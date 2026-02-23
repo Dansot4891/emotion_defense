@@ -55,7 +55,8 @@ class ActionBar extends StatelessWidget {
                 _ActionButton(
                   label: game.isSellMode ? '판매중' : '판매',
                   icon: Icons.sell,
-                  enabled: state.phase == GamePhase.preparing,
+                  enabled: state.phase == GamePhase.preparing ||
+                      state.phase == GamePhase.waveActive,
                   highlight: game.isSellMode,
                   onTap: () => game.toggleSellMode(),
                 ),
