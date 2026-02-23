@@ -17,28 +17,38 @@ class HudOverlay extends StatelessWidget {
       listenable: game.gameState,
       builder: (context, _) {
         final state = game.gameState;
-        return Container(
-          height: GameConstants.hudHeight,
-          color: AppColor.hudBackground,
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: SafeArea(
-            bottom: false,
+        return SafeArea(
+          bottom: false,
+          child: Container(
+            height: GameConstants.hudHeight,
+            color: AppColor.hudBackground,
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _HudItem(
                   icon: Icons.waves,
                   text: 'Wave ${state.currentWave}/${GameConstants.totalWaves}',
                 ),
+                const SizedBox(width: 12),
                 _HudItem(
                   icon: Icons.monetization_on,
                   text: '${state.gold}G',
                   color: AppColor.gold,
                 ),
+                const SizedBox(width: 12),
                 _HudItem(
                   icon: Icons.pest_control,
                   text: '${state.enemiesAlive}/${GameConstants.maxAliveEnemies}',
                   color: state.enemiesAlive > 15 ? AppColor.danger : null,
+                ),
+                const Spacer(),
+                GestureDetector(
+                  onTap: () => game.togglePause(),
+                  child: const Icon(
+                    Icons.pause,
+                    color: AppColor.textPrimary,
+                    size: 24,
+                  ),
                 ),
               ],
             ),

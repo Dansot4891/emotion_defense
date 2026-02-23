@@ -38,8 +38,10 @@ class ActionBar extends StatelessWidget {
                 _ActionButton(
                   label: state.phase == GamePhase.waveActive
                       ? '진행중...'
-                      : '웨이브\n시작',
-                  icon: Icons.play_arrow,
+                      : '다음\n${game.autoWaveRemaining.ceil()}s',
+                  icon: state.phase == GamePhase.waveActive
+                      ? Icons.play_arrow
+                      : Icons.timer,
                   enabled: state.phase == GamePhase.preparing,
                   onTap: () => game.startWave(),
                 ),

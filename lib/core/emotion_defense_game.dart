@@ -21,6 +21,15 @@ class EmotionDefenseGame extends FlameGame {
   /// 판매 모드 활성 여부
   bool isSellMode = false;
 
+  /// 자동 웨이브 활성 여부 (기본 ON)
+  bool isAutoWave = true;
+
+  /// 웨이브 간 대기 타이머 (초)
+  double _autoWaveDelay = 3.0;
+
+  /// 자동 웨이브 대기 시간 (초)
+  static const double autoWaveInterval = 3.0;
+
   /// 이전 게임 상태 (웨이브 클리어 감지용)
   GamePhase _previousPhase = GamePhase.preparing;
 
@@ -71,10 +80,23 @@ class EmotionDefenseGame extends FlameGame {
       waveSystem.update(dt);
     }
 
-    // 웨이브 클리어 감지 → 보너스 골드 지급
+    // 웨이브 클리어 감지 → 보너스 골드 지급 + 자동 웨이브 타이머 리셋
     if (_previousPhase == GamePhase.waveActive &&
         gameState.phase == GamePhase.preparing) {
       waveSystem.onWaveClear();
+      _autoWaveDelay = autoWaveInterval;
+    }
+
+    // 자동 웨이브: preparing 상태에서 카운트다운 후 자동 시작
+    if (gameState.phase == GamePhase.preparing &&
+        isAutoWave &&
+        waveSystem.canStartWave) {
+      _autoWaveDelay -= dt;
+      if (_autoWaveDelay <= 0) {
+        startWave();
+      }
+      // UI 갱신 (카운트다운 표시용)
+      gameState.notify();
     }
 
     // 게임오버/승리 오버레이
@@ -89,6 +111,9 @@ class EmotionDefenseGame extends FlameGame {
 
     _previousPhase = gameState.phase;
   }
+
+  /// 자동 웨이브 남은 시간 (초)
+  double get autoWaveRemaining => _autoWaveDelay.clamp(0.0, autoWaveInterval);
 
   /// 뽑기 실행
   void doGacha() {
@@ -119,6 +144,16 @@ class EmotionDefenseGame extends FlameGame {
     gameState.addGold(char.data.sellValue);
     char.removeCharacter();
     gameState.notify();
+  }
+
+  /// 일시정지 토글
+  void togglePause() {
+    paused = !paused;
+    if (paused) {
+      overlays.add('pausePopup');
+    } else {
+      overlays.remove('pausePopup');
+    }
   }
 
   /// 조합표 팝업 토글
@@ -165,8 +200,12 @@ class EmotionDefenseGame extends FlameGame {
     );
 
     isSellMode = false;
+    isAutoWave = true;
+    _autoWaveDelay = autoWaveInterval;
     _previousPhase = GamePhase.preparing;
+    paused = false;
     overlays.remove('gameOver');
     overlays.remove('combinePopup');
+    overlays.remove('pausePopup');
   }
 }

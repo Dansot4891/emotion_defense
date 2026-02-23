@@ -6,6 +6,7 @@ import '../../core/emotion_defense_game.dart';
 import '../overlays/action_bar.dart';
 import '../overlays/combine_popup.dart';
 import '../overlays/hud_overlay.dart';
+import '../overlays/pause_popup.dart';
 import 'game_over_screen.dart';
 
 /// 게임 화면 - FlameGame GameWidget 래퍼 + 오버레이 등록
@@ -41,6 +42,9 @@ class _GameScreenState extends State<GameScreen> {
                 game: game as EmotionDefenseGame,
               ),
           'combinePopup': (context, game) => CombinePopup(
+                game: game as EmotionDefenseGame,
+              ),
+          'pausePopup': (context, game) => PausePopup(
                 game: game as EmotionDefenseGame,
               ),
         },
