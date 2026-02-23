@@ -89,6 +89,7 @@ class GameState extends ChangeNotifier {
     if (_enemiesAlive >= effectiveMaxAliveEnemies) {
       _phase = GamePhase.gameOver;
     }
+    _checkWaveClear();
     notifyListeners();
   }
 
@@ -101,11 +102,16 @@ class GameState extends ChangeNotifier {
   }
 
   /// 웨이브 클리어 판정
+  /// - 일반 웨이브: 스폰 완료 시 바로 다음 웨이브 준비 (남은 적은 누적)
+  /// - 최종 웨이브: 적 전멸 시 승리
   void _checkWaveClear() {
     if (_phase != GamePhase.waveActive) return;
-    if (_enemiesAlive <= 0 && _totalSpawned >= _totalToSpawn) {
+    if (_totalSpawned >= _totalToSpawn) {
       if (_currentWave >= GameConstants.totalWaves) {
-        _phase = GamePhase.victory;
+        // 최종 웨이브는 적 전멸 필요
+        if (_enemiesAlive <= 0) {
+          _phase = GamePhase.victory;
+        }
       } else {
         _phase = GamePhase.preparing;
       }
