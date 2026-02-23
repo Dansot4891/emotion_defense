@@ -42,10 +42,9 @@ class EnemyComponent extends PositionComponent {
     super.update(dt);
     if (isDead) return;
 
-    // 웨이포인트를 따라 이동
+    // 웨이포인트를 따라 이동 (순환 루프)
     if (currentWaypointIndex >= pixelWaypoints.length) {
-      _reachEnd();
-      return;
+      currentWaypointIndex = 0; // 처음으로 돌아가서 계속 순환
     }
 
     final target = pixelWaypoints[currentWaypointIndex];
@@ -82,13 +81,6 @@ class EnemyComponent extends PositionComponent {
     isDead = true;
     gameState.addGold(data.rewardGold);
     gameState.onEnemyKilled();
-    removeFromParent();
-  }
-
-  /// 경로 끝 도달
-  void _reachEnd() {
-    isDead = true;
-    gameState.onEnemyLeaked();
     removeFromParent();
   }
 

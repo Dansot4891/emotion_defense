@@ -37,8 +37,6 @@ class TileComponent extends PositionComponent {
             : AppColor.tilePlacementEmpty;
       case TileType.spawn:
         return AppColor.tileSpawn;
-      case TileType.end:
-        return AppColor.tileEnd;
       case TileType.blocked:
         return AppColor.tileBlocked;
     }
@@ -63,11 +61,11 @@ class TileComponent extends PositionComponent {
       borderPaint,
     );
 
-    // 스폰/종료 마커
-    if (tileType == TileType.spawn || tileType == TileType.end) {
+    // 스폰 마커
+    if (tileType == TileType.spawn) {
       final textPainter = TextPainter(
-        text: TextSpan(
-          text: tileType == TileType.spawn ? 'S' : 'E',
+        text: const TextSpan(
+          text: 'S',
           style: AppTextStyle.tileMarker,
         ),
         textDirection: TextDirection.ltr,

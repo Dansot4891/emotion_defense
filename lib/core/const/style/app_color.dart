@@ -29,7 +29,7 @@ abstract class AppColor {
   static const Color tilePlacementEmpty = Color(0xFFA5D6A7);
   static const Color tilePlacementOccupied = Color(0xFF81C784);
   static const Color tileSpawn = Color(0xFF66BB6A);
-  static const Color tileEnd = Color(0xFFEF5350);
+  // tileEnd 제거 — 순환 루프이므로 종료 지점 없음
   static const Color tileBlocked = Color(0xFF616161);
   static const Color tileBorder = Color(0xFF424242);
 

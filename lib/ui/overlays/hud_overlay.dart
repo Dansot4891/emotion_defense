@@ -36,9 +36,9 @@ class HudOverlay extends StatelessWidget {
                   color: AppColor.gold,
                 ),
                 _HudItem(
-                  icon: Icons.heart_broken,
-                  text: '${state.enemiesLeaked}/${GameConstants.maxLeakedEnemies}',
-                  color: state.enemiesLeaked > 15 ? AppColor.danger : null,
+                  icon: Icons.pest_control,
+                  text: '${state.enemiesAlive}/${GameConstants.maxAliveEnemies}',
+                  color: state.enemiesAlive > 15 ? AppColor.danger : null,
                 ),
               ],
             ),

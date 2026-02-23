@@ -14,18 +14,16 @@ enum GamePhase {
 class GameState extends ChangeNotifier {
   int _gold = GameConstants.startingGold;
   int _currentWave = 0; // 0 = 아직 시작 안 함, 1 = 첫 웨이브
-  int _enemiesLeaked = 0;
+  int _enemiesAlive = 0; // 맵에 살아있는 적 수
   GamePhase _phase = GamePhase.preparing;
-  int _enemiesAlive = 0; // 현재 웨이브에서 살아있는 적 수
   int _totalSpawned = 0; // 현재 웨이브에서 스폰된 적 수
   int _totalToSpawn = 0; // 현재 웨이브에서 스폰할 총 적 수
 
   // Getters
   int get gold => _gold;
   int get currentWave => _currentWave;
-  int get enemiesLeaked => _enemiesLeaked;
-  GamePhase get phase => _phase;
   int get enemiesAlive => _enemiesAlive;
+  GamePhase get phase => _phase;
   int get totalSpawned => _totalSpawned;
   int get totalToSpawn => _totalToSpawn;
 
@@ -49,16 +47,18 @@ class GameState extends ChangeNotifier {
   void startWave(int waveNumber, int totalEnemies) {
     _currentWave = waveNumber;
     _phase = GamePhase.waveActive;
-    _enemiesAlive = 0;
     _totalSpawned = 0;
     _totalToSpawn = totalEnemies;
     notifyListeners();
   }
 
-  /// 적 스폰됨
+  /// 적 스폰됨 — 살아있는 적이 한도 초과 시 게임오버
   void onEnemySpawned() {
     _enemiesAlive++;
     _totalSpawned++;
+    if (_enemiesAlive >= GameConstants.maxAliveEnemies) {
+      _phase = GamePhase.gameOver;
+    }
     notifyListeners();
   }
 
@@ -66,18 +66,6 @@ class GameState extends ChangeNotifier {
   void onEnemyKilled() {
     _enemiesAlive--;
     _checkWaveClear();
-    notifyListeners();
-  }
-
-  /// 적이 경로 끝에 도달
-  void onEnemyLeaked() {
-    _enemiesAlive--;
-    _enemiesLeaked++;
-    if (_enemiesLeaked >= GameConstants.maxLeakedEnemies) {
-      _phase = GamePhase.gameOver;
-    } else {
-      _checkWaveClear();
-    }
     notifyListeners();
   }
 
@@ -97,9 +85,8 @@ class GameState extends ChangeNotifier {
   void reset() {
     _gold = GameConstants.startingGold;
     _currentWave = 0;
-    _enemiesLeaked = 0;
-    _phase = GamePhase.preparing;
     _enemiesAlive = 0;
+    _phase = GamePhase.preparing;
     _totalSpawned = 0;
     _totalToSpawn = 0;
     notifyListeners();
