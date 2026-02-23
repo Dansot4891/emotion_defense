@@ -50,8 +50,27 @@ abstract class AppColor {
   static const Color charShame = Color(0xFF8B4513); // 갈색
   static const Color charGratitude = Color(0xFFFFB6C1); // 연분홍
 
+  // === 캐릭터 (영웅) ===
+  static const Color charMadness = Color(0xFFFF0040); // 짙은 빨강
+  static const Color charResignation = Color(0xFF607D8B); // 청회색
+  static const Color charHope = Color(0xFF00E676); // 밝은 초록
+  static const Color charContempt = Color(0xFF6A0DAD); // 보라
+  static const Color charSerenity = Color(0xFF00BCD4); // 시안
+  static const Color charDread = Color(0xFF1A237E); // 짙은 남색
+
+  // === 캐릭터 (전설) ===
+  static const Color charPassion = Color(0xFFFF6D00); // 주황
+  static const Color charVoid = Color(0xFF212121); // 짙은 검정
+  static const Color charEnlightenment = Color(0xFFFFEB3B); // 노랑
+  static const Color charLove = Color(0xFFE91E63); // 핑크
+
   // === 적 ===
   static const Color enemyIdleThought = Color(0xFF2F2F2F);
+  static const Color enemyInsomnia = Color(0xFF1565C0); // 불면 (파랑)
+  static const Color enemyLethargy = Color(0xFF5D4037); // 무기력 (갈색)
+  static const Color enemyTrauma = Color(0xFF880E4F); // 트라우마 (자주)
+  static const Color enemyBurnout = Color(0xFFE65100); // 번아웃 (주황)
+  static const Color enemyNihility = Color(0xFF000000); // 허무 (검정)
 
   // === HP 바 ===
   static const Color hpBarBackground = Color(0xFF333333);

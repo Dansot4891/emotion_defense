@@ -38,8 +38,10 @@ class HudOverlay extends StatelessWidget {
                 const SizedBox(width: 12),
                 _HudItem(
                   icon: Icons.pest_control,
-                  text: '${state.enemiesAlive}/${GameConstants.maxAliveEnemies}',
-                  color: state.enemiesAlive > 15 ? AppColor.danger : null,
+                  text: '${state.enemiesAlive}/${state.effectiveMaxAliveEnemies}',
+                  color: state.enemiesAlive > state.effectiveMaxAliveEnemies - 5
+                      ? AppColor.danger
+                      : null,
                 ),
                 const Spacer(),
                 GestureDetector(

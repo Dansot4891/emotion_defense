@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'effect_model.dart';
+
 /// 캐릭터 등급
 enum Grade { common, rare, hero, legend }
 
@@ -22,6 +24,8 @@ class CharacterData {
   final int sellValue; // 판매 골드
   final Color color; // 프로토타입용 색상
   final String description;
+  final List<PassiveData> passives; // 패시브 스킬 목록
+  final List<ActiveData> actives; // 액티브 스킬 목록
 
   const CharacterData({
     required this.id,
@@ -35,5 +39,7 @@ class CharacterData {
     required this.sellValue,
     required this.color,
     required this.description,
+    this.passives = const [],
+    this.actives = const [],
   });
 }

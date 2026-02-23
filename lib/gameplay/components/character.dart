@@ -20,6 +20,14 @@ class CharacterComponent extends PositionComponent
   TileComponent currentTile;
   double _attackCooldown = 0;
 
+  /// 버프 배율 (매 프레임 리셋 후 오라 시스템에서 재계산)
+  double atkMultiplier = 1.0;
+  double aspdMultiplier = 1.0;
+
+  /// 강화 레벨
+  int atkUpgradeLevel = 0;
+  int aspdUpgradeLevel = 0;
+
   /// 드래그 관련
   bool _isDragging = false;
 
@@ -30,6 +38,20 @@ class CharacterComponent extends PositionComponent
   }) : super(size: Vector2(24, 24)) {
     _updatePositionFromTile();
     currentTile.occupant = this;
+  }
+
+  /// 실효 ATK (버프 + 강화)
+  double get effectiveAtk =>
+      data.atk * atkMultiplier * (1 + atkUpgradeLevel * 0.10);
+
+  /// 실효 ASPD 쿨다운 (버프 + 강화로 감소)
+  double get effectiveAspd =>
+      data.aspd / (aspdMultiplier * (1 + aspdUpgradeLevel * 0.10));
+
+  /// 버프 리셋 (매 프레임 오라 계산 전 호출)
+  void resetBuffs() {
+    atkMultiplier = 1.0;
+    aspdMultiplier = 1.0;
   }
 
   /// 타일 중심에 캐릭터 배치
@@ -53,7 +75,7 @@ class CharacterComponent extends PositionComponent
     final target = _findTarget();
     if (target != null) {
       _attack(target);
-      _attackCooldown = data.aspd;
+      _attackCooldown = effectiveAspd;
     }
   }
 
@@ -81,19 +103,22 @@ class CharacterComponent extends PositionComponent
   void _attack(EnemyComponent target) {
     final projectile = ProjectileComponent(
       target: target,
-      atk: data.atk,
+      atk: effectiveAtk,
       color: data.color,
       startPosition: position + size / 2 - Vector2(3, 3),
+      sourceData: data,
     );
     parent?.add(projectile);
   }
 
-  // --- 탭 판매 ---
+  // --- 탭 ---
 
   @override
   void onTapUp(TapUpEvent event) {
     if (game.isSellMode) {
       game.doSell(this);
+    } else {
+      game.showCharacterInfo(this);
     }
   }
 

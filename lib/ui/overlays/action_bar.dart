@@ -28,9 +28,9 @@ class ActionBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _ActionButton(
-                  label: '뽑기\n${GameConstants.gachaCost}G',
+                  label: '뽑기\n${state.effectiveGachaCost}G',
                   icon: Icons.casino,
-                  enabled: state.gold >= GameConstants.gachaCost &&
+                  enabled: state.gold >= state.effectiveGachaCost &&
                       state.phase != GamePhase.gameOver &&
                       state.phase != GamePhase.victory,
                   onTap: () => game.doGacha(),

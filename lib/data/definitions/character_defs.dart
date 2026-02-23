@@ -1,7 +1,8 @@
 import '../../core/const/style/app_color.dart';
 import '../../data/models/character_model.dart';
+import '../../data/models/effect_model.dart';
 
-/// 일반 등급 캐릭터 6종 (Phase 1: 뽑기에서 등장)
+/// 일반 등급 캐릭터 6종 (뽑기에서 등장)
 const List<CharacterData> commonCharacters = [
   CharacterData(
     id: 'joy',
@@ -83,7 +84,7 @@ const List<CharacterData> commonCharacters = [
   ),
 ];
 
-/// 레어 등급 캐릭터 6종 (Phase 2: 조합으로 획득)
+/// 레어 등급 캐릭터 6종 (조합으로 획득 — 스킬 1개씩)
 const List<CharacterData> rareCharacters = [
   CharacterData(
     id: 'anger',
@@ -97,6 +98,14 @@ const List<CharacterData> rareCharacters = [
     sellValue: 40,
     color: AppColor.charAnger,
     description: '슬픔과 외로움이 합쳐져 폭발한 분노',
+    actives: [
+      ActiveData(
+        type: ActiveType.critical,
+        procChance: 0.15,
+        value: 2.0,
+        description: '15% 확률로 크리티컬 x2.0',
+      ),
+    ],
   ),
   CharacterData(
     id: 'jealousy',
@@ -110,6 +119,15 @@ const List<CharacterData> rareCharacters = [
     sellValue: 40,
     color: AppColor.charJealousy,
     description: '기쁨과 두려움이 뒤섞인 질투',
+    actives: [
+      ActiveData(
+        type: ActiveType.defBreak,
+        procChance: 0.30,
+        value: 0.10,
+        duration: 3.0,
+        description: '30% 확률로 방깎 0.10 (3초)',
+      ),
+    ],
   ),
   CharacterData(
     id: 'anxiety',
@@ -123,6 +141,15 @@ const List<CharacterData> rareCharacters = [
     sellValue: 40,
     color: AppColor.charAnxiety,
     description: '두려움과 놀람이 결합한 불안',
+    actives: [
+      ActiveData(
+        type: ActiveType.slow,
+        procChance: 0.25,
+        value: 0.15,
+        duration: 2.0,
+        description: '25% 확률로 감속 15% (2초)',
+      ),
+    ],
   ),
   CharacterData(
     id: 'nostalgia',
@@ -136,6 +163,14 @@ const List<CharacterData> rareCharacters = [
     sellValue: 40,
     color: AppColor.charNostalgia,
     description: '슬픔과 설렘이 어우러진 그리움',
+    passives: [
+      PassiveData(
+        type: PassiveType.allyAtkBuff,
+        range: 2,
+        value: 0.10,
+        description: '주변 2칸 아군 ATK +10%',
+      ),
+    ],
   ),
   CharacterData(
     id: 'shame',
@@ -149,6 +184,15 @@ const List<CharacterData> rareCharacters = [
     sellValue: 40,
     color: AppColor.charShame,
     description: '놀람과 외로움이 만든 수치심',
+    actives: [
+      ActiveData(
+        type: ActiveType.stun,
+        procChance: 0.15,
+        value: 0,
+        duration: 1.0,
+        description: '15% 확률로 스턴 1초',
+      ),
+    ],
   ),
   CharacterData(
     id: 'gratitude',
@@ -162,6 +206,334 @@ const List<CharacterData> rareCharacters = [
     sellValue: 40,
     color: AppColor.charGratitude,
     description: '기쁨과 설렘이 빚어낸 감사',
+    passives: [
+      PassiveData(
+        type: PassiveType.allyAspdBuff,
+        range: 2,
+        value: 0.10,
+        description: '주변 2칸 아군 ASPD +10%',
+      ),
+    ],
+  ),
+];
+
+/// 영웅 등급 캐릭터 6종 (스킬 2개씩)
+const List<CharacterData> heroCharacters = [
+  // 광기 - 딜러 (높은 공격력 + 크리티컬 + 범위 데미지)
+  CharacterData(
+    id: 'madness',
+    name: '광기',
+    grade: Grade.hero,
+    polarity: Polarity.negative,
+    role: Role.dealer,
+    atk: 40,
+    aspd: 0.7,
+    range: 2,
+    sellValue: 80,
+    color: AppColor.charMadness,
+    description: '분노가 극에 달한 광기',
+    actives: [
+      ActiveData(
+        type: ActiveType.critical,
+        procChance: 0.20,
+        value: 2.5,
+        description: '20% 확률로 크리티컬 x2.5',
+      ),
+      ActiveData(
+        type: ActiveType.aoeDamage,
+        procChance: 0.15,
+        value: 0.5,
+        description: '15% 확률로 주변 50% 범위 데미지',
+      ),
+    ],
+  ),
+  // 체념 - 디버퍼 (감속 + 방깎)
+  CharacterData(
+    id: 'resignation',
+    name: '체념',
+    grade: Grade.hero,
+    polarity: Polarity.negative,
+    role: Role.debuffer,
+    atk: 22,
+    aspd: 1.0,
+    range: 3,
+    sellValue: 80,
+    color: AppColor.charResignation,
+    description: '불안이 무기력으로 변한 체념',
+    actives: [
+      ActiveData(
+        type: ActiveType.slow,
+        procChance: 0.30,
+        value: 0.25,
+        duration: 3.0,
+        description: '30% 확률로 감속 25% (3초)',
+      ),
+      ActiveData(
+        type: ActiveType.defBreak,
+        procChance: 0.25,
+        value: 0.15,
+        duration: 4.0,
+        description: '25% 확률로 방깎 0.15 (4초)',
+      ),
+    ],
+  ),
+  // 희망 - 버퍼 (아군 ATK + ASPD 오라)
+  CharacterData(
+    id: 'hope',
+    name: '희망',
+    grade: Grade.hero,
+    polarity: Polarity.positive,
+    role: Role.buffer,
+    atk: 18,
+    aspd: 1.0,
+    range: 3,
+    sellValue: 80,
+    color: AppColor.charHope,
+    description: '그리움에서 피어난 희망',
+    passives: [
+      PassiveData(
+        type: PassiveType.allyAtkBuff,
+        range: 2,
+        value: 0.15,
+        description: '주변 2칸 아군 ATK +15%',
+      ),
+      PassiveData(
+        type: PassiveType.allyAspdBuff,
+        range: 2,
+        value: 0.10,
+        description: '주변 2칸 아군 ASPD +10%',
+      ),
+    ],
+  ),
+  // 경멸 - 스터너 (스턴 + 감속)
+  CharacterData(
+    id: 'contempt',
+    name: '경멸',
+    grade: Grade.hero,
+    polarity: Polarity.negative,
+    role: Role.stunner,
+    atk: 25,
+    aspd: 1.1,
+    range: 2,
+    sellValue: 80,
+    color: AppColor.charContempt,
+    description: '수치심이 깊어져 생긴 경멸',
+    actives: [
+      ActiveData(
+        type: ActiveType.stun,
+        procChance: 0.20,
+        value: 0,
+        duration: 1.5,
+        description: '20% 확률로 스턴 1.5초',
+      ),
+      ActiveData(
+        type: ActiveType.slow,
+        procChance: 0.25,
+        value: 0.20,
+        duration: 2.0,
+        description: '25% 확률로 감속 20% (2초)',
+      ),
+    ],
+  ),
+  // 평온 - 버퍼 (적 감속 오라 + 아군 ASPD)
+  CharacterData(
+    id: 'serenity',
+    name: '평온',
+    grade: Grade.hero,
+    polarity: Polarity.positive,
+    role: Role.buffer,
+    atk: 16,
+    aspd: 1.0,
+    range: 3,
+    sellValue: 80,
+    color: AppColor.charSerenity,
+    description: '감사가 깊어진 평온',
+    passives: [
+      PassiveData(
+        type: PassiveType.allyAspdBuff,
+        range: 2,
+        value: 0.15,
+        description: '주변 2칸 아군 ASPD +15%',
+      ),
+      PassiveData(
+        type: PassiveType.enemySpdDebuff,
+        range: 2,
+        value: 0.10,
+        description: '주변 2칸 적 이동속도 -10%',
+      ),
+    ],
+  ),
+  // 공포 - 디버퍼 (방깎 오라 + 감속)
+  CharacterData(
+    id: 'dread',
+    name: '공포',
+    grade: Grade.hero,
+    polarity: Polarity.negative,
+    role: Role.debuffer,
+    atk: 20,
+    aspd: 1.1,
+    range: 3,
+    sellValue: 80,
+    color: AppColor.charDread,
+    description: '질투가 극으로 치달은 공포',
+    passives: [
+      PassiveData(
+        type: PassiveType.enemyDefDebuff,
+        range: 2,
+        value: 0.05,
+        description: '주변 2칸 적 DEF -0.05',
+      ),
+    ],
+    actives: [
+      ActiveData(
+        type: ActiveType.slow,
+        procChance: 0.30,
+        value: 0.20,
+        duration: 3.0,
+        description: '30% 확률로 감속 20% (3초)',
+      ),
+    ],
+  ),
+];
+
+/// 전설 등급 캐릭터 4종 (스킬 2~3개씩)
+const List<CharacterData> legendCharacters = [
+  // 열정 - 딜러 (크리 + 범위 + 높은 스탯)
+  CharacterData(
+    id: 'passion',
+    name: '열정',
+    grade: Grade.legend,
+    polarity: Polarity.positive,
+    role: Role.dealer,
+    atk: 60,
+    aspd: 0.6,
+    range: 2,
+    sellValue: 160,
+    color: AppColor.charPassion,
+    description: '광기와 희망이 합쳐진 열정',
+    actives: [
+      ActiveData(
+        type: ActiveType.critical,
+        procChance: 0.25,
+        value: 3.0,
+        description: '25% 확률로 크리티컬 x3.0',
+      ),
+      ActiveData(
+        type: ActiveType.aoeDamage,
+        procChance: 0.20,
+        value: 0.6,
+        description: '20% 확률로 주변 60% 범위 데미지',
+      ),
+    ],
+  ),
+  // 공허 - 디버퍼 (모든 디버프 집합)
+  CharacterData(
+    id: 'void_char',
+    name: '공허',
+    grade: Grade.legend,
+    polarity: Polarity.negative,
+    role: Role.debuffer,
+    atk: 25,
+    aspd: 1.0,
+    range: 3,
+    sellValue: 160,
+    color: AppColor.charVoid,
+    description: '체념과 공포가 합쳐진 공허',
+    passives: [
+      PassiveData(
+        type: PassiveType.enemyDefDebuff,
+        range: 3,
+        value: 0.10,
+        description: '주변 3칸 적 DEF -0.10',
+      ),
+    ],
+    actives: [
+      ActiveData(
+        type: ActiveType.slow,
+        procChance: 0.35,
+        value: 0.30,
+        duration: 4.0,
+        description: '35% 확률로 감속 30% (4초)',
+      ),
+      ActiveData(
+        type: ActiveType.defBreak,
+        procChance: 0.30,
+        value: 0.20,
+        duration: 5.0,
+        description: '30% 확률로 방깎 0.20 (5초)',
+      ),
+    ],
+  ),
+  // 깨달음 - 올라운더 (버프 + 디버프 + 스턴)
+  CharacterData(
+    id: 'enlightenment',
+    name: '깨달음',
+    grade: Grade.legend,
+    polarity: Polarity.positive,
+    role: Role.buffer,
+    atk: 30,
+    aspd: 0.9,
+    range: 3,
+    sellValue: 160,
+    color: AppColor.charEnlightenment,
+    description: '희망과 경멸을 초월한 깨달음',
+    passives: [
+      PassiveData(
+        type: PassiveType.allyAtkBuff,
+        range: 3,
+        value: 0.20,
+        description: '주변 3칸 아군 ATK +20%',
+      ),
+      PassiveData(
+        type: PassiveType.allyAspdBuff,
+        range: 3,
+        value: 0.15,
+        description: '주변 3칸 아군 ASPD +15%',
+      ),
+    ],
+    actives: [
+      ActiveData(
+        type: ActiveType.stun,
+        procChance: 0.15,
+        value: 0,
+        duration: 1.5,
+        description: '15% 확률로 스턴 1.5초',
+      ),
+    ],
+  ),
+  // 사랑 - 버퍼 (강력한 전체 버프)
+  CharacterData(
+    id: 'love',
+    name: '사랑',
+    grade: Grade.legend,
+    polarity: Polarity.positive,
+    role: Role.buffer,
+    atk: 20,
+    aspd: 1.0,
+    range: 3,
+    sellValue: 160,
+    color: AppColor.charLove,
+    description: '평온과 희망이 합쳐진 사랑',
+    passives: [
+      PassiveData(
+        type: PassiveType.allyAtkBuff,
+        range: 3,
+        value: 0.25,
+        description: '주변 3칸 아군 ATK +25%',
+      ),
+      PassiveData(
+        type: PassiveType.allyAspdBuff,
+        range: 3,
+        value: 0.20,
+        description: '주변 3칸 아군 ASPD +20%',
+      ),
+      PassiveData(
+        type: PassiveType.enemySpdDebuff,
+        range: 2,
+        value: 0.15,
+        description: '주변 2칸 적 이동속도 -15%',
+      ),
+    ],
   ),
 ];
 
@@ -169,4 +541,6 @@ const List<CharacterData> rareCharacters = [
 final Map<String, CharacterData> allCharacters = {
   for (final c in commonCharacters) c.id: c,
   for (final c in rareCharacters) c.id: c,
+  for (final c in heroCharacters) c.id: c,
+  for (final c in legendCharacters) c.id: c,
 };

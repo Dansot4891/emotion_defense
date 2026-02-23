@@ -19,6 +19,12 @@ class GameState extends ChangeNotifier {
   int _totalSpawned = 0; // 현재 웨이브에서 스폰된 적 수
   int _totalToSpawn = 0; // 현재 웨이브에서 스폰할 총 적 수
 
+  // 보상 누적 보너스
+  double globalAtkBonus = 0; // 영구 ATK 보너스 비율
+  double globalAspdBonus = 0; // 영구 ASPD 보너스 비율
+  int maxAliveEnemiesBonus = 0; // 적 한도 추가량
+  int gachaCostDiscount = 0; // 뽑기 비용 할인
+
   // Getters
   int get gold => _gold;
   int get currentWave => _currentWave;
@@ -26,6 +32,14 @@ class GameState extends ChangeNotifier {
   GamePhase get phase => _phase;
   int get totalSpawned => _totalSpawned;
   int get totalToSpawn => _totalToSpawn;
+
+  /// 실효 적 한도
+  int get effectiveMaxAliveEnemies =>
+      GameConstants.maxAliveEnemies + maxAliveEnemiesBonus;
+
+  /// 실효 뽑기 비용
+  int get effectiveGachaCost =>
+      (GameConstants.gachaCost - gachaCostDiscount).clamp(5, 999);
 
   /// 골드 추가
   void addGold(int amount) {
@@ -56,7 +70,7 @@ class GameState extends ChangeNotifier {
   void onEnemySpawned() {
     _enemiesAlive++;
     _totalSpawned++;
-    if (_enemiesAlive >= GameConstants.maxAliveEnemies) {
+    if (_enemiesAlive >= effectiveMaxAliveEnemies) {
       _phase = GamePhase.gameOver;
     }
     notifyListeners();
@@ -94,6 +108,10 @@ class GameState extends ChangeNotifier {
     _phase = GamePhase.preparing;
     _totalSpawned = 0;
     _totalToSpawn = 0;
+    globalAtkBonus = 0;
+    globalAspdBonus = 0;
+    maxAliveEnemiesBonus = 0;
+    gachaCostDiscount = 0;
     notifyListeners();
   }
 }

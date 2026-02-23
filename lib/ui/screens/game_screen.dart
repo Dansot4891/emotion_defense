@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import '../../core/const/style/app_color.dart';
 import '../../core/emotion_defense_game.dart';
 import '../overlays/action_bar.dart';
+import '../overlays/character_info_popup.dart';
 import '../overlays/combine_popup.dart';
 import '../overlays/hud_overlay.dart';
 import '../overlays/pause_popup.dart';
+import '../overlays/reward_popup.dart';
 import 'game_over_screen.dart';
 
 /// 게임 화면 - FlameGame GameWidget 래퍼 + 오버레이 등록
@@ -45,6 +47,12 @@ class _GameScreenState extends State<GameScreen> {
                 game: game as EmotionDefenseGame,
               ),
           'pausePopup': (context, game) => PausePopup(
+                game: game as EmotionDefenseGame,
+              ),
+          'characterInfo': (context, game) => CharacterInfoPopup(
+                game: game as EmotionDefenseGame,
+              ),
+          'rewardPopup': (context, game) => RewardPopup(
                 game: game as EmotionDefenseGame,
               ),
         },

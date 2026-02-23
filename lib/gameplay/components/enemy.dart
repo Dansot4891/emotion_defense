@@ -3,12 +3,16 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 
 import '../../core/const/style/app_color.dart';
+import '../../core/emotion_defense_game.dart';
 import '../../core/game_state.dart';
+import '../../data/definitions/enemy_defs.dart';
 import '../../data/models/enemy_model.dart';
+import '../../data/models/status_effect_model.dart';
 import '../../gameplay/systems/combat_system.dart';
 
-/// 적 컴포넌트 - 웨이포인트를 따라 이동, HP바 렌더링
-class EnemyComponent extends PositionComponent {
+/// 적 컴포넌트 - 웨이포인트를 따라 이동, HP바 렌더링, 상태 효과
+class EnemyComponent extends PositionComponent
+    with HasGameReference<EmotionDefenseGame> {
   final EnemyData data;
   final List<Offset> pixelWaypoints;
   final GameState gameState;
@@ -18,12 +22,19 @@ class EnemyComponent extends PositionComponent {
   int currentWaypointIndex = 0;
   bool isDead = false;
 
+  /// 상태 효과 목록
+  final List<StatusEffect> statusEffects = [];
+
+  /// 오라 디버프 (매 프레임 리셋)
+  double auraSpeedMultiplier = 1.0;
+  double auraDefReduction = 0.0;
+
   EnemyComponent({
     required this.data,
     required this.pixelWaypoints,
     required this.gameState,
     required double hpMultiplier,
-  }) : super(size: Vector2(20, 20)) {
+  }) : super(size: Vector2(data.isBoss ? 30 : 20, data.isBoss ? 30 : 20)) {
     maxHp = data.hp * hpMultiplier;
     hp = maxHp;
 
@@ -37,14 +48,66 @@ class EnemyComponent extends PositionComponent {
   @override
   Vector2 get center => position + size / 2;
 
+  /// 스턴 여부
+  bool get isStunned =>
+      statusEffects.any((e) => e.type == StatusEffectType.stun);
+
+  /// 감속 배율 (상태 효과)
+  double get speedMultiplier {
+    double mult = 1.0;
+    for (final e in statusEffects) {
+      if (e.type == StatusEffectType.slow) {
+        mult -= e.value;
+      }
+    }
+    return mult.clamp(0.1, 1.0);
+  }
+
+  /// 실효 방어력 (상태 효과 + 오라 디버프)
+  double get effectiveDef {
+    double defReduction = auraDefReduction;
+    for (final e in statusEffects) {
+      if (e.type == StatusEffectType.defBreak) {
+        defReduction += e.value;
+      }
+    }
+    return (data.def - defReduction).clamp(0.0, double.infinity);
+  }
+
+  /// 실효 이동속도
+  double get effectiveSpeed =>
+      data.speed * speedMultiplier * auraSpeedMultiplier;
+
+  /// 상태 효과 적용
+  void applyStatusEffect(StatusEffect effect) {
+    statusEffects.add(effect);
+  }
+
+  /// 오라 디버프 리셋 (매 프레임)
+  void resetAuraDebuffs() {
+    auraSpeedMultiplier = 1.0;
+    auraDefReduction = 0.0;
+  }
+
   @override
   void update(double dt) {
     super.update(dt);
     if (isDead) return;
 
+    // 상태 효과 틱 처리 (만료된 효과 제거)
+    statusEffects.removeWhere((e) => e.tick(dt));
+
+    // 트라우마 버프: 주변 적 HP 회복
+    if (data.buffsNearby) {
+      _processNearbyBuff(dt);
+    }
+
+    // 스턴 시 이동 정지
+    if (isStunned) return;
+
     // 웨이포인트를 따라 이동 (순환 루프)
     if (currentWaypointIndex >= pixelWaypoints.length) {
-      currentWaypointIndex = 0; // 처음으로 돌아가서 계속 순환
+      currentWaypointIndex = 0;
     }
 
     final target = pixelWaypoints[currentWaypointIndex];
@@ -57,7 +120,7 @@ class EnemyComponent extends PositionComponent {
       currentWaypointIndex++;
     } else {
       direction.normalize();
-      final move = direction * data.speed * dt;
+      final move = direction * effectiveSpeed * dt;
       if (move.length > distance) {
         position = targetVec - size / 2;
       } else {
@@ -66,10 +129,22 @@ class EnemyComponent extends PositionComponent {
     }
   }
 
+  /// 트라우마 버프 - 주변 적 HP 회복
+  void _processNearbyBuff(double dt) {
+    final enemies = parent?.children.whereType<EnemyComponent>() ?? [];
+    for (final enemy in enemies) {
+      if (enemy == this || enemy.isDead) continue;
+      final dist = (enemy.center - center).length;
+      if (dist <= data.nearbyBuffRange) {
+        enemy.hp = (enemy.hp + data.nearbyBuffValue * dt).clamp(0, enemy.maxHp);
+      }
+    }
+  }
+
   /// 데미지 받기
   void takeDamage(double atk) {
     if (isDead) return;
-    final damage = CombatSystem.calculateDamage(atk, data.def);
+    final damage = CombatSystem.calculateDamage(atk, effectiveDef);
     hp -= damage;
     if (hp <= 0) {
       die();
@@ -81,6 +156,25 @@ class EnemyComponent extends PositionComponent {
     isDead = true;
     gameState.addGold(data.rewardGold);
     gameState.onEnemyKilled();
+
+    // 분열 처리 (번아웃 등)
+    if (data.splits && data.splitIntoId != null) {
+      for (int i = 0; i < data.splitCount; i++) {
+        final splitData = getEnemyData(data.splitIntoId!);
+        final splitEnemy = EnemyComponent(
+          data: splitData,
+          pixelWaypoints: pixelWaypoints,
+          gameState: gameState,
+          hpMultiplier: 1.0, // 분열체는 기본 HP
+        );
+        // 현재 위치 근처에 스폰
+        splitEnemy.position = position.clone() + Vector2(i * 10.0 - 5, 0);
+        splitEnemy.currentWaypointIndex = currentWaypointIndex;
+        parent?.add(splitEnemy);
+        gameState.onEnemySpawned();
+      }
+    }
+
     removeFromParent();
   }
 
@@ -93,6 +187,19 @@ class EnemyComponent extends PositionComponent {
       size.x / 2,
       bodyPaint,
     );
+
+    // 스턴 표시 (노란 테두리)
+    if (isStunned) {
+      final stunPaint = Paint()
+        ..color = const Color(0xFFFFFF00)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 2.0;
+      canvas.drawCircle(
+        Offset(size.x / 2, size.y / 2),
+        size.x / 2 + 1,
+        stunPaint,
+      );
+    }
 
     // HP 바 배경
     final hpBarWidth = size.x;
