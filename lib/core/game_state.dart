@@ -20,10 +20,15 @@ class GameState extends ChangeNotifier {
   int _totalToSpawn = 0; // 현재 웨이브에서 스폰할 총 적 수
 
   // 보상 누적 보너스
-  double globalAtkBonus = 0; // 영구 ATK 보너스 비율
-  double globalAspdBonus = 0; // 영구 ASPD 보너스 비율
-  int maxAliveEnemiesBonus = 0; // 적 한도 추가량
-  int gachaCostDiscount = 0; // 뽑기 비용 할인
+  double globalAtkBonus = 0;
+  double globalAspdBonus = 0;
+  int maxAliveEnemiesBonus = 0;
+  int gachaCostDiscount = 0;
+
+  // 통계 (게임오버/승리 화면용)
+  int totalEnemiesKilled = 0;
+  int totalGoldEarned = 0;
+  int totalGoldSpent = 0;
 
   // Getters
   int get gold => _gold;
@@ -44,6 +49,7 @@ class GameState extends ChangeNotifier {
   /// 골드 추가
   void addGold(int amount) {
     _gold += amount;
+    totalGoldEarned += amount;
     notifyListeners();
   }
 
@@ -51,6 +57,7 @@ class GameState extends ChangeNotifier {
   bool spendGold(int amount) {
     if (_gold >= amount) {
       _gold -= amount;
+      totalGoldSpent += amount;
       notifyListeners();
       return true;
     }
@@ -79,6 +86,7 @@ class GameState extends ChangeNotifier {
   /// 적 처치됨
   void onEnemyKilled() {
     _enemiesAlive--;
+    totalEnemiesKilled++;
     _checkWaveClear();
     notifyListeners();
   }
@@ -112,6 +120,9 @@ class GameState extends ChangeNotifier {
     globalAspdBonus = 0;
     maxAliveEnemiesBonus = 0;
     gachaCostDiscount = 0;
+    totalEnemiesKilled = 0;
+    totalGoldEarned = 0;
+    totalGoldSpent = 0;
     notifyListeners();
   }
 }

@@ -33,6 +33,9 @@ class EmotionDefenseGame extends FlameGame {
   SynergyBonuses _synergyBonuses = const SynergyBonuses();
   SynergyBonuses get synergyBonuses => _synergyBonuses;
 
+  /// 배속 (1 = 보통, 2 = 2배)
+  int gameSpeed = 1;
+
   /// 판매 모드 활성 여부
   bool isSellMode = false;
 
@@ -97,14 +100,15 @@ class EmotionDefenseGame extends FlameGame {
 
   @override
   void update(double dt) {
-    super.update(dt);
+    final scaledDt = dt * gameSpeed;
+    super.update(scaledDt);
 
     // 오라 + 시너지 처리 (선두)
     _processAuras();
 
     // 웨이브 시스템 업데이트 (적 스폰)
     if (gameState.phase == GamePhase.waveActive) {
-      waveSystem.update(dt);
+      waveSystem.update(scaledDt);
     }
 
     // 웨이브 클리어 감지 → 보너스 골드 지급 + 보상/폭발 체크
@@ -133,7 +137,7 @@ class EmotionDefenseGame extends FlameGame {
         isAutoWave &&
         waveSystem.canStartWave &&
         !overlays.isActive('rewardPopup')) {
-      _autoWaveDelay -= dt;
+      _autoWaveDelay -= scaledDt;
       if (_autoWaveDelay <= 0) {
         startWave();
       }
@@ -350,6 +354,12 @@ class EmotionDefenseGame extends FlameGame {
     gameState.notify();
   }
 
+  /// 배속 토글 (1x → 2x → 1x)
+  void toggleSpeed() {
+    gameSpeed = gameSpeed == 1 ? 2 : 1;
+    gameState.notify();
+  }
+
   /// 일시정지 토글
   void togglePause() {
     paused = !paused;
@@ -407,6 +417,7 @@ class EmotionDefenseGame extends FlameGame {
 
     isSellMode = false;
     isAutoWave = true;
+    gameSpeed = 1;
     _autoWaveDelay = autoWaveInterval;
     _previousPhase = GamePhase.preparing;
     _synergyBonuses = const SynergyBonuses();

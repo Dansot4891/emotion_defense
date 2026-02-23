@@ -5,9 +5,10 @@ import '../../core/const/style/app_text_style.dart';
 import '../../core/emotion_defense_game.dart';
 import '../../data/definitions/character_defs.dart';
 import '../../data/definitions/recipe_defs.dart';
+import '../../data/models/character_model.dart';
 import '../../data/models/recipe_model.dart';
 
-/// 조합표 팝업 오버레이 — 레시피 목록 + 재료 보유 표시 + 조합 실행
+/// 조합표 팝업 오버레이 — 등급 필터 + 레시피 목록 + 조합 실행
 class CombinePopup extends StatefulWidget {
   final EmotionDefenseGame game;
 
@@ -18,6 +19,16 @@ class CombinePopup extends StatefulWidget {
 }
 
 class _CombinePopupState extends State<CombinePopup> {
+  Grade? _selectedGrade; // null = 전체
+
+  List<RecipeData> get _filteredRecipes {
+    if (_selectedGrade == null) return allRecipes;
+    return allRecipes.where((r) {
+      final result = allCharacters[r.resultId];
+      return result?.grade == _selectedGrade;
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -47,29 +58,104 @@ class _CombinePopupState extends State<CombinePopup> {
                 ),
               ],
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 8),
+            // 등급 필터 탭
+            Row(
+              children: [
+                _FilterTab(
+                  label: '전체',
+                  selected: _selectedGrade == null,
+                  color: AppColor.textPrimary,
+                  onTap: () => setState(() => _selectedGrade = null),
+                ),
+                _FilterTab(
+                  label: '레어',
+                  selected: _selectedGrade == Grade.rare,
+                  color: const Color(0xFF42A5F5),
+                  onTap: () => setState(() => _selectedGrade = Grade.rare),
+                ),
+                _FilterTab(
+                  label: '영웅',
+                  selected: _selectedGrade == Grade.hero,
+                  color: const Color(0xFFAB47BC),
+                  onTap: () => setState(() => _selectedGrade = Grade.hero),
+                ),
+                _FilterTab(
+                  label: '전설',
+                  selected: _selectedGrade == Grade.legend,
+                  color: AppColor.gold,
+                  onTap: () => setState(() => _selectedGrade = Grade.legend),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
             // 레시피 목록
             Flexible(
               child: ListView.separated(
                 shrinkWrap: true,
-                itemCount: allRecipes.length,
+                itemCount: _filteredRecipes.length,
                 separatorBuilder: (_, __) => const Divider(
                   color: AppColor.textMuted,
                   height: 1,
                 ),
                 itemBuilder: (context, index) {
                   return _RecipeRow(
-                    recipe: allRecipes[index],
+                    recipe: _filteredRecipes[index],
                     game: widget.game,
                     onCombine: () {
-                      widget.game.doCombine(allRecipes[index]);
-                      setState(() {}); // 조합 후 목록 갱신
+                      widget.game.doCombine(_filteredRecipes[index]);
+                      setState(() {});
                     },
                   );
                 },
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+/// 등급 필터 탭 버튼
+class _FilterTab extends StatelessWidget {
+  final String label;
+  final bool selected;
+  final Color color;
+  final VoidCallback onTap;
+
+  const _FilterTab({
+    required this.label,
+    required this.selected,
+    required this.color,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 6),
+          margin: const EdgeInsets.symmetric(horizontal: 2),
+          decoration: BoxDecoration(
+            color: selected ? color.withValues(alpha: 0.25) : Colors.transparent,
+            borderRadius: BorderRadius.circular(6),
+            border: Border.all(
+              color: selected ? color : AppColor.textMuted,
+              width: selected ? 1.5 : 0.5,
+            ),
+          ),
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: selected ? color : AppColor.textSecondary,
+              fontSize: 11,
+              fontWeight: selected ? FontWeight.bold : FontWeight.normal,
+            ),
+          ),
         ),
       ),
     );
