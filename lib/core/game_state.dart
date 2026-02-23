@@ -81,6 +81,11 @@ class GameState extends ChangeNotifier {
     }
   }
 
+  /// UI 갱신 트리거 (외부에서 호출 가능)
+  void notify() {
+    notifyListeners();
+  }
+
   /// 게임 리셋
   void reset() {
     _gold = GameConstants.startingGold;

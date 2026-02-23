@@ -43,17 +43,19 @@ class ActionBar extends StatelessWidget {
                   enabled: state.phase == GamePhase.preparing,
                   onTap: () => game.startWave(),
                 ),
-                const _ActionButton(
+                _ActionButton(
                   label: '조합',
                   icon: Icons.merge_type,
-                  enabled: false,
-                  onTap: null,
+                  enabled: state.phase == GamePhase.preparing ||
+                      state.phase == GamePhase.waveActive,
+                  onTap: () => game.toggleCombinePopup(),
                 ),
-                const _ActionButton(
-                  label: '판매',
+                _ActionButton(
+                  label: game.isSellMode ? '판매중' : '판매',
                   icon: Icons.sell,
-                  enabled: false,
-                  onTap: null,
+                  enabled: state.phase == GamePhase.preparing,
+                  highlight: game.isSellMode,
+                  onTap: () => game.toggleSellMode(),
                 ),
               ],
             ),
@@ -68,6 +70,7 @@ class _ActionButton extends StatelessWidget {
   final String label;
   final IconData icon;
   final bool enabled;
+  final bool highlight;
   final VoidCallback? onTap;
 
   const _ActionButton({
@@ -75,17 +78,23 @@ class _ActionButton extends StatelessWidget {
     required this.icon,
     required this.enabled,
     required this.onTap,
+    this.highlight = false,
   });
 
   @override
   Widget build(BuildContext context) {
+    final bgColor = highlight
+        ? AppColor.danger
+        : enabled
+            ? AppColor.primary
+            : AppColor.disabled;
     return GestureDetector(
       onTap: enabled ? onTap : null,
       child: Container(
         width: 72,
         padding: const EdgeInsets.symmetric(vertical: 4),
         decoration: BoxDecoration(
-          color: enabled ? AppColor.primary : AppColor.disabled,
+          color: bgColor,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(

@@ -33,7 +33,7 @@ abstract class AppColor {
   static const Color tileBlocked = Color(0xFF616161);
   static const Color tileBorder = Color(0xFF424242);
 
-  // === 캐릭터 ===
+  // === 캐릭터 (일반) ===
   static const Color charJoy = Color(0xFFFFD700);
   static const Color charSadness = Color(0xFF4169E1);
   static const Color charFear = Color(0xFF800080);
@@ -41,6 +41,14 @@ abstract class AppColor {
   static const Color charLoneliness = Color(0xFF708090);
   static const Color charExcitement = Color(0xFFFF69B4);
   static const Color charBorder = Color(0xFFFFFFFF);
+
+  // === 캐릭터 (레어) ===
+  static const Color charAnger = Color(0xFFDC143C); // 빨강 (크림슨)
+  static const Color charJealousy = Color(0xFF7CFC00); // 연두
+  static const Color charAnxiety = Color(0xFF4B0082); // 짙은보라 (인디고)
+  static const Color charNostalgia = Color(0xFF87CEEB); // 하늘
+  static const Color charShame = Color(0xFF8B4513); // 갈색
+  static const Color charGratitude = Color(0xFFFFB6C1); // 연분홍
 
   // === 적 ===
   static const Color enemyIdleThought = Color(0xFF2F2F2F);

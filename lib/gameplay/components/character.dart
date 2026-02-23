@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/const/style/app_color.dart';
 import '../../core/const/style/app_text_style.dart';
+import '../../core/emotion_defense_game.dart';
 import '../../data/models/character_model.dart';
 import '../map/grid_map.dart';
 import 'enemy.dart';
@@ -11,7 +12,8 @@ import 'projectile.dart';
 import 'tile.dart';
 
 /// 캐릭터 컴포넌트 - 사거리 내 적 탐색, 쿨다운 기반 자동 공격, 드래그 이동
-class CharacterComponent extends PositionComponent with DragCallbacks {
+class CharacterComponent extends PositionComponent
+    with DragCallbacks, TapCallbacks, HasGameReference<EmotionDefenseGame> {
   final CharacterData data;
   final GridMap gridMap;
 
@@ -84,6 +86,15 @@ class CharacterComponent extends PositionComponent with DragCallbacks {
       startPosition: position + size / 2 - Vector2(3, 3),
     );
     parent?.add(projectile);
+  }
+
+  // --- 탭 판매 ---
+
+  @override
+  void onTapUp(TapUpEvent event) {
+    if (game.isSellMode) {
+      game.doSell(this);
+    }
   }
 
   // --- 드래그 이동 ---

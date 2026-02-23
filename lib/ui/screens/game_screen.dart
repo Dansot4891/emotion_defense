@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../core/const/style/app_color.dart';
 import '../../core/emotion_defense_game.dart';
 import '../overlays/action_bar.dart';
+import '../overlays/combine_popup.dart';
 import '../overlays/hud_overlay.dart';
 import 'game_over_screen.dart';
 
@@ -37,6 +38,9 @@ class _GameScreenState extends State<GameScreen> {
                 game: game as EmotionDefenseGame,
               ),
           'gameOver': (context, game) => GameOverOverlay(
+                game: game as EmotionDefenseGame,
+              ),
+          'combinePopup': (context, game) => CombinePopup(
                 game: game as EmotionDefenseGame,
               ),
         },
