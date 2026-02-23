@@ -1,15 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import 'core/const/style/app_color.dart';
+import 'ui/screens/title_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  // 세로 모드 고정
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
+  runApp(const EmotionDefenseApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class EmotionDefenseApp extends StatelessWidget {
+  const EmotionDefenseApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: const Placeholder());
+    return MaterialApp(
+      title: '감정디펜스',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: AppColor.background,
+      ),
+      home: const TitleScreen(),
+    );
   }
 }
