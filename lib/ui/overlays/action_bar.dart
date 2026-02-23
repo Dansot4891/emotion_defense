@@ -53,6 +53,13 @@ class ActionBar extends StatelessWidget {
                   onTap: () => game.toggleCombinePopup(),
                 ),
                 _ActionButton(
+                  label: '강화',
+                  icon: Icons.arrow_upward,
+                  enabled: state.phase == GamePhase.preparing ||
+                      state.phase == GamePhase.waveActive,
+                  onTap: () => game.toggleUpgradePopup(),
+                ),
+                _ActionButton(
                   label: game.isSellMode ? '판매중' : '판매',
                   icon: Icons.sell,
                   enabled: state.phase == GamePhase.preparing ||

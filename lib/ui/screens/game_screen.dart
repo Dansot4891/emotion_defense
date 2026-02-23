@@ -9,6 +9,7 @@ import '../overlays/combine_popup.dart';
 import '../overlays/hud_overlay.dart';
 import '../overlays/pause_popup.dart';
 import '../overlays/reward_popup.dart';
+import '../overlays/upgrade_popup.dart';
 import 'game_over_screen.dart';
 
 /// 게임 화면 - FlameGame GameWidget 래퍼 + 오버레이 등록
@@ -53,6 +54,9 @@ class _GameScreenState extends State<GameScreen> {
                 game: game as EmotionDefenseGame,
               ),
           'rewardPopup': (context, game) => RewardPopup(
+                game: game as EmotionDefenseGame,
+              ),
+          'upgradePopup': (context, game) => UpgradePopup(
                 game: game as EmotionDefenseGame,
               ),
         },

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../core/const/style/app_color.dart';
 import '../../core/const/style/app_text_style.dart';
 import '../../core/emotion_defense_game.dart';
-import '../../data/definitions/upgrade_defs.dart';
 import '../../data/models/character_model.dart';
 
 /// 캐릭터 정보/강화 팝업
@@ -20,6 +19,7 @@ class CharacterInfoPopup extends StatelessWidget {
         final char = game.selectedCharacter;
         if (char == null) return const SizedBox.shrink();
 
+        final state = game.gameState;
         final data = char.data;
         return GestureDetector(
           onTap: () => game.hideCharacterInfo(),
@@ -102,13 +102,13 @@ class CharacterInfoPopup extends StatelessWidget {
                         label: 'ATK',
                         value:
                             '${char.effectiveAtk.toStringAsFixed(1)} (기본 ${data.atk})',
-                        upgradeLevel: char.atkUpgradeLevel,
+                        upgradeLevel: state.atkUpgradeLevels[data.grade]!,
                       ),
                       _StatRow(
                         label: 'ASPD',
                         value:
                             '${char.effectiveAspd.toStringAsFixed(2)}s (기본 ${data.aspd}s)',
-                        upgradeLevel: char.aspdUpgradeLevel,
+                        upgradeLevel: state.aspdUpgradeLevels[data.grade]!,
                       ),
                       _StatRow(
                         label: 'Range',
@@ -159,40 +159,7 @@ class CharacterInfoPopup extends StatelessWidget {
                               fontSize: 10, color: AppColor.textMuted),
                         ),
 
-                      const SizedBox(height: 12),
-
-                      // 강화 버튼
-                      Row(
-                        children: [
-                          Expanded(
-                            child: _UpgradeButton(
-                              label: 'ATK 강화',
-                              level: char.atkUpgradeLevel,
-                              cost: char.atkUpgradeLevel < maxUpgradeLevel
-                                  ? upgradeCosts[char.atkUpgradeLevel]
-                                  : 0,
-                              enabled: game.upgradeSystem.canUpgradeAtk(char),
-                              onTap: () {
-                                game.doUpgradeAtk(char);
-                              },
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: _UpgradeButton(
-                              label: 'ASPD 강화',
-                              level: char.aspdUpgradeLevel,
-                              cost: char.aspdUpgradeLevel < maxUpgradeLevel
-                                  ? upgradeCosts[char.aspdUpgradeLevel]
-                                  : 0,
-                              enabled: game.upgradeSystem.canUpgradeAspd(char),
-                              onTap: () {
-                                game.doUpgradeAspd(char);
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
+                      const SizedBox(height: 4),
                     ],
                   ),
                 ),
@@ -292,49 +259,3 @@ class _StatRow extends StatelessWidget {
   }
 }
 
-class _UpgradeButton extends StatelessWidget {
-  final String label;
-  final int level;
-  final int cost;
-  final bool enabled;
-  final VoidCallback onTap;
-
-  const _UpgradeButton({
-    required this.label,
-    required this.level,
-    required this.cost,
-    required this.enabled,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final isMax = level >= maxUpgradeLevel;
-    return GestureDetector(
-      onTap: enabled ? onTap : null,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 6),
-        decoration: BoxDecoration(
-          color: enabled ? AppColor.primary : AppColor.disabled,
-          borderRadius: BorderRadius.circular(6),
-        ),
-        child: Column(
-          children: [
-            Text(
-              label,
-              style: AppTextStyle.buttonSmall.copyWith(fontSize: 10),
-            ),
-            Text(
-              isMax ? 'MAX' : '${cost}G (Lv$level)',
-              style: AppTextStyle.buttonSmall.copyWith(
-                fontSize: 9,
-                color:
-                    enabled ? AppColor.gold : AppColor.textDisabled,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

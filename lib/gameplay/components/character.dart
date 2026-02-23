@@ -24,10 +24,6 @@ class CharacterComponent extends PositionComponent
   double atkMultiplier = 1.0;
   double aspdMultiplier = 1.0;
 
-  /// 강화 레벨
-  int atkUpgradeLevel = 0;
-  int aspdUpgradeLevel = 0;
-
   /// 드래그 관련
   bool _isDragging = false;
 
@@ -39,6 +35,10 @@ class CharacterComponent extends PositionComponent
     _updatePositionFromTile();
     currentTile.occupant = this;
   }
+
+  /// 등급별 강화 레벨 (GameState에서 조회)
+  int get atkUpgradeLevel => game.gameState.atkUpgradeLevels[data.grade]!;
+  int get aspdUpgradeLevel => game.gameState.aspdUpgradeLevels[data.grade]!;
 
   /// 실효 ATK (버프 + 강화)
   double get effectiveAtk =>

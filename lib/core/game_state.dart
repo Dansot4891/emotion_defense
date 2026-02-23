@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import '../data/models/character_model.dart';
 import 'constants.dart';
 
 /// 게임 진행 상태
@@ -18,6 +19,14 @@ class GameState extends ChangeNotifier {
   GamePhase _phase = GamePhase.preparing;
   int _totalSpawned = 0; // 현재 웨이브에서 스폰된 적 수
   int _totalToSpawn = 0; // 현재 웨이브에서 스폰할 총 적 수
+
+  // 등급별 강화 레벨
+  final Map<Grade, int> atkUpgradeLevels = {
+    for (final g in Grade.values) g: 0,
+  };
+  final Map<Grade, int> aspdUpgradeLevels = {
+    for (final g in Grade.values) g: 0,
+  };
 
   // 보상 누적 보너스
   double globalAtkBonus = 0;
@@ -116,6 +125,10 @@ class GameState extends ChangeNotifier {
     _phase = GamePhase.preparing;
     _totalSpawned = 0;
     _totalToSpawn = 0;
+    for (final g in Grade.values) {
+      atkUpgradeLevels[g] = 0;
+      aspdUpgradeLevels[g] = 0;
+    }
     globalAtkBonus = 0;
     globalAspdBonus = 0;
     maxAliveEnemiesBonus = 0;

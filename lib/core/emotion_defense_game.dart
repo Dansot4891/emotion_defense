@@ -2,6 +2,7 @@ import 'package:flame/game.dart';
 
 import 'game_state.dart';
 import '../data/definitions/character_defs.dart';
+import '../data/models/character_model.dart';
 import '../data/models/effect_model.dart';
 import '../data/models/recipe_model.dart';
 import '../data/models/reward_model.dart';
@@ -309,16 +310,25 @@ class EmotionDefenseGame extends FlameGame {
     gameState.notify();
   }
 
-  /// ATK 강화
-  void doUpgradeAtk(CharacterComponent char) {
-    upgradeSystem.upgradeAtk(char);
+  /// ATK 강화 (등급별)
+  void doUpgradeAtk(Grade grade) {
+    upgradeSystem.upgradeAtk(grade);
     gameState.notify();
   }
 
-  /// ASPD 강화
-  void doUpgradeAspd(CharacterComponent char) {
-    upgradeSystem.upgradeAspd(char);
+  /// ASPD 강화 (등급별)
+  void doUpgradeAspd(Grade grade) {
+    upgradeSystem.upgradeAspd(grade);
     gameState.notify();
+  }
+
+  /// 강화 팝업 토글
+  void toggleUpgradePopup() {
+    if (overlays.isActive('upgradePopup')) {
+      overlays.remove('upgradePopup');
+    } else {
+      overlays.add('upgradePopup');
+    }
   }
 
   /// 보상 선택
@@ -429,5 +439,6 @@ class EmotionDefenseGame extends FlameGame {
     overlays.remove('pausePopup');
     overlays.remove('characterInfo');
     overlays.remove('rewardPopup');
+    overlays.remove('upgradePopup');
   }
 }
