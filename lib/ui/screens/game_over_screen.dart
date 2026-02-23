@@ -1,3 +1,4 @@
+import 'package:emotion_defense/ui/screens/title_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/const/style/app_color.dart';
@@ -14,8 +15,7 @@ class GameOverOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isVictory = game.gameState.phase == GamePhase.victory;
-    final accentColor =
-        isVictory ? AppColor.borderGold : AppColor.borderDanger;
+    final accentColor = isVictory ? AppColor.borderGold : AppColor.borderDanger;
     final state = game.gameState;
 
     return Center(
@@ -103,7 +103,12 @@ class GameOverOverlay extends StatelessWidget {
                 ),
                 const SizedBox(width: 16),
                 ElevatedButton(
-                  onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const TitleScreen(),
+                    ),
+                  ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColor.disabled,
                     foregroundColor: AppColor.textPrimary,
@@ -153,10 +158,7 @@ class _StatLine extends StatelessWidget {
         const Spacer(),
         Text(
           value,
-          style: AppTextStyle.hudLabel.copyWith(
-            fontSize: 12,
-            color: c,
-          ),
+          style: AppTextStyle.hudLabel.copyWith(fontSize: 12, color: c),
         ),
       ],
     );

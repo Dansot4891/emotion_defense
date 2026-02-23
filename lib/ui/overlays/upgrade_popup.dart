@@ -21,13 +21,12 @@ class UpgradePopup extends StatelessWidget {
           onTap: () => game.toggleUpgradePopup(),
           child: Container(
             color: const Color(0x88000000),
-            child: Center(
+            child: SafeArea(
               child: GestureDetector(
                 onTap: () {}, // 내부 탭은 닫기 방지
                 child: Container(
-                  width: 300,
-                  margin: const EdgeInsets.symmetric(vertical: 60),
-                  padding: const EdgeInsets.all(16),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                   decoration: BoxDecoration(
                     color: AppColor.overlay,
                     borderRadius: BorderRadius.circular(16),
@@ -36,49 +35,60 @@ class UpgradePopup extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      // 헤더
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text('강화', style: AppTextStyle.hudLabel),
-                          GestureDetector(
-                            onTap: () => game.toggleUpgradePopup(),
-                            child: const Icon(
-                              Icons.close,
-                              color: AppColor.textSecondary,
-                              size: 24,
+                      // 고정 헤더
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text('강화', style: AppTextStyle.hudLabel),
+                            GestureDetector(
+                              onTap: () => game.toggleUpgradePopup(),
+                              child: const Icon(
+                                Icons.close,
+                                color: AppColor.textSecondary,
+                                size: 24,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       const SizedBox(height: 12),
-                      // 등급별 강화 섹션
-                      _GradeUpgradeSection(
-                        grade: Grade.common,
-                        gradeName: '일반',
-                        gradeColor: AppColor.textSecondary,
-                        game: game,
-                      ),
-                      const SizedBox(height: 8),
-                      _GradeUpgradeSection(
-                        grade: Grade.rare,
-                        gradeName: '레어',
-                        gradeColor: const Color(0xFF42A5F5),
-                        game: game,
-                      ),
-                      const SizedBox(height: 8),
-                      _GradeUpgradeSection(
-                        grade: Grade.hero,
-                        gradeName: '영웅',
-                        gradeColor: const Color(0xFFAB47BC),
-                        game: game,
-                      ),
-                      const SizedBox(height: 8),
-                      _GradeUpgradeSection(
-                        grade: Grade.legend,
-                        gradeName: '전설',
-                        gradeColor: AppColor.gold,
-                        game: game,
+                      // 스크롤 가능한 등급 섹션
+                      Flexible(
+                        child: ListView(
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                          children: [
+                            _GradeUpgradeSection(
+                              grade: Grade.common,
+                              gradeName: '일반',
+                              gradeColor: AppColor.textSecondary,
+                              game: game,
+                            ),
+                            const SizedBox(height: 8),
+                            _GradeUpgradeSection(
+                              grade: Grade.rare,
+                              gradeName: '레어',
+                              gradeColor: const Color(0xFF42A5F5),
+                              game: game,
+                            ),
+                            const SizedBox(height: 8),
+                            _GradeUpgradeSection(
+                              grade: Grade.hero,
+                              gradeName: '영웅',
+                              gradeColor: const Color(0xFFAB47BC),
+                              game: game,
+                            ),
+                            const SizedBox(height: 8),
+                            _GradeUpgradeSection(
+                              grade: Grade.legend,
+                              gradeName: '전설',
+                              gradeColor: AppColor.gold,
+                              game: game,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
