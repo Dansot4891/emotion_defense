@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flame/game.dart';
 
 import 'const/asset/app_character_path.dart';
@@ -357,6 +359,34 @@ class EmotionDefenseGame extends FlameGame {
   void doSell(CharacterComponent char) {
     gameState.addGold(char.data.sellValue);
     char.removeCharacter();
+    gameState.notify();
+  }
+
+  /// 일반 캐릭터 교체 — 10G 소비 → 다른 랜덤 일반 캐릭터로 교체
+  void doReroll() {
+    const cost = 10;
+    final char = selectedCharacter;
+    if (char == null || char.data.grade != Grade.common) return;
+    if (!gameState.spendGold(cost)) return;
+
+    // 현재 캐릭터와 다른 일반 캐릭터 선택
+    final candidates =
+        commonCharacters.where((c) => c.id != char.data.id).toList();
+    final newData = candidates[Random().nextInt(candidates.length)];
+
+    // 같은 타일에 새 캐릭터 생성
+    final tile = char.currentTile;
+    char.removeCharacter();
+
+    final newChar = CharacterComponent(
+      data: newData,
+      currentTile: tile,
+      gridMap: gridMap,
+    );
+    add(newChar);
+
+    // 팝업을 새 캐릭터로 갱신
+    selectedCharacter = newChar;
     gameState.notify();
   }
 

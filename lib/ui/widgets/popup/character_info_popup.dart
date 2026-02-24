@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/const/style/app_color.dart';
 import '../../../core/const/style/app_text_style.dart';
 import '../../../core/emotion_defense_game.dart';
+import '../../../core/game_state.dart';
 import '../../../data/models/character_model.dart';
 
 /// 캐릭터 정보/강화 팝업
@@ -159,6 +160,12 @@ class CharacterInfoPopup extends StatelessWidget {
                           ),
                         ),
 
+                      // 일반 등급 교체 버튼
+                      if (data.grade == Grade.common) ...[
+                        const SizedBox(height: 8),
+                        _RerollButton(game: game, state: state),
+                      ],
+
                       const SizedBox(height: 4),
                     ],
                   ),
@@ -219,6 +226,41 @@ class CharacterInfoPopup extends StatelessWidget {
       case Role.debuffer:
         return '디버퍼';
     }
+  }
+}
+
+class _RerollButton extends StatelessWidget {
+  final EmotionDefenseGame game;
+  final GameState state;
+
+  const _RerollButton({required this.game, required this.state});
+
+  @override
+  Widget build(BuildContext context) {
+    const cost = 10;
+    final enabled = state.gold >= cost &&
+        state.phase != GamePhase.gameOver &&
+        state.phase != GamePhase.victory;
+
+    return GestureDetector(
+      onTap: enabled ? () => game.doReroll() : null,
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        decoration: BoxDecoration(
+          color: enabled ? AppColor.primary : AppColor.disabled,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Text(
+          '교체 ${cost}G',
+          textAlign: TextAlign.center,
+          style: AppTextStyle.buttonSmall.copyWith(
+            fontSize: 11,
+            color: enabled ? AppColor.textPrimary : AppColor.textDisabled,
+          ),
+        ),
+      ),
+    );
   }
 }
 
