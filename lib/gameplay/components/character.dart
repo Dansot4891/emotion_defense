@@ -9,6 +9,7 @@ import '../../core/const/style/app_color.dart';
 import '../../core/emotion_defense_game.dart';
 import '../../data/models/character_model.dart';
 import '../map/grid_map.dart';
+import '../map/path_system.dart';
 import 'enemy.dart';
 import 'projectile.dart';
 import 'tile.dart';
@@ -167,10 +168,19 @@ class CharacterComponent extends PositionComponent
     final centerPos = position + size / 2;
     final targetTile = gridMap.getTileAtPixel(centerPos.x, centerPos.y);
 
-    if (targetTile != null && targetTile.canPlace) {
-      // 이전 타일에서 제거
-      currentTile.occupant = null;
-      // 새 타일에 배치
+    if (targetTile != null &&
+        targetTile.tileType == TileType.placement &&
+        targetTile != currentTile) {
+      final otherChar = targetTile.occupant;
+      if (otherChar != null) {
+        // 교체: 상대를 내 타일로 이동
+        otherChar.currentTile = currentTile;
+        currentTile.occupant = otherChar;
+        otherChar._updatePositionFromTile();
+      } else {
+        currentTile.occupant = null;
+      }
+      // 나를 새 타일에 배치
       currentTile = targetTile;
       currentTile.occupant = this;
       _updatePositionFromTile();
