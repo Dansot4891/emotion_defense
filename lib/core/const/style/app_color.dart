@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import '../../../data/models/character_model.dart';
+
 /// 앱 전체 색상 정의 — 모든 색상은 여기서만 관리
 abstract class AppColor {
   // === 브랜드 / 배경 ===
@@ -94,4 +96,18 @@ abstract class AppColor {
 
   // === 알림 배지 ===
   static const Color badgeRed = Color(0xFFF44336);
+
+  /// 등급별 색상 반환 (여러 곳에서 공용)
+  static Color gradeColor(Grade grade) {
+    switch (grade) {
+      case Grade.common:
+        return gradeCommon;
+      case Grade.rare:
+        return gradeRare;
+      case Grade.hero:
+        return gradeHero;
+      case Grade.legend:
+        return gradeLegend;
+    }
+  }
 }

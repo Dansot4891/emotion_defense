@@ -102,13 +102,17 @@ class TileComponent extends PositionComponent
         : AppColor.tilePlacementEmpty;
     canvas.drawRRect(rrect, Paint()..color = baseColor);
 
-    // 미세한 실선 테두리
+    // 테두리: 캐릭터가 있으면 등급 색상, 없으면 기본
+    final borderColor = occupant != null
+        ? AppColor.gradeColor(occupant!.data.grade)
+        : AppColor.tilePlacementBorder;
+    final borderWidth = occupant != null ? 1.5 : 0.5;
     canvas.drawRRect(
       rrect,
       Paint()
-        ..color = AppColor.tilePlacementBorder
+        ..color = borderColor
         ..style = PaintingStyle.stroke
-        ..strokeWidth = 0.5,
+        ..strokeWidth = borderWidth,
     );
   }
 
