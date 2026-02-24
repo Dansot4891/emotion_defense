@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../core/const/style/app_color.dart';
 import '../../core/const/style/app_text_style.dart';
-import '../../core/constants.dart';
 import '../../core/emotion_defense_game.dart';
 import '../../core/game_state.dart';
 
@@ -18,14 +17,18 @@ class ActionBar extends StatelessWidget {
       listenable: game.gameState,
       builder: (context, _) {
         final state = game.gameState;
+        final bottomPadding = MediaQuery.of(context).padding.bottom;
         return Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            height: GameConstants.actionBarHeight,
             color: AppColor.hudBackground,
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            padding: EdgeInsets.only(
+              left: 6,
+              right: 6,
+              top: 6,
+              bottom: 6 + bottomPadding,
+            ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _ActionButton(
                   label: '뽑기\n${state.effectiveGachaCost}G',
@@ -35,6 +38,7 @@ class ActionBar extends StatelessWidget {
                       state.phase != GamePhase.victory,
                   onTap: () => game.doGacha(),
                 ),
+                const SizedBox(width: 4),
                 _ActionButton(
                   label: state.phase == GamePhase.waveActive
                       ? '진행중...'
@@ -45,6 +49,7 @@ class ActionBar extends StatelessWidget {
                   enabled: state.phase == GamePhase.preparing,
                   onTap: () => game.startWave(),
                 ),
+                const SizedBox(width: 4),
                 _ActionButton(
                   label: '조합',
                   icon: Icons.merge_type,
@@ -52,6 +57,7 @@ class ActionBar extends StatelessWidget {
                       state.phase == GamePhase.waveActive,
                   onTap: () => game.toggleCombinePopup(),
                 ),
+                const SizedBox(width: 4),
                 _ActionButton(
                   label: '강화',
                   icon: Icons.arrow_upward,
@@ -59,6 +65,7 @@ class ActionBar extends StatelessWidget {
                       state.phase == GamePhase.waveActive,
                   onTap: () => game.toggleUpgradePopup(),
                 ),
+                const SizedBox(width: 4),
                 _ActionButton(
                   label: game.isSellMode ? '판매중' : '판매',
                   icon: Icons.sell,
@@ -98,31 +105,35 @@ class _ActionButton extends StatelessWidget {
         : enabled
             ? AppColor.primary
             : AppColor.disabled;
-    return GestureDetector(
-      onTap: enabled ? onTap : null,
-      child: Container(
-        width: 72,
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        decoration: BoxDecoration(
-          color: bgColor,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              icon,
-              color: enabled ? AppColor.textPrimary : AppColor.textDisabled,
-              size: 18,
-            ),
-            Text(
-              label,
-              textAlign: TextAlign.center,
-              style: enabled
-                  ? AppTextStyle.buttonSmall
-                  : AppTextStyle.buttonSmallDisabled,
-            ),
-          ],
+    return Expanded(
+      child: GestureDetector(
+        onTap: enabled ? onTap : null,
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 4),
+          decoration: BoxDecoration(
+            color: bgColor,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                icon,
+                color: enabled ? AppColor.textPrimary : AppColor.textDisabled,
+                size: 18,
+              ),
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  label,
+                  textAlign: TextAlign.center,
+                  style: enabled
+                      ? AppTextStyle.buttonSmall
+                      : AppTextStyle.buttonSmallDisabled,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

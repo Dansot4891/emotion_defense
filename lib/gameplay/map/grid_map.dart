@@ -13,11 +13,12 @@ class GridMap extends PositionComponent {
   late List<List<TileComponent>> tiles;
 
   /// 화면 크기 기반 맵 초기화
-  void initialize(Vector2 screenSize) {
-    // HUD와 액션바 높이를 제외한 가용 영역 계산
+  void initialize(Vector2 screenSize, {double safeAreaTop = 0, double safeAreaBottom = 0}) {
+    // SafeArea + HUD(시너지 바 포함)/액션바 높이를 제외한 가용 영역 계산
+    final topInset = safeAreaTop + GameConstants.hudHeight + GameConstants.synergyBarHeight;
+    final bottomInset = safeAreaBottom + GameConstants.actionBarHeight;
     final availableWidth = screenSize.x;
-    final availableHeight =
-        screenSize.y - GameConstants.hudHeight - GameConstants.actionBarHeight;
+    final availableHeight = screenSize.y - topInset - bottomInset;
 
     // 격자에 맞춰 tileSize 동적 계산
     final tileSizeByWidth = availableWidth / GameConstants.gridColumns;
@@ -31,7 +32,7 @@ class GridMap extends PositionComponent {
     final mapHeight = tileSize * GameConstants.gridRows;
     mapOffset = Offset(
       (screenSize.x - mapWidth) / 2,
-      GameConstants.hudHeight + (availableHeight - mapHeight) / 2,
+      topInset + (availableHeight - mapHeight) / 2,
     );
 
     // 타일 생성

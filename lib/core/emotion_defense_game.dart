@@ -52,6 +52,10 @@ class EmotionDefenseGame extends FlameGame {
   /// 이전 게임 상태 (웨이브 클리어 감지용)
   GamePhase _previousPhase = GamePhase.preparing;
 
+  /// SafeArea 패딩 (Flutter에서 전달)
+  double safeAreaTop = 0;
+  double safeAreaBottom = 0;
+
   /// 캐릭터 정보 팝업용
   CharacterComponent? selectedCharacter;
 
@@ -67,7 +71,7 @@ class EmotionDefenseGame extends FlameGame {
 
     // 격자 맵 초기화
     gridMap = GridMap();
-    gridMap.initialize(size);
+    gridMap.initialize(size, safeAreaTop: safeAreaTop, safeAreaBottom: safeAreaBottom);
     add(gridMap);
 
     // 시스템 초기화
@@ -401,7 +405,7 @@ class EmotionDefenseGame extends FlameGame {
 
     // 맵 재생성
     gridMap = GridMap();
-    gridMap.initialize(size);
+    gridMap.initialize(size, safeAreaTop: safeAreaTop, safeAreaBottom: safeAreaBottom);
     add(gridMap);
 
     // 시스템 재초기화

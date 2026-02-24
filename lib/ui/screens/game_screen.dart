@@ -30,35 +30,35 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final padding = MediaQuery.of(context).padding;
+    _game.safeAreaTop = padding.top;
+    _game.safeAreaBottom = padding.bottom;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GameWidget(
         game: _game,
         overlayBuilderMap: {
-          'hud': (context, game) => HudOverlay(
-                game: game as EmotionDefenseGame,
-              ),
-          'actionBar': (context, game) => ActionBar(
-                game: game as EmotionDefenseGame,
-              ),
-          'gameOver': (context, game) => GameOverOverlay(
-                game: game as EmotionDefenseGame,
-              ),
-          'combinePopup': (context, game) => CombinePopup(
-                game: game as EmotionDefenseGame,
-              ),
-          'pausePopup': (context, game) => PausePopup(
-                game: game as EmotionDefenseGame,
-              ),
-          'characterInfo': (context, game) => CharacterInfoPopup(
-                game: game as EmotionDefenseGame,
-              ),
-          'rewardPopup': (context, game) => RewardPopup(
-                game: game as EmotionDefenseGame,
-              ),
-          'upgradePopup': (context, game) => UpgradePopup(
-                game: game as EmotionDefenseGame,
-              ),
+          'hud': (context, game) =>
+              HudOverlay(game: game as EmotionDefenseGame),
+          'actionBar': (context, game) =>
+              ActionBar(game: game as EmotionDefenseGame),
+          'gameOver': (context, game) =>
+              GameOverOverlay(game: game as EmotionDefenseGame),
+          'combinePopup': (context, game) =>
+              CombinePopup(game: game as EmotionDefenseGame),
+          'pausePopup': (context, game) =>
+              PausePopup(game: game as EmotionDefenseGame),
+          'characterInfo': (context, game) =>
+              CharacterInfoPopup(game: game as EmotionDefenseGame),
+          'rewardPopup': (context, game) =>
+              RewardPopup(game: game as EmotionDefenseGame),
+          'upgradePopup': (context, game) =>
+              UpgradePopup(game: game as EmotionDefenseGame),
         },
         backgroundBuilder: (context) {
           return Container(color: AppColor.surface);
