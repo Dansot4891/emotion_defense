@@ -5,7 +5,7 @@ import '../../../core/const/style/app_text_style.dart';
 import '../../../core/emotion_defense_game.dart';
 import '../../../core/game_state.dart';
 
-/// 하단 액션 버튼 바 - 뽑기, 웨이브 시작, 조합(비활성), 판매(비활성)
+/// 하단 액션 버튼 바 - 뽑기, 조합, 강화, 판매
 class ActionBar extends StatelessWidget {
   final EmotionDefenseGame game;
 
@@ -38,17 +38,6 @@ class ActionBar extends StatelessWidget {
                       state.phase != GamePhase.gameOver &&
                       state.phase != GamePhase.victory,
                   onTap: () => game.doGacha(),
-                ),
-                const SizedBox(width: 4),
-                _ActionButton(
-                  label: state.phase == GamePhase.waveActive
-                      ? '진행중...'
-                      : '다음\n${game.autoWaveRemaining.ceil()}s',
-                  icon: state.phase == GamePhase.waveActive
-                      ? Icons.play_arrow
-                      : Icons.timer,
-                  enabled: state.phase == GamePhase.preparing,
-                  onTap: () => game.startWave(),
                 ),
                 const SizedBox(width: 4),
                 _ActionButton(

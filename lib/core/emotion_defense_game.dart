@@ -10,6 +10,7 @@ import '../data/models/reward_model.dart';
 import '../gameplay/components/character.dart';
 import '../gameplay/components/enemy.dart';
 import '../gameplay/components/projectile.dart';
+import '../gameplay/components/wave_countdown.dart';
 import '../gameplay/map/grid_map.dart';
 import '../gameplay/systems/combine_system.dart';
 import '../gameplay/systems/economy_system.dart';
@@ -57,6 +58,9 @@ class EmotionDefenseGame extends FlameGame {
   double safeAreaTop = 0;
   double safeAreaBottom = 0;
 
+  /// 웨이브 카운트다운 컴포넌트
+  WaveCountdownComponent? _countdownComponent;
+
   /// 캐릭터 정보 팝업용
   CharacterComponent? selectedCharacter;
 
@@ -83,7 +87,11 @@ class EmotionDefenseGame extends FlameGame {
 
     // 격자 맵 초기화
     gridMap = GridMap();
-    gridMap.initialize(size, safeAreaTop: safeAreaTop, safeAreaBottom: safeAreaBottom);
+    gridMap.initialize(
+      size,
+      safeAreaTop: safeAreaTop,
+      safeAreaBottom: safeAreaBottom,
+    );
     add(gridMap);
 
     // 시스템 초기화
@@ -102,10 +110,7 @@ class EmotionDefenseGame extends FlameGame {
       gameWorld: this,
     );
 
-    combineSystem = CombineSystem(
-      gameWorld: this,
-      gridMap: gridMap,
-    );
+    combineSystem = CombineSystem(gameWorld: this, gridMap: gridMap);
 
     upgradeSystem = UpgradeSystem(gameState: gameState);
     rewardSystem = RewardSystem();
@@ -155,10 +160,24 @@ class EmotionDefenseGame extends FlameGame {
         waveSystem.canStartWave &&
         !overlays.isActive('rewardPopup')) {
       _autoWaveDelay -= scaledDt;
+
+      // 카운트다운 표시
+      if (_countdownComponent == null) {
+        _countdownComponent = WaveCountdownComponent(
+          spawnCenter: gridMap.gridToPixelCenter(0, 0),
+          tileSize: gridMap.tileSize,
+        );
+        add(_countdownComponent!);
+      }
+      _countdownComponent!.updateFromDelay(_autoWaveDelay);
+
       if (_autoWaveDelay <= 0) {
+        _removeCountdown();
         startWave();
       }
       gameState.notify();
+    } else {
+      _removeCountdown();
     }
 
     // 게임오버/승리 오버레이
@@ -212,7 +231,7 @@ class EmotionDefenseGame extends FlameGame {
       for (final passive in char.data.passives) {
         final rangePixels =
             (passive.range + _synergyBonuses.bufferRangeBonus) *
-                gridMap.tileSize;
+            gridMap.tileSize;
         final myCenter = char.position + char.size / 2;
 
         switch (passive.type) {
@@ -280,6 +299,12 @@ class EmotionDefenseGame extends FlameGame {
 
   /// 자동 웨이브 남은 시간 (초)
   double get autoWaveRemaining => _autoWaveDelay.clamp(0.0, autoWaveInterval);
+
+  /// 카운트다운 컴포넌트 제거
+  void _removeCountdown() {
+    _countdownComponent?.removeFromParent();
+    _countdownComponent = null;
+  }
 
   /// 뽑기 실행
   void doGacha() {
@@ -417,7 +442,11 @@ class EmotionDefenseGame extends FlameGame {
 
     // 맵 재생성
     gridMap = GridMap();
-    gridMap.initialize(size, safeAreaTop: safeAreaTop, safeAreaBottom: safeAreaBottom);
+    gridMap.initialize(
+      size,
+      safeAreaTop: safeAreaTop,
+      safeAreaBottom: safeAreaBottom,
+    );
     add(gridMap);
 
     // 시스템 재초기화
@@ -434,10 +463,7 @@ class EmotionDefenseGame extends FlameGame {
       gameWorld: this,
     );
 
-    combineSystem = CombineSystem(
-      gameWorld: this,
-      gridMap: gridMap,
-    );
+    combineSystem = CombineSystem(gameWorld: this, gridMap: gridMap);
 
     upgradeSystem = UpgradeSystem(gameState: gameState);
 
@@ -447,6 +473,7 @@ class EmotionDefenseGame extends FlameGame {
     _autoWaveDelay = autoWaveInterval;
     _previousPhase = GamePhase.preparing;
     _synergyBonuses = const SynergyBonuses();
+    _countdownComponent = null;
     selectedCharacter = null;
     currentRewardOptions = null;
     paused = false;
