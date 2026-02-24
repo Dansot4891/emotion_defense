@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../core/const/style/app_color.dart';
-import '../../core/const/style/app_text_style.dart';
-import '../../core/emotion_defense_game.dart';
-import '../../data/definitions/upgrade_defs.dart';
-import '../../data/models/character_model.dart';
+import '../../../core/const/style/app_color.dart';
+import '../../../core/const/style/app_text_style.dart';
+import '../../../core/emotion_defense_game.dart';
+import '../../../data/definitions/upgrade_defs.dart';
+import '../../../data/models/character_model.dart';
 
 /// 강화 팝업 — 등급별 ATK/ASPD 강화
 class UpgradePopup extends StatelessWidget {
@@ -25,8 +25,10 @@ class UpgradePopup extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {}, // 내부 탭은 닫기 방지
                 child: Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 16,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColor.overlay,
                     borderRadius: BorderRadius.circular(16),
@@ -136,8 +138,7 @@ class _GradeUpgradeSection extends StatelessWidget {
           Row(
             children: [
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
                   color: gradeColor.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(4),
@@ -170,9 +171,7 @@ class _GradeUpgradeSection extends StatelessWidget {
                 child: _UpgradeButton(
                   label: 'ATK 강화',
                   level: atkLevel,
-                  cost: atkLevel < maxUpgradeLevel
-                      ? upgradeCosts[atkLevel]
-                      : 0,
+                  cost: atkLevel < maxUpgradeLevel ? upgradeCosts[atkLevel] : 0,
                   enabled: game.upgradeSystem.canUpgradeAtk(grade),
                   onTap: () => game.doUpgradeAtk(grade),
                 ),
@@ -226,10 +225,7 @@ class _UpgradeButton extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Text(
-              label,
-              style: AppTextStyle.buttonSmall.copyWith(fontSize: 10),
-            ),
+            Text(label, style: AppTextStyle.buttonSmall.copyWith(fontSize: 10)),
             Text(
               isMax ? 'MAX' : '${cost}G (Lv$level)',
               style: AppTextStyle.buttonSmall.copyWith(

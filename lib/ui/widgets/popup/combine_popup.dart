@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../core/const/style/app_color.dart';
-import '../../core/const/style/app_text_style.dart';
-import '../../core/emotion_defense_game.dart';
-import '../../data/definitions/character_defs.dart';
-import '../../data/definitions/recipe_defs.dart';
-import '../../data/models/character_model.dart';
-import '../../data/models/recipe_model.dart';
+import '../../../core/const/style/app_color.dart';
+import '../../../core/const/style/app_text_style.dart';
+import '../../../core/emotion_defense_game.dart';
+import '../../../data/definitions/character_defs.dart';
+import '../../../data/definitions/recipe_defs.dart';
+import '../../../data/models/character_model.dart';
+import '../../../data/models/recipe_model.dart';
 
 /// 등급별 통일 색상
 Color _gradeColor(Grade? grade) {
@@ -110,10 +110,8 @@ class _CombinePopupState extends State<CombinePopup> {
               child: ListView.separated(
                 shrinkWrap: true,
                 itemCount: _filteredRecipes.length,
-                separatorBuilder: (_, __) => const Divider(
-                  color: AppColor.textMuted,
-                  height: 1,
-                ),
+                separatorBuilder: (_, __) =>
+                    const Divider(color: AppColor.textMuted, height: 1),
                 itemBuilder: (context, index) {
                   return _RecipeRow(
                     recipe: _filteredRecipes[index],
@@ -156,7 +154,9 @@ class _FilterTab extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 6),
           margin: const EdgeInsets.symmetric(horizontal: 2),
           decoration: BoxDecoration(
-            color: selected ? color.withValues(alpha: 0.25) : Colors.transparent,
+            color: selected
+                ? color.withValues(alpha: 0.25)
+                : Colors.transparent,
             borderRadius: BorderRadius.circular(6),
             border: Border.all(
               color: selected ? color : AppColor.textMuted,
@@ -216,24 +216,36 @@ class _RecipeRow extends StatelessWidget {
                 _MaterialChip(
                   name: allCharacters[recipe.materialIds[0]]?.name ?? '?',
                   owned: materialOwned[0],
-                  gradeColor: _gradeColor(allCharacters[recipe.materialIds[0]]?.grade),
+                  gradeColor: _gradeColor(
+                    allCharacters[recipe.materialIds[0]]?.grade,
+                  ),
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4),
-                  child: Text('+',
-                      style: TextStyle(
-                          color: AppColor.textSecondary, fontSize: 14)),
+                  child: Text(
+                    '+',
+                    style: TextStyle(
+                      color: AppColor.textSecondary,
+                      fontSize: 14,
+                    ),
+                  ),
                 ),
                 _MaterialChip(
                   name: allCharacters[recipe.materialIds[1]]?.name ?? '?',
                   owned: materialOwned[1],
-                  gradeColor: _gradeColor(allCharacters[recipe.materialIds[1]]?.grade),
+                  gradeColor: _gradeColor(
+                    allCharacters[recipe.materialIds[1]]?.grade,
+                  ),
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4),
-                  child: Text('→',
-                      style: TextStyle(
-                          color: AppColor.textSecondary, fontSize: 14)),
+                  child: Text(
+                    '→',
+                    style: TextStyle(
+                      color: AppColor.textSecondary,
+                      fontSize: 14,
+                    ),
+                  ),
                 ),
                 Text(
                   resultData?.name ?? '?',
@@ -256,8 +268,9 @@ class _RecipeRow extends StatelessWidget {
               child: Text(
                 '조합',
                 style: AppTextStyle.buttonSmall.copyWith(
-                  color:
-                      canCombine ? AppColor.textPrimary : AppColor.textDisabled,
+                  color: canCombine
+                      ? AppColor.textPrimary
+                      : AppColor.textDisabled,
                 ),
               ),
             ),

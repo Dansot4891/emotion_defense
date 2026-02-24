@@ -1,8 +1,8 @@
 import 'package:emotion_defense/app/route/routes.dart';
 import 'package:flutter/material.dart';
-import '../../core/const/style/app_color.dart';
-import '../../core/const/style/app_text_style.dart';
-import '../../core/emotion_defense_game.dart';
+import '../../../core/const/style/app_color.dart';
+import '../../../core/const/style/app_text_style.dart';
+import '../../../core/emotion_defense_game.dart';
 
 /// 일시정지 오버레이 — 반투명 배경 + 계속하기/타이틀 버튼
 class PausePopup extends StatelessWidget {

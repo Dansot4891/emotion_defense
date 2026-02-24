@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 
 import '../../core/const/style/app_color.dart';
 import '../../core/emotion_defense_game.dart';
-import '../overlays/action_bar.dart';
-import '../overlays/character_info_popup.dart';
-import '../overlays/combine_popup.dart';
-import '../overlays/hud_overlay.dart';
-import '../overlays/pause_popup.dart';
-import '../overlays/reward_popup.dart';
-import '../overlays/upgrade_popup.dart';
-import 'game_over_screen.dart';
+import '../widgets/app_bar/action_bar.dart';
+import '../widgets/popup/character_info_popup.dart';
+import '../widgets/popup/combine_popup.dart';
+import '../widgets/overlay/hud_overlay.dart';
+import '../widgets/popup/pause_popup.dart';
+import '../widgets/popup/reward_popup.dart';
+import '../widgets/popup/upgrade_popup.dart';
+import '../widgets/overlay/game_over_overlay.dart';
 
 /// 게임 화면 - FlameGame GameWidget 래퍼 + 오버레이 등록
 class GameScreen extends StatefulWidget {
@@ -48,7 +48,7 @@ class _GameScreenState extends State<GameScreen> {
           'actionBar': (context, game) =>
               ActionBar(game: game as EmotionDefenseGame),
           'gameOver': (context, game) =>
-              GameOverScreen(game: game as EmotionDefenseGame),
+              GameOverOverlay(game: game as EmotionDefenseGame),
           'combinePopup': (context, game) =>
               CombinePopup(game: game as EmotionDefenseGame),
           'pausePopup': (context, game) =>

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../core/const/style/app_color.dart';
-import '../../core/const/style/app_text_style.dart';
-import '../../core/emotion_defense_game.dart';
-import '../../data/models/character_model.dart';
+import '../../../core/const/style/app_color.dart';
+import '../../../core/const/style/app_text_style.dart';
+import '../../../core/emotion_defense_game.dart';
+import '../../../data/models/character_model.dart';
 
 /// 캐릭터 정보/강화 팝업
 class CharacterInfoPopup extends StatelessWidget {
@@ -75,8 +75,11 @@ class CharacterInfoPopup extends StatelessWidget {
                             ),
                           ),
                           IconButton(
-                            icon: const Icon(Icons.close,
-                                color: AppColor.textPrimary, size: 20),
+                            icon: const Icon(
+                              Icons.close,
+                              color: AppColor.textPrimary,
+                              size: 20,
+                            ),
                             padding: EdgeInsets.zero,
                             constraints: const BoxConstraints(),
                             onPressed: () => game.hideCharacterInfo(),
@@ -98,25 +101,27 @@ class CharacterInfoPopup extends StatelessWidget {
                             '${char.effectiveAspd.toStringAsFixed(2)}s (기본 ${data.aspd}s)',
                         upgradeLevel: state.aspdUpgradeLevels[data.grade]!,
                       ),
-                      _StatRow(
-                        label: 'Range',
-                        value: '${data.range}칸',
-                      ),
+                      _StatRow(label: 'Range', value: '${data.range}칸'),
                       const SizedBox(height: 8),
 
                       // 패시브 스킬
                       if (data.passives.isNotEmpty) ...[
-                        Text('패시브',
-                            style: AppTextStyle.hudLabel.copyWith(
-                                fontSize: 12, color: AppColor.success)),
+                        Text(
+                          '패시브',
+                          style: AppTextStyle.hudLabel.copyWith(
+                            fontSize: 12,
+                            color: AppColor.success,
+                          ),
+                        ),
                         for (final p in data.passives)
                           Padding(
                             padding: const EdgeInsets.only(left: 8, top: 2),
                             child: Text(
                               '- ${p.description}',
                               style: AppTextStyle.hudLabel.copyWith(
-                                  fontSize: 10,
-                                  color: AppColor.textSecondary),
+                                fontSize: 10,
+                                color: AppColor.textSecondary,
+                              ),
                             ),
                           ),
                         const SizedBox(height: 4),
@@ -124,17 +129,22 @@ class CharacterInfoPopup extends StatelessWidget {
 
                       // 액티브 스킬
                       if (data.actives.isNotEmpty) ...[
-                        Text('액티브',
-                            style: AppTextStyle.hudLabel.copyWith(
-                                fontSize: 12, color: AppColor.warning)),
+                        Text(
+                          '액티브',
+                          style: AppTextStyle.hudLabel.copyWith(
+                            fontSize: 12,
+                            color: AppColor.warning,
+                          ),
+                        ),
                         for (final a in data.actives)
                           Padding(
                             padding: const EdgeInsets.only(left: 8, top: 2),
                             child: Text(
                               '- ${a.description}',
                               style: AppTextStyle.hudLabel.copyWith(
-                                  fontSize: 10,
-                                  color: AppColor.textSecondary),
+                                fontSize: 10,
+                                color: AppColor.textSecondary,
+                              ),
                             ),
                           ),
                         const SizedBox(height: 4),
@@ -144,7 +154,9 @@ class CharacterInfoPopup extends StatelessWidget {
                         Text(
                           '스킬 없음',
                           style: AppTextStyle.hudLabel.copyWith(
-                              fontSize: 10, color: AppColor.textMuted),
+                            fontSize: 10,
+                            color: AppColor.textMuted,
+                          ),
                         ),
 
                       const SizedBox(height: 4),
@@ -215,11 +227,7 @@ class _StatRow extends StatelessWidget {
   final String value;
   final int? upgradeLevel;
 
-  const _StatRow({
-    required this.label,
-    required this.value,
-    this.upgradeLevel,
-  });
+  const _StatRow({required this.label, required this.value, this.upgradeLevel});
 
   @override
   Widget build(BuildContext context) {
@@ -229,21 +237,30 @@ class _StatRow extends StatelessWidget {
         children: [
           SizedBox(
             width: 50,
-            child: Text(label,
-                style: AppTextStyle.hudLabel
-                    .copyWith(fontSize: 11, color: AppColor.textSecondary)),
+            child: Text(
+              label,
+              style: AppTextStyle.hudLabel.copyWith(
+                fontSize: 11,
+                color: AppColor.textSecondary,
+              ),
+            ),
           ),
           Expanded(
-            child: Text(value,
-                style: AppTextStyle.hudLabel.copyWith(fontSize: 11)),
+            child: Text(
+              value,
+              style: AppTextStyle.hudLabel.copyWith(fontSize: 11),
+            ),
           ),
           if (upgradeLevel != null && upgradeLevel! > 0)
-            Text('+$upgradeLevel',
-                style: AppTextStyle.hudLabel
-                    .copyWith(fontSize: 10, color: AppColor.success)),
+            Text(
+              '+$upgradeLevel',
+              style: AppTextStyle.hudLabel.copyWith(
+                fontSize: 10,
+                color: AppColor.success,
+              ),
+            ),
         ],
       ),
     );
   }
 }
-

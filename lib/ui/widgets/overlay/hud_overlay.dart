@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../core/const/style/app_color.dart';
-import '../../core/const/style/app_text_style.dart';
-import '../../core/constants.dart';
-import '../../core/emotion_defense_game.dart';
-import '../../gameplay/systems/synergy_system.dart';
+import '../../../core/const/style/app_color.dart';
+import '../../../core/const/style/app_text_style.dart';
+import '../../../core/constants.dart';
+import '../../../core/emotion_defense_game.dart';
+import '../../../gameplay/systems/synergy_system.dart';
 
 /// 상단 HUD 오버레이 - 웨이브 정보, 골드, 적 수, 시너지, 배속, 일시정지
 class HudOverlay extends StatelessWidget {
@@ -33,8 +33,7 @@ class HudOverlay extends StatelessWidget {
                   children: [
                     _HudItem(
                       icon: Icons.waves,
-                      text:
-                          'W${state.currentWave}/${GameConstants.totalWaves}',
+                      text: 'W${state.currentWave}/${GameConstants.totalWaves}',
                     ),
                     const SizedBox(width: 10),
                     _HudItem(
@@ -47,7 +46,8 @@ class HudOverlay extends StatelessWidget {
                       icon: Icons.pest_control,
                       text:
                           '${state.enemiesAlive}/${state.effectiveMaxAliveEnemies}',
-                      color: state.enemiesAlive >
+                      color:
+                          state.enemiesAlive >
                               state.effectiveMaxAliveEnemies - 5
                           ? AppColor.danger
                           : null,
@@ -58,7 +58,9 @@ class HudOverlay extends StatelessWidget {
                       onTap: () => game.toggleSpeed(),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 6, vertical: 2),
+                          horizontal: 6,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(4),
                           border: Border.all(
@@ -96,8 +98,10 @@ class HudOverlay extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   color: AppColor.hudBackground,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 4,
+                  ),
                   child: Wrap(
                     spacing: 6,
                     runSpacing: 2,
@@ -126,58 +130,71 @@ class HudOverlay extends StatelessWidget {
   List<Widget> _buildSynergyChips(SynergyBonuses s) {
     final chips = <Widget>[];
     if (s.allyAtkBonus > 0) {
-      chips.add(_SynergyChip(
-        label: 'ATK+${(s.allyAtkBonus * 100).toInt()}%',
-        color: AppColor.success,
-      ));
+      chips.add(
+        _SynergyChip(
+          label: 'ATK+${(s.allyAtkBonus * 100).toInt()}%',
+          color: AppColor.success,
+        ),
+      );
     }
     if (s.allyAspdBonus > 0) {
-      chips.add(_SynergyChip(
-        label: 'ASPD+${(s.allyAspdBonus * 100).toInt()}%',
-        color: AppColor.success,
-      ));
+      chips.add(
+        _SynergyChip(
+          label: 'ASPD+${(s.allyAspdBonus * 100).toInt()}%',
+          color: AppColor.success,
+        ),
+      );
     }
     if (s.enemySpeedPenalty > 0) {
-      chips.add(_SynergyChip(
-        label: '적속-${(s.enemySpeedPenalty * 100).toInt()}%',
-        color: const Color(0xFF42A5F5),
-      ));
+      chips.add(
+        _SynergyChip(
+          label: '적속-${(s.enemySpeedPenalty * 100).toInt()}%',
+          color: const Color(0xFF42A5F5),
+        ),
+      );
     }
     if (s.enemyDefPenalty > 0) {
-      chips.add(_SynergyChip(
-        label: '적방-${s.enemyDefPenalty.toInt()}',
-        color: const Color(0xFF42A5F5),
-      ));
+      chips.add(
+        _SynergyChip(
+          label: '적방-${s.enemyDefPenalty.toInt()}',
+          color: const Color(0xFF42A5F5),
+        ),
+      );
     }
     if (s.emotionExplosion) {
-      chips.add(const _SynergyChip(
-        label: '감정폭발',
-        color: AppColor.danger,
-      ));
+      chips.add(const _SynergyChip(label: '감정폭발', color: AppColor.danger));
     }
     if (s.dealerCritBonus > 0) {
-      chips.add(_SynergyChip(
-        label: '크리+${(s.dealerCritBonus * 100).toInt()}%',
-        color: AppColor.warning,
-      ));
+      chips.add(
+        _SynergyChip(
+          label: '크리+${(s.dealerCritBonus * 100).toInt()}%',
+          color: AppColor.warning,
+        ),
+      );
     }
     if (s.stunDurationBonus > 0) {
-      chips.add(_SynergyChip(
-        label: '스턴+${s.stunDurationBonus}s',
-        color: const Color(0xFFAB47BC),
-      ));
+      chips.add(
+        _SynergyChip(
+          label: '스턴+${s.stunDurationBonus}s',
+          color: const Color(0xFFAB47BC),
+        ),
+      );
     }
     if (s.bufferRangeBonus > 0) {
-      chips.add(_SynergyChip(
-        label: '범위+${s.bufferRangeBonus.toInt()}',
-        color: const Color(0xFF00BCD4),
-      ));
+      chips.add(
+        _SynergyChip(
+          label: '범위+${s.bufferRangeBonus.toInt()}',
+          color: const Color(0xFF00BCD4),
+        ),
+      );
     }
     if (s.debufferDurationBonus > 0) {
-      chips.add(_SynergyChip(
-        label: '디버프+${s.debufferDurationBonus}s',
-        color: const Color(0xFF42A5F5),
-      ));
+      chips.add(
+        _SynergyChip(
+          label: '디버프+${s.debufferDurationBonus}s',
+          color: const Color(0xFF42A5F5),
+        ),
+      );
     }
     return chips;
   }
@@ -198,10 +215,7 @@ class _HudItem extends StatelessWidget {
       children: [
         Icon(icon, color: c, size: 18),
         const SizedBox(width: 4),
-        Text(
-          text,
-          style: AppTextStyle.hudLabel.copyWith(color: c),
-        ),
+        Text(text, style: AppTextStyle.hudLabel.copyWith(color: c)),
       ],
     );
   }

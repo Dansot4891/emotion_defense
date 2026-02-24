@@ -23,6 +23,7 @@ class CharacterDetailScreen extends StatelessWidget {
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+
         children: [
           _GradeSection(
             title: '일반',
@@ -85,10 +86,7 @@ class _GradeSection extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               '$title 등급',
-              style: AppTextStyle.hudLabel.copyWith(
-                fontSize: 16,
-                color: color,
-              ),
+              style: AppTextStyle.hudLabel.copyWith(fontSize: 16, color: color),
             ),
             const SizedBox(width: 8),
             Text(
@@ -121,10 +119,7 @@ class _CharacterCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColor.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: gradeColor.withValues(alpha: 0.3),
-          width: 1,
-        ),
+        border: Border.all(color: gradeColor.withValues(alpha: 0.3), width: 1),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,10 +138,7 @@ class _CharacterCard extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(7),
-              child: Image.asset(
-                data.imagePath,
-                fit: BoxFit.contain,
-              ),
+              child: Image.asset(data.imagePath, fit: BoxFit.contain),
             ),
           ),
           const SizedBox(width: 12),

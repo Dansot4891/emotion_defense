@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../core/const/style/app_color.dart';
-import '../../core/const/style/app_text_style.dart';
-import '../../core/emotion_defense_game.dart';
-import '../../core/game_state.dart';
+import '../../../core/const/style/app_color.dart';
+import '../../../core/const/style/app_text_style.dart';
+import '../../../core/emotion_defense_game.dart';
+import '../../../core/game_state.dart';
 
 /// 하단 액션 버튼 바 - 뽑기, 웨이브 시작, 조합(비활성), 판매(비활성)
 class ActionBar extends StatelessWidget {
@@ -33,7 +33,8 @@ class ActionBar extends StatelessWidget {
                 _ActionButton(
                   label: '뽑기\n${state.effectiveGachaCost}G',
                   icon: Icons.casino,
-                  enabled: state.gold >= state.effectiveGachaCost &&
+                  enabled:
+                      state.gold >= state.effectiveGachaCost &&
                       state.phase != GamePhase.gameOver &&
                       state.phase != GamePhase.victory,
                   onTap: () => game.doGacha(),
@@ -53,7 +54,8 @@ class ActionBar extends StatelessWidget {
                 _ActionButton(
                   label: '조합',
                   icon: Icons.merge_type,
-                  enabled: state.phase == GamePhase.preparing ||
+                  enabled:
+                      state.phase == GamePhase.preparing ||
                       state.phase == GamePhase.waveActive,
                   onTap: () => game.toggleCombinePopup(),
                 ),
@@ -61,7 +63,8 @@ class ActionBar extends StatelessWidget {
                 _ActionButton(
                   label: '강화',
                   icon: Icons.arrow_upward,
-                  enabled: state.phase == GamePhase.preparing ||
+                  enabled:
+                      state.phase == GamePhase.preparing ||
                       state.phase == GamePhase.waveActive,
                   onTap: () => game.toggleUpgradePopup(),
                 ),
@@ -69,7 +72,8 @@ class ActionBar extends StatelessWidget {
                 _ActionButton(
                   label: game.isSellMode ? '판매중' : '판매',
                   icon: Icons.sell,
-                  enabled: state.phase == GamePhase.preparing ||
+                  enabled:
+                      state.phase == GamePhase.preparing ||
                       state.phase == GamePhase.waveActive,
                   highlight: game.isSellMode,
                   onTap: () => game.toggleSellMode(),
@@ -103,8 +107,8 @@ class _ActionButton extends StatelessWidget {
     final bgColor = highlight
         ? AppColor.danger
         : enabled
-            ? AppColor.primary
-            : AppColor.disabled;
+        ? AppColor.primary
+        : AppColor.disabled;
     return Expanded(
       child: GestureDetector(
         onTap: enabled ? onTap : null,

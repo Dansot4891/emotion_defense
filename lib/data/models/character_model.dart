@@ -3,7 +3,16 @@ import 'dart:ui';
 import 'effect_model.dart';
 
 /// 캐릭터 등급
-enum Grade { common, rare, hero, legend }
+enum Grade {
+  common('일반'),
+  rare('레어'),
+  hero('영웅'),
+  legend('전설');
+
+  final String displayName;
+
+  const Grade(this.displayName);
+}
 
 /// 감정 극성
 enum Polarity { positive, negative, neutral }
