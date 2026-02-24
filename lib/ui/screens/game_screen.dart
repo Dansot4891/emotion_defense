@@ -48,7 +48,7 @@ class _GameScreenState extends State<GameScreen> {
           'actionBar': (context, game) =>
               ActionBar(game: game as EmotionDefenseGame),
           'gameOver': (context, game) =>
-              GameOverOverlay(game: game as EmotionDefenseGame),
+              GameOverScreen(game: game as EmotionDefenseGame),
           'combinePopup': (context, game) =>
               CombinePopup(game: game as EmotionDefenseGame),
           'pausePopup': (context, game) =>

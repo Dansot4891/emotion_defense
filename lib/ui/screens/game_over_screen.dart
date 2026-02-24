@@ -1,16 +1,15 @@
-import 'package:emotion_defense/ui/screens/title_screen.dart';
+import 'package:emotion_defense/app/route/routes.dart';
 import 'package:flutter/material.dart';
-
 import '../../core/const/style/app_color.dart';
 import '../../core/const/style/app_text_style.dart';
 import '../../core/emotion_defense_game.dart';
 import '../../core/game_state.dart';
 
 /// 게임오버/승리 오버레이 화면 — 결과 통계 포함
-class GameOverOverlay extends StatelessWidget {
+class GameOverScreen extends StatelessWidget {
   final EmotionDefenseGame game;
 
-  const GameOverOverlay({super.key, required this.game});
+  const GameOverScreen({super.key, required this.game});
 
   @override
   Widget build(BuildContext context) {
@@ -103,12 +102,7 @@ class GameOverOverlay extends StatelessWidget {
                 ),
                 const SizedBox(width: 16),
                 ElevatedButton(
-                  onPressed: () => Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const TitleScreen(),
-                    ),
-                  ),
+                  onPressed: () => TitleRoute().go(context),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColor.disabled,
                     foregroundColor: AppColor.textPrimary,

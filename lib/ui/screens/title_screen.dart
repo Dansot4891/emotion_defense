@@ -1,8 +1,7 @@
+import 'package:emotion_defense/app/route/routes.dart';
 import 'package:flutter/material.dart';
-
 import '../../core/const/style/app_color.dart';
 import '../../core/const/style/app_text_style.dart';
-import 'game_screen.dart';
 
 /// 타이틀 화면 - "감정디펜스" + 시작 버튼
 class TitleScreen extends StatelessWidget {
@@ -22,9 +21,7 @@ class TitleScreen extends StatelessWidget {
             const SizedBox(height: 48),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (_) => const GameScreen()),
-                );
+                GameScreenRoute().go(context);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColor.primary,

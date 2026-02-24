@@ -1,6 +1,5 @@
-import 'package:emotion_defense/ui/screens/title_screen.dart';
+import 'package:emotion_defense/app/route/routes.dart';
 import 'package:flutter/material.dart';
-
 import '../../core/const/style/app_color.dart';
 import '../../core/const/style/app_text_style.dart';
 import '../../core/emotion_defense_game.dart';
@@ -45,11 +44,7 @@ class PausePopup extends StatelessWidget {
                 color: AppColor.danger,
                 onTap: () {
                   game.togglePause();
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const TitleScreen(),
-                    ),
-                  );
+                  TitleRoute().go(context);
                 },
               ),
             ],

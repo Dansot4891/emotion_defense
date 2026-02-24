@@ -1,8 +1,7 @@
+import 'package:emotion_defense/app/route/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'core/const/style/app_color.dart';
-import 'ui/screens/title_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,13 +19,13 @@ class EmotionDefenseApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: '감정디펜스',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: AppColor.background,
       ),
-      home: const TitleScreen(),
+      routerConfig: AppRouter.appRouter(),
     );
   }
 }
