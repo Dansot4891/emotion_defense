@@ -41,7 +41,7 @@ class GachaSystem {
     // 빈 타일에 배치
     final emptyTiles = gridMap.getEmptyPlacementTiles();
     if (emptyTiles.isEmpty) return null;
-    final tile = emptyTiles[_random.nextInt(emptyTiles.length)];
+    final tile = emptyTiles.first;
 
     // 캐릭터 생성 및 배치
     final character = CharacterComponent(
@@ -59,7 +59,7 @@ class GachaSystem {
     if (emptyTiles.isEmpty || pool.isEmpty) return null;
 
     final charData = pool[_random.nextInt(pool.length)];
-    final tile = emptyTiles[_random.nextInt(emptyTiles.length)];
+    final tile = emptyTiles.first;
 
     final character = CharacterComponent(
       data: charData,
