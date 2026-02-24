@@ -1,9 +1,11 @@
+import 'dart:ui' as ui;
+
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/const/asset/app_character_path.dart';
 import '../../core/const/style/app_color.dart';
-import '../../core/const/style/app_text_style.dart';
 import '../../core/emotion_defense_game.dart';
 import '../../data/models/character_model.dart';
 import '../map/grid_map.dart';
@@ -27,13 +29,23 @@ class CharacterComponent extends PositionComponent
   /// 드래그 관련
   bool _isDragging = false;
 
+  /// 캐릭터 스프라이트
+  ui.Image? _spriteImage;
+
   CharacterComponent({
     required this.data,
     required this.currentTile,
     required this.gridMap,
-  }) : super(size: Vector2(24, 24)) {
+  }) : super(size: Vector2.all(gridMap.tileSize * 0.85)) {
     _updatePositionFromTile();
     currentTile.occupant = this;
+  }
+
+  @override
+  Future<void> onLoad() async {
+    await super.onLoad();
+    final flamePath = AppCharacterPath.toFlamePath(data.imagePath);
+    _spriteImage = game.images.fromCache(flamePath);
   }
 
   /// 등급별 강화 레벨 (GameState에서 조회)
@@ -183,41 +195,16 @@ class CharacterComponent extends PositionComponent
       );
     }
 
-    // 캐릭터 본체 (원형)
-    final bodyPaint = Paint()..color = data.color;
-    canvas.drawCircle(
-      Offset(size.x / 2, size.y / 2),
-      size.x / 2,
-      bodyPaint,
-    );
-
-    // 캐릭터 테두리
-    final borderPaint = Paint()
-      ..color = AppColor.charBorder
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.5;
-    canvas.drawCircle(
-      Offset(size.x / 2, size.y / 2),
-      size.x / 2,
-      borderPaint,
-    );
-
-    // 이름 표시
-    final textPainter = TextPainter(
-      text: TextSpan(
-        text: data.name[0], // 첫 글자만
-        style: AppTextStyle.charLabel,
-      ),
-      textDirection: TextDirection.ltr,
-    );
-    textPainter.layout();
-    textPainter.paint(
-      canvas,
-      Offset(
-        (size.x - textPainter.width) / 2,
-        (size.y - textPainter.height) / 2,
-      ),
-    );
+    // 캐릭터 스프라이트 렌더링
+    if (_spriteImage != null) {
+      final src = Rect.fromLTWH(
+        0, 0,
+        _spriteImage!.width.toDouble(),
+        _spriteImage!.height.toDouble(),
+      );
+      final dst = Rect.fromLTWH(0, 0, size.x, size.y);
+      canvas.drawImageRect(_spriteImage!, src, dst, Paint());
+    }
   }
 
   /// 캐릭터 제거 (판매 등)

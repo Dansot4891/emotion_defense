@@ -23,6 +23,7 @@ class CharacterData {
   final int range; // 사거리 (칸 단위)
   final int sellValue; // 판매 골드
   final Color color; // 프로토타입용 색상
+  final String imagePath; // 캐릭터 이미지 에셋 경로
   final String description;
   final List<PassiveData> passives; // 패시브 스킬 목록
   final List<ActiveData> actives; // 액티브 스킬 목록
@@ -38,6 +39,7 @@ class CharacterData {
     required this.range,
     required this.sellValue,
     required this.color,
+    required this.imagePath,
     required this.description,
     this.passives = const [],
     this.actives = const [],

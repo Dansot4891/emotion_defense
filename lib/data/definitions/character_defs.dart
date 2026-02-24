@@ -1,3 +1,4 @@
+import '../../core/const/asset/app_character_path.dart';
 import '../../core/const/style/app_color.dart';
 import '../../data/models/character_model.dart';
 import '../../data/models/effect_model.dart';
@@ -15,6 +16,7 @@ const List<CharacterData> commonCharacters = [
     range: 2,
     sellValue: 15,
     color: AppColor.charJoy,
+    imagePath: AppCharacterPath.joy,
     description: '기본적인 행복의 감정',
   ),
   CharacterData(
@@ -28,6 +30,7 @@ const List<CharacterData> commonCharacters = [
     range: 3,
     sellValue: 15,
     color: AppColor.charSadness,
+    imagePath: AppCharacterPath.sadness,
     description: '기본적인 슬픔의 감정',
   ),
   CharacterData(
@@ -41,6 +44,7 @@ const List<CharacterData> commonCharacters = [
     range: 3,
     sellValue: 15,
     color: AppColor.charFear,
+    imagePath: AppCharacterPath.fear,
     description: '기본적인 두려움의 감정',
   ),
   CharacterData(
@@ -54,6 +58,7 @@ const List<CharacterData> commonCharacters = [
     range: 2,
     sellValue: 15,
     color: AppColor.charSurprise,
+    imagePath: AppCharacterPath.surprise,
     description: '기본적인 놀라움의 감정',
   ),
   CharacterData(
@@ -67,6 +72,7 @@ const List<CharacterData> commonCharacters = [
     range: 2,
     sellValue: 15,
     color: AppColor.charLoneliness,
+    imagePath: AppCharacterPath.loneliness,
     description: '기본적인 외로움의 감정',
   ),
   CharacterData(
@@ -80,6 +86,7 @@ const List<CharacterData> commonCharacters = [
     range: 2,
     sellValue: 15,
     color: AppColor.charExcitement,
+    imagePath: AppCharacterPath.excitement,
     description: '기본적인 설렘의 감정',
   ),
 ];
@@ -97,6 +104,7 @@ const List<CharacterData> rareCharacters = [
     range: 2,
     sellValue: 40,
     color: AppColor.charAnger,
+    imagePath: AppCharacterPath.anger,
     description: '슬픔과 외로움이 합쳐져 폭발한 분노',
     actives: [
       ActiveData(
@@ -118,6 +126,7 @@ const List<CharacterData> rareCharacters = [
     range: 3,
     sellValue: 40,
     color: AppColor.charJealousy,
+    imagePath: AppCharacterPath.jealousy,
     description: '기쁨과 두려움이 뒤섞인 질투',
     actives: [
       ActiveData(
@@ -140,6 +149,7 @@ const List<CharacterData> rareCharacters = [
     range: 3,
     sellValue: 40,
     color: AppColor.charAnxiety,
+    imagePath: AppCharacterPath.anxiety,
     description: '두려움과 놀람이 결합한 불안',
     actives: [
       ActiveData(
@@ -162,6 +172,7 @@ const List<CharacterData> rareCharacters = [
     range: 3,
     sellValue: 40,
     color: AppColor.charNostalgia,
+    imagePath: AppCharacterPath.nostalgia,
     description: '슬픔과 설렘이 어우러진 그리움',
     passives: [
       PassiveData(
@@ -183,6 +194,7 @@ const List<CharacterData> rareCharacters = [
     range: 2,
     sellValue: 40,
     color: AppColor.charShame,
+    imagePath: AppCharacterPath.shame,
     description: '놀람과 외로움이 만든 수치심',
     actives: [
       ActiveData(
@@ -205,6 +217,7 @@ const List<CharacterData> rareCharacters = [
     range: 3,
     sellValue: 40,
     color: AppColor.charGratitude,
+    imagePath: AppCharacterPath.gratitude,
     description: '기쁨과 설렘이 빚어낸 감사',
     passives: [
       PassiveData(
@@ -231,6 +244,7 @@ const List<CharacterData> heroCharacters = [
     range: 2,
     sellValue: 80,
     color: AppColor.charMadness,
+    imagePath: AppCharacterPath.madness,
     description: '분노가 극에 달한 광기',
     actives: [
       ActiveData(
@@ -259,6 +273,7 @@ const List<CharacterData> heroCharacters = [
     range: 3,
     sellValue: 80,
     color: AppColor.charResignation,
+    imagePath: AppCharacterPath.resignation,
     description: '불안이 무기력으로 변한 체념',
     actives: [
       ActiveData(
@@ -289,6 +304,7 @@ const List<CharacterData> heroCharacters = [
     range: 3,
     sellValue: 80,
     color: AppColor.charHope,
+    imagePath: AppCharacterPath.hope,
     description: '그리움에서 피어난 희망',
     passives: [
       PassiveData(
@@ -317,6 +333,7 @@ const List<CharacterData> heroCharacters = [
     range: 2,
     sellValue: 80,
     color: AppColor.charContempt,
+    imagePath: AppCharacterPath.contempt,
     description: '수치심이 깊어져 생긴 경멸',
     actives: [
       ActiveData(
@@ -347,6 +364,7 @@ const List<CharacterData> heroCharacters = [
     range: 3,
     sellValue: 80,
     color: AppColor.charSerenity,
+    imagePath: AppCharacterPath.serenity,
     description: '감사가 깊어진 평온',
     passives: [
       PassiveData(
@@ -375,6 +393,7 @@ const List<CharacterData> heroCharacters = [
     range: 3,
     sellValue: 80,
     color: AppColor.charDread,
+    imagePath: AppCharacterPath.dread,
     description: '질투가 극으로 치달은 공포',
     passives: [
       PassiveData(
@@ -410,6 +429,7 @@ const List<CharacterData> legendCharacters = [
     range: 2,
     sellValue: 160,
     color: AppColor.charPassion,
+    imagePath: AppCharacterPath.passion,
     description: '광기와 희망이 합쳐진 열정',
     actives: [
       ActiveData(
@@ -438,6 +458,7 @@ const List<CharacterData> legendCharacters = [
     range: 3,
     sellValue: 160,
     color: AppColor.charVoid,
+    imagePath: AppCharacterPath.voidChar,
     description: '체념과 공포가 합쳐진 공허',
     passives: [
       PassiveData(
@@ -476,6 +497,7 @@ const List<CharacterData> legendCharacters = [
     range: 3,
     sellValue: 160,
     color: AppColor.charEnlightenment,
+    imagePath: AppCharacterPath.enlightenment,
     description: '희망과 경멸을 초월한 깨달음',
     passives: [
       PassiveData(
@@ -513,6 +535,7 @@ const List<CharacterData> legendCharacters = [
     range: 3,
     sellValue: 160,
     color: AppColor.charLove,
+    imagePath: AppCharacterPath.love,
     description: '평온과 희망이 합쳐진 사랑',
     passives: [
       PassiveData(

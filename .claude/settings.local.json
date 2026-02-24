@@ -1,0 +1,24 @@
+{
+    "permissions": {
+        "allow": [
+            "Bash(find:*)",
+            "Bash(xargs sed -i '' \"s|import ''''package:everyoung/features/post/data/model/post/enum/file_type.dart''''|import ''''package:everyoung/features/post/domain/entity/enum/file_type.dart''''|g\")",
+            "mcp__ide__getDiagnostics",
+            "Bash(xcrun simctl:*)",
+            "Bash(open:*)",
+            "Bash(flutter run:*)"
+        ]
+    },
+    "hooks": {
+        "Notification": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "afplay /System/Library/Sounds/Glass.aiff"
+                    }
+                ]
+            }
+        ]
+    }
+}

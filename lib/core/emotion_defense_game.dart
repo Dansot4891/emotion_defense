@@ -1,5 +1,6 @@
 import 'package:flame/game.dart';
 
+import 'const/asset/app_character_path.dart';
 import 'game_state.dart';
 import '../data/definitions/character_defs.dart';
 import '../data/models/character_model.dart';
@@ -65,6 +66,17 @@ class EmotionDefenseGame extends FlameGame {
   @override
   Future<void> onLoad() async {
     await super.onLoad();
+
+    // 캐릭터 이미지 프리로드 (중복 경로 제거)
+    final allImagePaths = {
+      ...commonCharacters.map((c) => c.imagePath),
+      ...rareCharacters.map((c) => c.imagePath),
+      ...heroCharacters.map((c) => c.imagePath),
+      ...legendCharacters.map((c) => c.imagePath),
+    };
+    for (final path in allImagePaths) {
+      await images.load(AppCharacterPath.toFlamePath(path));
+    }
 
     // 게임 상태 초기화
     gameState = GameState();

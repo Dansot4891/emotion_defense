@@ -46,23 +46,11 @@ class CharacterInfoPopup extends StatelessWidget {
                       // 헤더: 이름 + 등급 + 극성
                       Row(
                         children: [
-                          Container(
-                            width: 36,
-                            height: 36,
-                            decoration: BoxDecoration(
-                              color: data.color,
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: AppColor.charBorder,
-                                width: 1.5,
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                data.name[0],
-                                style: AppTextStyle.charLabel,
-                              ),
-                            ),
+                          Image.asset(
+                            data.imagePath,
+                            width: 40,
+                            height: 40,
+                            fit: BoxFit.contain,
                           ),
                           const SizedBox(width: 10),
                           Expanded(
