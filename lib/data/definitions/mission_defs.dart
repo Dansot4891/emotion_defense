@@ -82,8 +82,8 @@ const List<MissionData> allMissions = [
     targetValue: 6,
     reward: MissionReward(
       type: MissionRewardType.gold,
-      value: 200,
-      description: '골드 200',
+      value: 50,
+      description: '골드 50',
     ),
   ),
   MissionData(
@@ -94,8 +94,8 @@ const List<MissionData> allMissions = [
     targetValue: 6,
     reward: MissionReward(
       type: MissionRewardType.gold,
-      value: 400,
-      description: '골드 400',
+      value: 100,
+      description: '골드 100',
     ),
   ),
   MissionData(
@@ -106,8 +106,8 @@ const List<MissionData> allMissions = [
     targetValue: 4,
     reward: MissionReward(
       type: MissionRewardType.gold,
-      value: 800,
-      description: '골드 800',
+      value: 200,
+      description: '골드 200',
     ),
   ),
   MissionData(
