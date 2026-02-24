@@ -8,6 +8,22 @@ import '../../data/definitions/recipe_defs.dart';
 import '../../data/models/character_model.dart';
 import '../../data/models/recipe_model.dart';
 
+/// 등급별 통일 색상
+Color _gradeColor(Grade? grade) {
+  switch (grade) {
+    case Grade.common:
+      return AppColor.gradeCommon;
+    case Grade.rare:
+      return AppColor.gradeRare;
+    case Grade.hero:
+      return AppColor.gradeHero;
+    case Grade.legend:
+      return AppColor.gradeLegend;
+    case null:
+      return AppColor.textPrimary;
+  }
+}
+
 /// 조합표 팝업 오버레이 — 등급 필터 + 레시피 목록 + 조합 실행
 class CombinePopup extends StatefulWidget {
   final EmotionDefenseGame game;
@@ -71,19 +87,19 @@ class _CombinePopupState extends State<CombinePopup> {
                 _FilterTab(
                   label: '레어',
                   selected: _selectedGrade == Grade.rare,
-                  color: const Color(0xFF42A5F5),
+                  color: AppColor.gradeRare,
                   onTap: () => setState(() => _selectedGrade = Grade.rare),
                 ),
                 _FilterTab(
                   label: '영웅',
                   selected: _selectedGrade == Grade.hero,
-                  color: const Color(0xFFAB47BC),
+                  color: AppColor.gradeHero,
                   onTap: () => setState(() => _selectedGrade = Grade.hero),
                 ),
                 _FilterTab(
                   label: '전설',
                   selected: _selectedGrade == Grade.legend,
-                  color: AppColor.gold,
+                  color: AppColor.gradeLegend,
                   onTap: () => setState(() => _selectedGrade = Grade.legend),
                 ),
               ],
@@ -200,6 +216,7 @@ class _RecipeRow extends StatelessWidget {
                 _MaterialChip(
                   name: allCharacters[recipe.materialIds[0]]?.name ?? '?',
                   owned: materialOwned[0],
+                  gradeColor: _gradeColor(allCharacters[recipe.materialIds[0]]?.grade),
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4),
@@ -210,6 +227,7 @@ class _RecipeRow extends StatelessWidget {
                 _MaterialChip(
                   name: allCharacters[recipe.materialIds[1]]?.name ?? '?',
                   owned: materialOwned[1],
+                  gradeColor: _gradeColor(allCharacters[recipe.materialIds[1]]?.grade),
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4),
@@ -220,7 +238,7 @@ class _RecipeRow extends StatelessWidget {
                 Text(
                   resultData?.name ?? '?',
                   style: AppTextStyle.hudLabel.copyWith(
-                    color: resultData?.color ?? AppColor.textPrimary,
+                    color: _gradeColor(resultData?.grade),
                   ),
                 ),
               ],
@@ -250,12 +268,17 @@ class _RecipeRow extends StatelessWidget {
   }
 }
 
-/// 재료 칩 위젯 — 보유 시 초록, 미보유 시 빨간색
+/// 재료 칩 위젯 — 등급 색상 텍스트 + 보유 여부 테두리
 class _MaterialChip extends StatelessWidget {
   final String name;
   final bool owned;
+  final Color gradeColor;
 
-  const _MaterialChip({required this.name, required this.owned});
+  const _MaterialChip({
+    required this.name,
+    required this.owned,
+    required this.gradeColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -271,7 +294,7 @@ class _MaterialChip extends StatelessWidget {
       child: Text(
         name,
         style: TextStyle(
-          color: owned ? AppColor.success : AppColor.danger,
+          color: gradeColor,
           fontSize: 12,
           fontWeight: FontWeight.bold,
         ),

@@ -35,6 +35,12 @@ abstract class AppColor {
   static const Color tilePlacementBorder = Color(0xFF253555); // 배치 타일 테두리
   static const Color tileSpawnGlow = Color(0xFFA78BFA); // 스폰 발광 효과
 
+  // === 등급 색상 ===
+  static const Color gradeCommon = Color(0xFF9E9E9E); // 일반 — 회색
+  static const Color gradeRare = Color(0xFF42A5F5); // 레어 — 파랑
+  static const Color gradeHero = Color(0xFFAB47BC); // 영웅 — 보라
+  static const Color gradeLegend = Color(0xFFFFD700); // 전설 — 금색
+
   // === 캐릭터 (일반) ===
   static const Color charJoy = Color(0xFFFFD700);
   static const Color charSadness = Color(0xFF4169E1);

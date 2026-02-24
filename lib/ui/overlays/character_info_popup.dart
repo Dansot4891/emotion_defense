@@ -174,13 +174,13 @@ class CharacterInfoPopup extends StatelessWidget {
   static Color _gradeColor(Grade grade) {
     switch (grade) {
       case Grade.common:
-        return AppColor.textSecondary;
+        return AppColor.gradeCommon;
       case Grade.rare:
-        return const Color(0xFF42A5F5);
+        return AppColor.gradeRare;
       case Grade.hero:
-        return const Color(0xFFAB47BC);
+        return AppColor.gradeHero;
       case Grade.legend:
-        return AppColor.gold;
+        return AppColor.gradeLegend;
     }
   }
 
