@@ -54,6 +54,15 @@ class CharacterComponent extends PositionComponent
     aspdMultiplier = 1.0;
   }
 
+  /// 히트 영역을 타일 전체로 확장 (타일 아무 곳이나 탭/드래그 가능)
+  @override
+  bool containsLocalPoint(Vector2 point) {
+    final tileSize = currentTile.size;
+    final offset = (tileSize - size) / 2;
+    return point.x >= -offset.x && point.x <= size.x + offset.x &&
+        point.y >= -offset.y && point.y <= size.y + offset.y;
+  }
+
   /// 타일 중심에 캐릭터 배치
   void _updatePositionFromTile() {
     position = Vector2(

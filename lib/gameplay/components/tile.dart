@@ -1,13 +1,16 @@
 import 'package:flame/components.dart';
+import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/const/style/app_color.dart';
 import '../../core/const/style/app_text_style.dart';
+import '../../core/emotion_defense_game.dart';
 import '../map/path_system.dart';
 import 'character.dart';
 
 /// 격자 맵의 개별 타일 컴포넌트
-class TileComponent extends PositionComponent {
+class TileComponent extends PositionComponent
+    with TapCallbacks, HasGameReference<EmotionDefenseGame> {
   final int row;
   final int col;
   final TileType tileType;
@@ -25,6 +28,20 @@ class TileComponent extends PositionComponent {
 
   /// 캐릭터 배치 가능 여부
   bool get canPlace => tileType == TileType.placement && occupant == null;
+
+  // --- 타일 탭 → 캐릭터에게 전달 ---
+
+  @override
+  void onTapUp(TapUpEvent event) {
+    final char = occupant;
+    if (char == null) return;
+
+    if (game.isSellMode) {
+      game.doSell(char);
+    } else {
+      game.showCharacterInfo(char);
+    }
+  }
 
   /// 타일 타입에 따른 색상
   Color get _color {
