@@ -21,7 +21,7 @@ class TitleScreen extends StatelessWidget {
             const SizedBox(height: 48),
             TextButton(
               onPressed: () {
-                CharacterDetailRoute().go(context);
+                CharacterDetailRoute().push(context);
               },
               child: const Text('캐릭터 도감', style: AppTextStyle.subtitle),
             ),
