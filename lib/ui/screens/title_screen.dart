@@ -19,6 +19,13 @@ class TitleScreen extends StatelessWidget {
             const SizedBox(height: 8),
             const Text('Emotion Defense', style: AppTextStyle.subtitle),
             const SizedBox(height: 48),
+            TextButton(
+              onPressed: () {
+                CharacterDetailRoute().go(context);
+              },
+              child: const Text('캐릭터 도감', style: AppTextStyle.subtitle),
+            ),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
                 GameScreenRoute().go(context);
