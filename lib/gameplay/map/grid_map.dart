@@ -43,6 +43,7 @@ class GridMap extends PositionComponent {
           row: row,
           col: col,
           tileType: tileType,
+          pathDirection: PathSystem.getPathDirection(row, col),
           position: Vector2(
             mapOffset.dx + col * tileSize,
             mapOffset.dy + row * tileSize,

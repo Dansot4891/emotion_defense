@@ -11,6 +11,9 @@ enum TileType {
   blocked, // 배치 불가 (장식)
 }
 
+/// 경로 타일의 이동 방향 (화살표 렌더링용)
+enum PathDirection { right, left, down }
+
 /// 6x10 맵 레이아웃 정의
 /// S자형 경로 — 적이 좌우로 왕복하며 아래로 내려가는 구조
 ///
@@ -118,5 +121,27 @@ class PathSystem {
       return TileType.blocked;
     }
     return mapLayout[row][col];
+  }
+
+  /// 경로 타일의 이동 방향 계산 (웨이포인트 기반)
+  /// 경로가 아닌 타일은 null 반환
+  static PathDirection? getPathDirection(int row, int col) {
+    // 웨이포인트 리스트에서 해당 좌표 찾기
+    for (int i = 0; i < waypoints.length; i++) {
+      final wp = waypoints[i];
+      if (wp.x == row && wp.y == col) {
+        // 다음 웨이포인트와 비교하여 방향 결정
+        final next = (i + 1 < waypoints.length) ? waypoints[i + 1] : waypoints[0];
+        final dr = next.x - wp.x;
+        final dc = next.y - wp.y;
+
+        if (dc > 0) return PathDirection.right;
+        if (dc < 0) return PathDirection.left;
+        if (dr > 0) return PathDirection.down;
+        // dr < 0 (위로)는 현재 맵에 없지만 down으로 fallback
+        return PathDirection.down;
+      }
+    }
+    return null;
   }
 }

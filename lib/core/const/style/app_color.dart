@@ -24,14 +24,16 @@ abstract class AppColor {
   static const Color warning = Color(0xFFFF9800);
   static const Color danger = Color(0xFFF44336);
 
-  // === 타일 ===
-  static const Color tilePath = Color(0xFF9E9E9E);
-  static const Color tilePlacementEmpty = Color(0xFFA5D6A7);
-  static const Color tilePlacementOccupied = Color(0xFF81C784);
-  static const Color tileSpawn = Color(0xFF66BB6A);
-  // tileEnd 제거 — 순환 루프이므로 종료 지점 없음
-  static const Color tileBlocked = Color(0xFF616161);
-  static const Color tileBorder = Color(0xFF424242);
+  // === 타일 (마음속 세계 테마) ===
+  static const Color tilePath = Color(0xFF1E1845); // 어두운 보라 — 경로 베이스
+  static const Color tilePlacementEmpty = Color(0xFF0F1A2E); // 깊은 남색 — 빈 배치
+  static const Color tilePlacementOccupied = Color(0xFF1A2840); // 밝은 남색 — 점유 배치
+  static const Color tileSpawn = Color(0xFF2D1F6B); // 보라 강조 — 스폰
+  static const Color tileBlocked = Color(0xFF080810); // 거의 검정 — 차단
+  static const Color tileBorder = Color(0xFF1A1535); // 어두운 보라 — 기본 테두리
+  static const Color tilePathGlow = Color(0xFF6C5CE7); // 경로 내부 발광 테두리
+  static const Color tilePlacementBorder = Color(0xFF253555); // 배치 타일 테두리
+  static const Color tileSpawnGlow = Color(0xFFA78BFA); // 스폰 발광 효과
 
   // === 캐릭터 (일반) ===
   static const Color charJoy = Color(0xFFFFD700);
