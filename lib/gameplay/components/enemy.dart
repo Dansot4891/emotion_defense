@@ -35,7 +35,7 @@ class EnemyComponent extends PositionComponent
     required this.gameState,
     required double hpMultiplier,
   }) : super(size: Vector2(data.isBoss ? 30 : 20, data.isBoss ? 30 : 20)) {
-    maxHp = data.hp * hpMultiplier;
+    maxHp = data.hp * hpMultiplier * gameState.difficulty.hpMult;
     hp = maxHp;
 
     // 스폰 위치 (첫 번째 웨이포인트)
@@ -63,7 +63,7 @@ class EnemyComponent extends PositionComponent
     return mult.clamp(0.1, 1.0);
   }
 
-  /// 실효 방어력 (상태 효과 + 오라 디버프)
+  /// 실효 방어력 (난이도 + 상태 효과 + 오라 디버프)
   double get effectiveDef {
     double defReduction = auraDefReduction;
     for (final e in statusEffects) {
@@ -71,12 +71,16 @@ class EnemyComponent extends PositionComponent
         defReduction += e.value;
       }
     }
-    return (data.def - defReduction).clamp(0.0, double.infinity);
+    return (data.def * gameState.difficulty.defMult - defReduction)
+        .clamp(0.0, double.infinity);
   }
 
-  /// 실효 이동속도
+  /// 실효 이동속도 (난이도 적용)
   double get effectiveSpeed =>
-      data.speed * speedMultiplier * auraSpeedMultiplier;
+      data.speed *
+      gameState.difficulty.speedMult *
+      speedMultiplier *
+      auraSpeedMultiplier;
 
   /// 상태 효과 적용
   void applyStatusEffect(StatusEffect effect) {

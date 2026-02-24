@@ -4,6 +4,7 @@ import '../../../core/const/style/app_color.dart';
 import '../../../core/const/style/app_text_style.dart';
 import '../../../core/constants.dart';
 import '../../../core/emotion_defense_game.dart';
+import '../../../core/game_state.dart';
 import '../../../gameplay/systems/synergy_system.dart';
 
 /// 상단 HUD 오버레이 - 웨이브 정보, 골드, 적 수, 시너지, 배속, 일시정지
@@ -35,6 +36,8 @@ class HudOverlay extends StatelessWidget {
                       icon: Icons.waves,
                       text: 'W${state.currentWave}/${GameConstants.totalWaves}',
                     ),
+                    const SizedBox(width: 6),
+                    _DifficultyChip(difficulty: state.difficulty),
                     const SizedBox(width: 10),
                     _HudItem(
                       icon: Icons.monetization_on,
@@ -217,6 +220,39 @@ class _HudItem extends StatelessWidget {
         const SizedBox(width: 4),
         Text(text, style: AppTextStyle.hudLabel.copyWith(color: c)),
       ],
+    );
+  }
+}
+
+class _DifficultyChip extends StatelessWidget {
+  final Difficulty difficulty;
+
+  const _DifficultyChip({required this.difficulty});
+
+  @override
+  Widget build(BuildContext context) {
+    if (difficulty == Difficulty.normal) return const SizedBox.shrink();
+    final color = switch (difficulty) {
+      Difficulty.easy => AppColor.success,
+      Difficulty.normal => AppColor.primary,
+      Difficulty.hard => AppColor.warning,
+      Difficulty.hell => AppColor.danger,
+    };
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.2),
+        border: Border.all(color: color, width: 1),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Text(
+        difficulty.label,
+        style: TextStyle(
+          color: color,
+          fontSize: 10,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }

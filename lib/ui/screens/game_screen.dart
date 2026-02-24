@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/const/style/app_color.dart';
 import '../../core/emotion_defense_game.dart';
+import 'title_screen.dart';
 import '../widgets/app_bar/action_bar.dart';
 import '../widgets/popup/character_info_popup.dart';
 import '../widgets/popup/combine_popup.dart';
@@ -27,7 +28,8 @@ class _GameScreenState extends State<GameScreen> {
   @override
   void initState() {
     super.initState();
-    _game = EmotionDefenseGame();
+    _game = EmotionDefenseGame()
+      ..selectedDifficulty = TitleScreen.selectedDifficulty;
   }
 
   @override

@@ -3,6 +3,26 @@ import 'package:flutter/foundation.dart';
 import '../data/models/character_model.dart';
 import 'constants.dart';
 
+/// 난이도
+enum Difficulty {
+  easy(label: '쉬움', hpMult: 0.7, defMult: 0.7, speedMult: 0.85),
+  normal(label: '보통', hpMult: 1.0, defMult: 1.0, speedMult: 1.0),
+  hard(label: '어려움', hpMult: 1.4, defMult: 1.3, speedMult: 1.15),
+  hell(label: '지옥', hpMult: 2.0, defMult: 1.6, speedMult: 1.3);
+
+  final String label;
+  final double hpMult; // 적 HP 배율
+  final double defMult; // 적 DEF 배율
+  final double speedMult; // 적 이동속도 배율
+
+  const Difficulty({
+    required this.label,
+    required this.hpMult,
+    required this.defMult,
+    required this.speedMult,
+  });
+}
+
 /// 게임 진행 상태
 enum GamePhase {
   preparing, // 웨이브 준비 (뽑기/배치 가능)
@@ -13,6 +33,8 @@ enum GamePhase {
 
 /// 게임 상태 관리 (ChangeNotifier로 UI 반응형 갱신)
 class GameState extends ChangeNotifier {
+  Difficulty difficulty = Difficulty.normal;
+
   int _gold = GameConstants.startingGold;
   int _currentWave = 0; // 0 = 아직 시작 안 함, 1 = 첫 웨이브
   int _enemiesAlive = 0; // 맵에 살아있는 적 수

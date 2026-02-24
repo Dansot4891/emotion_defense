@@ -60,6 +60,9 @@ class EmotionDefenseGame extends FlameGame {
   /// 이전 게임 상태 (웨이브 클리어 감지용)
   GamePhase _previousPhase = GamePhase.preparing;
 
+  /// 난이도 (타이틀에서 전달)
+  Difficulty selectedDifficulty = Difficulty.normal;
+
   /// SafeArea 패딩 (Flutter에서 전달)
   double safeAreaTop = 0;
   double safeAreaBottom = 0;
@@ -93,6 +96,7 @@ class EmotionDefenseGame extends FlameGame {
 
     // 게임 상태 초기화
     gameState = GameState();
+    gameState.difficulty = selectedDifficulty;
 
     // 격자 맵 초기화
     gridMap = GridMap();
@@ -512,6 +516,7 @@ class EmotionDefenseGame extends FlameGame {
     removeWhere((component) => component is! GridMap);
 
     gameState.reset();
+    gameState.difficulty = selectedDifficulty;
 
     // 맵 재생성
     gridMap = GridMap();
