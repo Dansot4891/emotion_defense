@@ -14,6 +14,9 @@ class EnemyData {
   // 보스 여부
   final bool isBoss;
 
+  // 소환 보스 여부
+  final bool isSummonedBoss;
+
   // 분열 (번아웃)
   final bool splits;
   final int splitCount;
@@ -34,6 +37,7 @@ class EnemyData {
     required this.color,
     required this.description,
     this.isBoss = false,
+    this.isSummonedBoss = false,
     this.splits = false,
     this.splitCount = 0,
     this.splitIntoId,

@@ -39,6 +39,14 @@ class GameState extends ChangeNotifier {
   int totalGoldEarned = 0;
   int totalGoldSpent = 0;
 
+  // 퀘스트 시스템
+  final Set<String> completedMissionIds = {}; // 조건 달성된 미션
+  final Set<String> claimedMissionIds = {}; // 보상 수령 완료 미션
+  int bossSummonCount = 0; // 보스 소환 횟수
+  int bossKillCount = 0; // 소환 보스 처치 횟수
+  int lastBossSummonWave = 0; // 마지막 소환 시 웨이브
+  int totalCombineCount = 0; // 조합 횟수
+
   // Getters
   int get gold => _gold;
   int get currentWave => _currentWave;
@@ -118,6 +126,25 @@ class GameState extends ChangeNotifier {
     }
   }
 
+  /// 소환 보스 스폰 — _enemiesAlive만 증가 (웨이브 카운트 건드리지 않음)
+  void onSummonedBossSpawned() {
+    _enemiesAlive++;
+    if (_enemiesAlive >= effectiveMaxAliveEnemies) {
+      _phase = GamePhase.gameOver;
+    }
+    notifyListeners();
+  }
+
+  /// 소환 보스 처치
+  void onSummonedBossKilled() {
+    bossKillCount++;
+    notifyListeners();
+  }
+
+  /// 완료됐지만 미수령 미션 존재 여부
+  bool get hasPendingMissionReward =>
+      completedMissionIds.any((id) => !claimedMissionIds.contains(id));
+
   /// UI 갱신 트리거 (외부에서 호출 가능)
   void notify() {
     notifyListeners();
@@ -142,6 +169,12 @@ class GameState extends ChangeNotifier {
     totalEnemiesKilled = 0;
     totalGoldEarned = 0;
     totalGoldSpent = 0;
+    completedMissionIds.clear();
+    claimedMissionIds.clear();
+    bossSummonCount = 0;
+    bossKillCount = 0;
+    lastBossSummonWave = 0;
+    totalCombineCount = 0;
     notifyListeners();
   }
 }

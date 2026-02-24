@@ -1,4 +1,5 @@
 import '../../core/const/style/app_color.dart';
+import '../../data/definitions/boss_summon_defs.dart';
 import '../../data/models/enemy_model.dart';
 
 /// 잡념 - 기본 적
@@ -109,6 +110,8 @@ EnemyData getEnemyData(String id) {
       return burnoutSplit;
     case 'nihility':
       return nihility;
+    case 'summoned_despair':
+      return summonedDespair;
     default:
       return idleThought;
   }

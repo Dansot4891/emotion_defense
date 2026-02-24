@@ -157,6 +157,11 @@ class EnemyComponent extends PositionComponent
     gameState.addGold(data.rewardGold);
     gameState.onEnemyKilled();
 
+    // 소환 보스 처치 기록
+    if (data.isSummonedBoss) {
+      gameState.onSummonedBossKilled();
+    }
+
     // 분열 처리 (번아웃 등)
     if (data.splits && data.splitIntoId != null) {
       for (int i = 0; i < data.splitCount; i++) {

@@ -67,6 +67,16 @@ class ActionBar extends StatelessWidget {
                   highlight: game.isSellMode,
                   onTap: () => game.toggleSellMode(),
                 ),
+                const SizedBox(width: 4),
+                _ActionButton(
+                  label: '퀘스트',
+                  icon: Icons.assignment,
+                  enabled:
+                      state.phase == GamePhase.preparing ||
+                      state.phase == GamePhase.waveActive,
+                  badge: state.hasPendingMissionReward,
+                  onTap: () => game.toggleQuestPopup(),
+                ),
               ],
             ),
           ),
@@ -81,6 +91,7 @@ class _ActionButton extends StatelessWidget {
   final IconData icon;
   final bool enabled;
   final bool highlight;
+  final bool badge;
   final VoidCallback? onTap;
 
   const _ActionButton({
@@ -89,6 +100,7 @@ class _ActionButton extends StatelessWidget {
     required this.enabled,
     required this.onTap,
     this.highlight = false,
+    this.badge = false,
   });
 
   @override
@@ -101,32 +113,52 @@ class _ActionButton extends StatelessWidget {
     return Expanded(
       child: GestureDetector(
         onTap: enabled ? onTap : null,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 4),
-          decoration: BoxDecoration(
-            color: bgColor,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                icon,
-                color: enabled ? AppColor.textPrimary : AppColor.textDisabled,
-                size: 18,
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              decoration: BoxDecoration(
+                color: bgColor,
+                borderRadius: BorderRadius.circular(8),
               ),
-              FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(
-                  label,
-                  textAlign: TextAlign.center,
-                  style: enabled
-                      ? AppTextStyle.buttonSmall
-                      : AppTextStyle.buttonSmallDisabled,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    icon,
+                    color:
+                        enabled ? AppColor.textPrimary : AppColor.textDisabled,
+                    size: 18,
+                  ),
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      label,
+                      textAlign: TextAlign.center,
+                      style: enabled
+                          ? AppTextStyle.buttonSmall
+                          : AppTextStyle.buttonSmallDisabled,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            if (badge)
+              Positioned(
+                top: -2,
+                right: -2,
+                child: Container(
+                  width: 8,
+                  height: 8,
+                  decoration: const BoxDecoration(
+                    color: AppColor.badgeRed,
+                    shape: BoxShape.circle,
+                  ),
                 ),
               ),
-            ],
-          ),
+          ],
         ),
       ),
     );

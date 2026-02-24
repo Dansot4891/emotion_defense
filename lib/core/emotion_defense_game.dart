@@ -12,9 +12,11 @@ import '../gameplay/components/enemy.dart';
 import '../gameplay/components/projectile.dart';
 import '../gameplay/components/wave_countdown.dart';
 import '../gameplay/map/grid_map.dart';
+import '../gameplay/systems/boss_summon_system.dart';
 import '../gameplay/systems/combine_system.dart';
 import '../gameplay/systems/economy_system.dart';
 import '../gameplay/systems/gacha_system.dart';
+import '../gameplay/systems/mission_system.dart';
 import '../gameplay/systems/reward_system.dart';
 import '../gameplay/systems/synergy_system.dart';
 import '../gameplay/systems/upgrade_system.dart';
@@ -30,6 +32,8 @@ class EmotionDefenseGame extends FlameGame {
   late CombineSystem combineSystem;
   late UpgradeSystem upgradeSystem;
   late RewardSystem rewardSystem;
+  late MissionSystem missionSystem;
+  late BossSummonSystem bossSummonSystem;
   static const SynergySystem synergySystem = SynergySystem();
 
   /// 시너지 보너스 (매 프레임 재계산)
@@ -66,6 +70,9 @@ class EmotionDefenseGame extends FlameGame {
 
   /// 보상 팝업용
   List<RewardOption>? currentRewardOptions;
+
+  /// 미션 체크 타이머 (1초 간격)
+  double _missionCheckTimer = 0;
 
   @override
   Future<void> onLoad() async {
@@ -114,6 +121,13 @@ class EmotionDefenseGame extends FlameGame {
 
     upgradeSystem = UpgradeSystem(gameState: gameState);
     rewardSystem = RewardSystem();
+    missionSystem = MissionSystem(gameState: gameState);
+    bossSummonSystem = BossSummonSystem(
+      gameState: gameState,
+      gameWorld: this,
+      tileSize: gridMap.tileSize,
+      mapOffset: gridMap.mapOffset,
+    );
 
     // 오버레이 표시
     overlays.add('hud');
@@ -188,6 +202,14 @@ class EmotionDefenseGame extends FlameGame {
     if (gameState.phase == GamePhase.victory &&
         _previousPhase != GamePhase.victory) {
       overlays.add('gameOver');
+    }
+
+    // 미션 체크 (1초 간격)
+    _missionCheckTimer -= scaledDt;
+    if (_missionCheckTimer <= 0) {
+      _missionCheckTimer = 1.0;
+      final characters = children.whereType<CharacterComponent>().toList();
+      missionSystem.checkMissions(characters);
     }
 
     _previousPhase = gameState.phase;
@@ -321,6 +343,7 @@ class EmotionDefenseGame extends FlameGame {
   /// 조합 실행
   void doCombine(RecipeData recipe) {
     combineSystem.execute(recipe);
+    gameState.totalCombineCount++;
     gameState.notify();
   }
 
@@ -421,6 +444,26 @@ class EmotionDefenseGame extends FlameGame {
     }
   }
 
+  /// 퀘스트 팝업 토글
+  void toggleQuestPopup() {
+    if (overlays.isActive('questPopup')) {
+      overlays.remove('questPopup');
+    } else {
+      overlays.add('questPopup');
+    }
+  }
+
+  /// 미션 보상 수령
+  void claimMissionReward(String missionId) {
+    missionSystem.claimReward(missionId);
+  }
+
+  /// 보스 소환
+  void doSummonBoss() {
+    bossSummonSystem.summon();
+    gameState.notify();
+  }
+
   /// 조합표 팝업 토글
   void toggleCombinePopup() {
     if (overlays.isActive('combinePopup')) {
@@ -466,6 +509,13 @@ class EmotionDefenseGame extends FlameGame {
     combineSystem = CombineSystem(gameWorld: this, gridMap: gridMap);
 
     upgradeSystem = UpgradeSystem(gameState: gameState);
+    missionSystem = MissionSystem(gameState: gameState);
+    bossSummonSystem = BossSummonSystem(
+      gameState: gameState,
+      gameWorld: this,
+      tileSize: gridMap.tileSize,
+      mapOffset: gridMap.mapOffset,
+    );
 
     isSellMode = false;
     isAutoWave = true;
@@ -473,6 +523,7 @@ class EmotionDefenseGame extends FlameGame {
     _autoWaveDelay = autoWaveInterval;
     _previousPhase = GamePhase.preparing;
     _synergyBonuses = const SynergyBonuses();
+    _missionCheckTimer = 0;
     _countdownComponent = null;
     selectedCharacter = null;
     currentRewardOptions = null;
@@ -483,5 +534,6 @@ class EmotionDefenseGame extends FlameGame {
     overlays.remove('characterInfo');
     overlays.remove('rewardPopup');
     overlays.remove('upgradePopup');
+    overlays.remove('questPopup');
   }
 }

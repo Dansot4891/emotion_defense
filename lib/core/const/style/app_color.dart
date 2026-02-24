@@ -79,6 +79,7 @@ abstract class AppColor {
   static const Color enemyTrauma = Color(0xFF880E4F); // 트라우마 (자주)
   static const Color enemyBurnout = Color(0xFFE65100); // 번아웃 (주황)
   static const Color enemyNihility = Color(0xFF000000); // 허무 (검정)
+  static const Color enemySummonedBoss = Color(0xFF4A148C); // 소환 보스 (짙은 보라)
 
   // === HP 바 ===
   static const Color hpBarBackground = Color(0xFF333333);
@@ -90,4 +91,7 @@ abstract class AppColor {
   static const Color borderGold = Color(0xFFFFD700);
   static const Color borderDanger = Color(0xFFF44336);
   static const Color rangeIndicator = Color(0x3300FF00);
+
+  // === 알림 배지 ===
+  static const Color badgeRed = Color(0xFFF44336);
 }
