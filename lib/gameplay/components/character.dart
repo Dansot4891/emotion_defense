@@ -37,7 +37,7 @@ class CharacterComponent extends PositionComponent
     required this.data,
     required this.currentTile,
     required this.gridMap,
-  }) : super(size: Vector2.all(gridMap.tileSize * 0.85)) {
+  }) : super(size: Vector2.all(gridMap.tileSize * 0.95)) {
     _updatePositionFromTile();
     currentTile.occupant = this;
   }
