@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../core/const/style/app_color.dart';
-import '../../core/const/style/app_text_style.dart';
-import '../../data/definitions/character_defs.dart';
-import '../../data/models/character_model.dart';
+import '../../../core/const/style/app_color.dart';
+import '../../../core/const/style/app_text_style.dart';
+import '../../../data/definitions/character_defs.dart';
+import '../../../data/models/character_model.dart';
 
 /// 캐릭터 도감 화면 — 등급별 캐릭터 리스트 + 상세 정보
-class CharacterDetailScreen extends StatelessWidget {
-  const CharacterDetailScreen({super.key});
+class CharacterBookScreen extends StatelessWidget {
+  const CharacterBookScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -9,7 +9,7 @@ part of 'routes.dart';
 List<RouteBase> get $appRoutes => [
   $titleRoute,
   $gameScreenRoute,
-  $characterDetailRoute,
+  $characterBookScreenRoute,
 ];
 
 RouteBase get $titleRoute =>
@@ -59,17 +59,17 @@ mixin $GameScreenRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-RouteBase get $characterDetailRoute => GoRouteData.$route(
-  path: '/character-detail',
-  factory: $CharacterDetailRoute._fromState,
+RouteBase get $characterBookScreenRoute => GoRouteData.$route(
+  path: '/character-book',
+  factory: $CharacterBookScreenRoute._fromState,
 );
 
-mixin $CharacterDetailRoute on GoRouteData {
-  static CharacterDetailRoute _fromState(GoRouterState state) =>
-      const CharacterDetailRoute();
+mixin $CharacterBookScreenRoute on GoRouteData {
+  static CharacterBookScreenRoute _fromState(GoRouterState state) =>
+      const CharacterBookScreenRoute();
 
   @override
-  String get location => GoRouteData.$location('/character-detail');
+  String get location => GoRouteData.$location('/character-book');
 
   @override
   void go(BuildContext context) => context.go(location);

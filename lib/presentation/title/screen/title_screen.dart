@@ -1,8 +1,8 @@
 import 'package:emotion_defense/app/route/routes.dart';
 import 'package:flutter/material.dart';
-import '../../core/const/style/app_color.dart';
-import '../../core/const/style/app_text_style.dart';
-import '../../core/game_state.dart';
+import '../../../core/const/style/app_color.dart';
+import '../../../core/const/style/app_text_style.dart';
+import '../../../core/game_state.dart';
 
 /// 타이틀 화면 - "감정디펜스" + 난이도 선택 + 시작 버튼
 class TitleScreen extends StatefulWidget {
@@ -30,7 +30,7 @@ class _TitleScreenState extends State<TitleScreen> {
             const SizedBox(height: 48),
             TextButton(
               onPressed: () {
-                CharacterDetailRoute().push(context);
+                CharacterBookScreenRoute().push(context);
               },
               child: const Text('캐릭터 도감', style: AppTextStyle.subtitle),
             ),
@@ -70,8 +70,9 @@ class _TitleScreenState extends State<TitleScreen> {
                               ? _difficultyColor(d)
                               : AppColor.textSecondary,
                           fontSize: 14,
-                          fontWeight:
-                              selected ? FontWeight.bold : FontWeight.normal,
+                          fontWeight: selected
+                              ? FontWeight.bold
+                              : FontWeight.normal,
                         ),
                       ),
                     ),

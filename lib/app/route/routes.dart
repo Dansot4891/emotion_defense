@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../ui/screens/character_detail_screen.dart';
-import '../../ui/screens/game_screen.dart';
-import '../../ui/screens/title_screen.dart';
+import '../../presentation/character_book/screen/character_book_screen.dart';
+import '../../presentation/game/screen/game_screen.dart';
+import '../../presentation/title/screen/title_screen.dart';
 
 part 'routes.g.dart';
 
@@ -27,12 +27,13 @@ class GameScreenRoute extends GoRouteData with $GameScreenRoute {
   }
 }
 
-@TypedGoRoute<CharacterDetailRoute>(path: '/character-detail')
-class CharacterDetailRoute extends GoRouteData with $CharacterDetailRoute {
-  const CharacterDetailRoute();
+@TypedGoRoute<CharacterBookScreenRoute>(path: '/character-book')
+class CharacterBookScreenRoute extends GoRouteData
+    with $CharacterBookScreenRoute {
+  const CharacterBookScreenRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const CharacterDetailScreen();
+    return const CharacterBookScreen();
   }
 }
