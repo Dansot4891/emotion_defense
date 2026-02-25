@@ -3,7 +3,7 @@ import '../../core/const/style/app_color.dart';
 import '../../data/models/character_model.dart';
 import '../../data/models/effect_model.dart';
 
-/// 일반 등급 캐릭터 6종 (뽑기에서 등장)
+/// 일반 등급 캐릭터 8종 (뽑기에서 등장)
 const List<CharacterData> commonCharacters = [
   CharacterData(
     id: 'joy',
@@ -89,9 +89,37 @@ const List<CharacterData> commonCharacters = [
     imagePath: AppCharacterPath.excitement,
     description: '기본적인 설렘의 감정',
   ),
+  CharacterData(
+    id: 'disgust',
+    name: '혐오',
+    grade: Grade.common,
+    polarity: Polarity.negative,
+    role: Role.stunner,
+    atk: 11,
+    aspd: 1.2,
+    range: 2,
+    sellValue: 15,
+    color: AppColor.charDisgust,
+    imagePath: AppCharacterPath.disgust,
+    description: '기본적인 혐오의 감정',
+  ),
+  CharacterData(
+    id: 'curiosity',
+    name: '호기심',
+    grade: Grade.common,
+    polarity: Polarity.neutral,
+    role: Role.buffer,
+    atk: 6,
+    aspd: 0.9,
+    range: 3,
+    sellValue: 15,
+    color: AppColor.charCuriosity,
+    imagePath: AppCharacterPath.curiosity,
+    description: '기본적인 호기심의 감정',
+  ),
 ];
 
-/// 레어 등급 캐릭터 6종 (조합으로 획득 — 스킬 1개씩)
+/// 레어 등급 캐릭터 8종 (조합으로 획득 — 스킬 1개씩)
 const List<CharacterData> rareCharacters = [
   CharacterData(
     id: 'anger',
@@ -150,7 +178,7 @@ const List<CharacterData> rareCharacters = [
     sellValue: 40,
     color: AppColor.charAnxiety,
     imagePath: AppCharacterPath.anxiety,
-    description: '두려움과 놀람이 결합한 불안',
+    description: '두려움과 호기심이 결합한 불안',
     actives: [
       ActiveData(
         type: ActiveType.slow,
@@ -195,7 +223,7 @@ const List<CharacterData> rareCharacters = [
     sellValue: 40,
     color: AppColor.charShame,
     imagePath: AppCharacterPath.shame,
-    description: '놀람과 외로움이 만든 수치심',
+    description: '놀람과 혐오가 만든 수치심',
     actives: [
       ActiveData(
         type: ActiveType.stun,
@@ -218,7 +246,7 @@ const List<CharacterData> rareCharacters = [
     sellValue: 40,
     color: AppColor.charGratitude,
     imagePath: AppCharacterPath.gratitude,
-    description: '기쁨과 설렘이 빚어낸 감사',
+    description: '기쁨과 호기심이 빚어낸 감사',
     passives: [
       PassiveData(
         type: PassiveType.allyAspdBuff,
@@ -228,9 +256,53 @@ const List<CharacterData> rareCharacters = [
       ),
     ],
   ),
+  CharacterData(
+    id: 'regret',
+    name: '후회',
+    grade: Grade.rare,
+    polarity: Polarity.negative,
+    role: Role.debuffer,
+    atk: 17,
+    aspd: 1.1,
+    range: 3,
+    sellValue: 40,
+    color: AppColor.charRegret,
+    imagePath: AppCharacterPath.regret,
+    description: '외로움과 혐오가 엉킨 후회',
+    passives: [
+      PassiveData(
+        type: PassiveType.enemySpdDebuff,
+        range: 2,
+        value: 0.08,
+        description: '주변 2칸 적 이동속도 -8%',
+      ),
+    ],
+  ),
+  CharacterData(
+    id: 'wonder',
+    name: '경이',
+    grade: Grade.rare,
+    polarity: Polarity.positive,
+    role: Role.dealer,
+    atk: 22,
+    aspd: 0.9,
+    range: 2,
+    sellValue: 40,
+    color: AppColor.charWonder,
+    imagePath: AppCharacterPath.wonder,
+    description: '설렘과 놀람이 빚어낸 경이',
+    actives: [
+      ActiveData(
+        type: ActiveType.aoeDamage,
+        procChance: 0.10,
+        value: 0.4,
+        description: '10% 확률로 주변 40% 범위 데미지',
+      ),
+    ],
+  ),
 ];
 
-/// 영웅 등급 캐릭터 6종 (스킬 2개씩)
+/// 영웅 등급 캐릭터 8종 (스킬 2개씩)
 const List<CharacterData> heroCharacters = [
   // 광기 - 딜러 (높은 공격력 + 크리티컬 + 범위 데미지)
   CharacterData(
@@ -245,7 +317,7 @@ const List<CharacterData> heroCharacters = [
     sellValue: 80,
     color: AppColor.charMadness,
     imagePath: AppCharacterPath.madness,
-    description: '분노가 극에 달한 광기',
+    description: '분노와 경이가 뒤섞인 광기',
     actives: [
       ActiveData(
         type: ActiveType.critical,
@@ -274,7 +346,7 @@ const List<CharacterData> heroCharacters = [
     sellValue: 80,
     color: AppColor.charResignation,
     imagePath: AppCharacterPath.resignation,
-    description: '불안이 무기력으로 변한 체념',
+    description: '후회와 불안이 무기력으로 변한 체념',
     actives: [
       ActiveData(
         type: ActiveType.slow,
@@ -305,7 +377,7 @@ const List<CharacterData> heroCharacters = [
     sellValue: 80,
     color: AppColor.charHope,
     imagePath: AppCharacterPath.hope,
-    description: '그리움에서 피어난 희망',
+    description: '감사와 그리움에서 피어난 희망',
     passives: [
       PassiveData(
         type: PassiveType.allyAtkBuff,
@@ -334,7 +406,7 @@ const List<CharacterData> heroCharacters = [
     sellValue: 80,
     color: AppColor.charContempt,
     imagePath: AppCharacterPath.contempt,
-    description: '수치심이 깊어져 생긴 경멸',
+    description: '질투와 수치심이 깊어져 생긴 경멸',
     actives: [
       ActiveData(
         type: ActiveType.stun,
@@ -365,7 +437,7 @@ const List<CharacterData> heroCharacters = [
     sellValue: 80,
     color: AppColor.charSerenity,
     imagePath: AppCharacterPath.serenity,
-    description: '감사가 깊어진 평온',
+    description: '감사와 경이가 깊어진 평온',
     passives: [
       PassiveData(
         type: PassiveType.allyAspdBuff,
@@ -394,7 +466,7 @@ const List<CharacterData> heroCharacters = [
     sellValue: 80,
     color: AppColor.charDread,
     imagePath: AppCharacterPath.dread,
-    description: '질투가 극으로 치달은 공포',
+    description: '분노와 불안이 극으로 치달은 공포',
     passives: [
       PassiveData(
         type: PassiveType.enemyDefDebuff,
@@ -413,9 +485,70 @@ const List<CharacterData> heroCharacters = [
       ),
     ],
   ),
+  // 집착 - 스터너 (스턴 + 크리티컬)
+  CharacterData(
+    id: 'obsession',
+    name: '집착',
+    grade: Grade.hero,
+    polarity: Polarity.negative,
+    role: Role.stunner,
+    atk: 28,
+    aspd: 1.0,
+    range: 2,
+    sellValue: 80,
+    color: AppColor.charObsession,
+    imagePath: AppCharacterPath.obsession,
+    description: '질투와 그리움이 뒤엉킨 집착',
+    actives: [
+      ActiveData(
+        type: ActiveType.stun,
+        procChance: 0.15,
+        value: 0,
+        duration: 1.0,
+        description: '15% 확률로 스턴 1초',
+      ),
+      ActiveData(
+        type: ActiveType.critical,
+        procChance: 0.20,
+        value: 2.0,
+        description: '20% 확률로 크리티컬 x2.0',
+      ),
+    ],
+  ),
+  // 용기 - 딜러 (크리티컬 + 아군 ATK 버프)
+  CharacterData(
+    id: 'courage',
+    name: '용기',
+    grade: Grade.hero,
+    polarity: Polarity.positive,
+    role: Role.dealer,
+    atk: 35,
+    aspd: 0.8,
+    range: 2,
+    sellValue: 80,
+    color: AppColor.charCourage,
+    imagePath: AppCharacterPath.courage,
+    description: '수치심과 후회를 이겨낸 용기',
+    actives: [
+      ActiveData(
+        type: ActiveType.critical,
+        procChance: 0.15,
+        value: 2.0,
+        description: '15% 확률로 크리티컬 x2.0',
+      ),
+    ],
+    passives: [
+      PassiveData(
+        type: PassiveType.allyAtkBuff,
+        range: 2,
+        value: 0.10,
+        description: '주변 2칸 아군 ATK +10%',
+      ),
+    ],
+  ),
 ];
 
-/// 전설 등급 캐릭터 4종 (스킬 2~3개씩)
+/// 전설 등급 캐릭터 6종 (스킬 2~3개씩)
 const List<CharacterData> legendCharacters = [
   // 열정 - 딜러 (크리 + 범위 + 높은 스탯)
   CharacterData(
@@ -430,7 +563,7 @@ const List<CharacterData> legendCharacters = [
     sellValue: 160,
     color: AppColor.charPassion,
     imagePath: AppCharacterPath.passion,
-    description: '광기와 희망이 합쳐진 열정',
+    description: '광기와 용기가 합쳐진 열정',
     actives: [
       ActiveData(
         type: ActiveType.critical,
@@ -498,7 +631,7 @@ const List<CharacterData> legendCharacters = [
     sellValue: 160,
     color: AppColor.charEnlightenment,
     imagePath: AppCharacterPath.enlightenment,
-    description: '희망과 경멸을 초월한 깨달음',
+    description: '경멸과 평온을 초월한 깨달음',
     passives: [
       PassiveData(
         type: PassiveType.allyAtkBuff,
@@ -536,7 +669,7 @@ const List<CharacterData> legendCharacters = [
     sellValue: 160,
     color: AppColor.charLove,
     imagePath: AppCharacterPath.love,
-    description: '평온과 희망이 합쳐진 사랑',
+    description: '희망과 평온이 합쳐진 사랑',
     passives: [
       PassiveData(
         type: PassiveType.allyAtkBuff,
@@ -555,6 +688,81 @@ const List<CharacterData> legendCharacters = [
         range: 2,
         value: 0.15,
         description: '주변 2칸 적 이동속도 -15%',
+      ),
+    ],
+  ),
+  // 복수 - 딜러 (크리 + 스턴 + 적 DEF 디버프)
+  CharacterData(
+    id: 'vengeance',
+    name: '복수',
+    grade: Grade.legend,
+    polarity: Polarity.negative,
+    role: Role.dealer,
+    atk: 55,
+    aspd: 0.7,
+    range: 2,
+    sellValue: 160,
+    color: AppColor.charVengeance,
+    imagePath: AppCharacterPath.vengeance,
+    description: '집착과 경멸이 폭발한 복수',
+    passives: [
+      PassiveData(
+        type: PassiveType.enemyDefDebuff,
+        range: 2,
+        value: 0.08,
+        description: '주변 2칸 적 DEF -0.08',
+      ),
+    ],
+    actives: [
+      ActiveData(
+        type: ActiveType.critical,
+        procChance: 0.30,
+        value: 3.5,
+        description: '30% 확률로 크리티컬 x3.5',
+      ),
+      ActiveData(
+        type: ActiveType.stun,
+        procChance: 0.15,
+        value: 0,
+        duration: 1.0,
+        description: '15% 확률로 스턴 1초',
+      ),
+    ],
+  ),
+  // 황홀 - 버퍼 (아군ATK + 적속도 감소 + AoE)
+  CharacterData(
+    id: 'ecstasy',
+    name: '황홀',
+    grade: Grade.legend,
+    polarity: Polarity.neutral,
+    role: Role.buffer,
+    atk: 25,
+    aspd: 0.9,
+    range: 3,
+    sellValue: 160,
+    color: AppColor.charEcstasy,
+    imagePath: AppCharacterPath.ecstasy,
+    description: '희망과 용기가 폭발한 황홀',
+    passives: [
+      PassiveData(
+        type: PassiveType.allyAtkBuff,
+        range: 3,
+        value: 0.20,
+        description: '주변 3칸 아군 ATK +20%',
+      ),
+      PassiveData(
+        type: PassiveType.enemySpdDebuff,
+        range: 3,
+        value: 0.20,
+        description: '주변 3칸 적 이동속도 -20%',
+      ),
+    ],
+    actives: [
+      ActiveData(
+        type: ActiveType.aoeDamage,
+        procChance: 0.15,
+        value: 0.5,
+        description: '15% 확률로 주변 50% 범위 데미지',
       ),
     ],
   ),

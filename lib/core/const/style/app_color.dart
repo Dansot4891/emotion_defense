@@ -50,6 +50,8 @@ abstract class AppColor {
   static const Color charSurprise = Color(0xFFFF8C00);
   static const Color charLoneliness = Color(0xFF708090);
   static const Color charExcitement = Color(0xFFFF69B4);
+  static const Color charDisgust = Color(0xFF6B8E23); // 올리브
+  static const Color charCuriosity = Color(0xFF20B2AA); // 청록
   static const Color charBorder = Color(0xFFFFFFFF);
 
   // === 캐릭터 (레어) ===
@@ -59,6 +61,8 @@ abstract class AppColor {
   static const Color charNostalgia = Color(0xFF87CEEB); // 하늘
   static const Color charShame = Color(0xFF8B4513); // 갈색
   static const Color charGratitude = Color(0xFFFFB6C1); // 연분홍
+  static const Color charRegret = Color(0xFF9370DB); // 탁한 보라
+  static const Color charWonder = Color(0xFFDAA520); // 골드로드
 
   // === 캐릭터 (영웅) ===
   static const Color charMadness = Color(0xFFFF0040); // 짙은 빨강
@@ -67,12 +71,16 @@ abstract class AppColor {
   static const Color charContempt = Color(0xFF6A0DAD); // 보라
   static const Color charSerenity = Color(0xFF00BCD4); // 시안
   static const Color charDread = Color(0xFF1A237E); // 짙은 남색
+  static const Color charObsession = Color(0xFF8B0000); // 짙은 적색
+  static const Color charCourage = Color(0xFFFF4500); // 주홍
 
   // === 캐릭터 (전설) ===
   static const Color charPassion = Color(0xFFFF6D00); // 주황
   static const Color charVoid = Color(0xFF212121); // 짙은 검정
   static const Color charEnlightenment = Color(0xFFFFEB3B); // 노랑
   static const Color charLove = Color(0xFFE91E63); // 핑크
+  static const Color charVengeance = Color(0xFF800020); // 마룬
+  static const Color charEcstasy = Color(0xFFB0A0FF); // 라벤더
 
   // === 적 ===
   static const Color enemyIdleThought = Color(0xFF2F2F2F);
