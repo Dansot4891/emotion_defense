@@ -43,13 +43,13 @@ const List<RecipeData> heroRecipes = [
   ),
   RecipeData(
     resultId: 'resignation',
-    materialIds: ['anxiety', 'loneliness'],
-    description: '불안 + 외로움 → 체념',
+    materialIds: ['shame', 'nostalgia'],
+    description: '수치심 + 그리움 → 체념',
   ),
   RecipeData(
     resultId: 'hope',
-    materialIds: ['nostalgia', 'gratitude'],
-    description: '그리움 + 감사 → 희망',
+    materialIds: ['gratitude', 'anxiety'],
+    description: '감사 + 불안 → 희망',
   ),
   RecipeData(
     resultId: 'contempt',
@@ -82,8 +82,8 @@ const List<RecipeData> legendRecipes = [
   ),
   RecipeData(
     resultId: 'enlightenment',
-    materialIds: ['hope', 'contempt'],
-    description: '희망 + 경멸 → 깨달음',
+    materialIds: ['contempt', 'serenity'],
+    description: '경멸 + 평온 → 깨달음',
   ),
   RecipeData(
     resultId: 'love',
