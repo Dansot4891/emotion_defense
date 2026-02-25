@@ -484,6 +484,15 @@ class EmotionDefenseGame extends FlameGame {
     }
   }
 
+  /// 시너지 팝업 토글
+  void toggleSynergyPopup() {
+    if (overlays.isActive('synergyPopup')) {
+      overlays.remove('synergyPopup');
+    } else {
+      overlays.add('synergyPopup');
+    }
+  }
+
   /// 퀘스트 팝업 토글
   void toggleQuestPopup() {
     if (overlays.isActive('questPopup')) {
@@ -576,5 +585,6 @@ class EmotionDefenseGame extends FlameGame {
     overlays.remove('rewardPopup');
     overlays.remove('upgradePopup');
     overlays.remove('questPopup');
+    overlays.remove('synergyPopup');
   }
 }

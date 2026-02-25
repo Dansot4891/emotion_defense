@@ -13,6 +13,14 @@ class SynergyBonuses {
   final double bufferRangeBonus; // 버퍼 오라 범위 보너스 (칸)
   final double debufferDurationBonus; // 디버퍼 효과 지속시간 보너스
 
+  // 카운트 (팝업 표시용)
+  final int positiveCount;
+  final int negativeCount;
+  final int dealerCount;
+  final int stunnerCount;
+  final int bufferCount;
+  final int debufferCount;
+
   const SynergyBonuses({
     this.allyAtkBonus = 0,
     this.allyAspdBonus = 0,
@@ -23,7 +31,26 @@ class SynergyBonuses {
     this.stunDurationBonus = 0,
     this.bufferRangeBonus = 0,
     this.debufferDurationBonus = 0,
+    this.positiveCount = 0,
+    this.negativeCount = 0,
+    this.dealerCount = 0,
+    this.stunnerCount = 0,
+    this.bufferCount = 0,
+    this.debufferCount = 0,
   });
+
+  /// 활성 시너지 개수
+  int get activeCount {
+    int count = 0;
+    if (allyAtkBonus > 0 || allyAspdBonus > 0) count++; // 긍정 시너지
+    if (enemySpeedPenalty > 0 || enemyDefPenalty > 0) count++; // 부정 시너지
+    if (emotionExplosion) count++;
+    if (dealerCritBonus > 0) count++;
+    if (stunDurationBonus > 0) count++;
+    if (bufferRangeBonus > 0) count++;
+    if (debufferDurationBonus > 0) count++;
+    return count;
+  }
 }
 
 /// 시너지 시스템 — 극성/역할군 시너지 계산
@@ -122,6 +149,12 @@ class SynergySystem {
       stunDurationBonus: stunDurationBonus,
       bufferRangeBonus: bufferRangeBonus,
       debufferDurationBonus: debufferDurationBonus,
+      positiveCount: positiveCount,
+      negativeCount: negativeCount,
+      dealerCount: dealerCount,
+      stunnerCount: stunnerCount,
+      bufferCount: bufferCount,
+      debufferCount: debufferCount,
     );
   }
 }

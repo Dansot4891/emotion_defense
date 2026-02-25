@@ -5,7 +5,6 @@ import '../../../core/const/style/app_text_style.dart';
 import '../../../core/constants.dart';
 import '../../../core/emotion_defense_game.dart';
 import '../../../core/game_state.dart';
-import '../../../gameplay/systems/synergy_system.dart';
 
 /// 상단 HUD 오버레이 - 웨이브 정보, 골드, 적 수, 시너지, 배속, 일시정지
 class HudOverlay extends StatelessWidget {
@@ -55,6 +54,14 @@ class HudOverlay extends StatelessWidget {
                           ? AppColor.danger
                           : null,
                     ),
+                    const SizedBox(width: 10),
+                    // 시너지 버튼
+                    _SynergyButton(
+                      count: synergy.activeCount,
+                      onTap: synergy.activeCount > 0
+                          ? () => game.toggleSynergyPopup()
+                          : null,
+                    ),
                     const Spacer(),
                     // 배속 버튼
                     GestureDetector(
@@ -96,21 +103,6 @@ class HudOverlay extends StatelessWidget {
                   ],
                 ),
               ),
-              // 시너지 표시 바 (활성 시너지가 있을 때만)
-              if (_hasActiveSynergy(synergy))
-                Container(
-                  width: double.infinity,
-                  color: AppColor.hudBackground,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 4,
-                  ),
-                  child: Wrap(
-                    spacing: 6,
-                    runSpacing: 2,
-                    children: _buildSynergyChips(synergy),
-                  ),
-                ),
             ],
           ),
         );
@@ -118,89 +110,6 @@ class HudOverlay extends StatelessWidget {
     );
   }
 
-  bool _hasActiveSynergy(SynergyBonuses s) {
-    return s.allyAtkBonus > 0 ||
-        s.allyAspdBonus > 0 ||
-        s.enemySpeedPenalty > 0 ||
-        s.enemyDefPenalty > 0 ||
-        s.emotionExplosion ||
-        s.dealerCritBonus > 0 ||
-        s.stunDurationBonus > 0 ||
-        s.bufferRangeBonus > 0 ||
-        s.debufferDurationBonus > 0;
-  }
-
-  List<Widget> _buildSynergyChips(SynergyBonuses s) {
-    final chips = <Widget>[];
-    if (s.allyAtkBonus > 0) {
-      chips.add(
-        _SynergyChip(
-          label: 'ATK+${(s.allyAtkBonus * 100).toInt()}%',
-          color: AppColor.success,
-        ),
-      );
-    }
-    if (s.allyAspdBonus > 0) {
-      chips.add(
-        _SynergyChip(
-          label: 'ASPD+${(s.allyAspdBonus * 100).toInt()}%',
-          color: AppColor.success,
-        ),
-      );
-    }
-    if (s.enemySpeedPenalty > 0) {
-      chips.add(
-        _SynergyChip(
-          label: '적속-${(s.enemySpeedPenalty * 100).toInt()}%',
-          color: const Color(0xFF42A5F5),
-        ),
-      );
-    }
-    if (s.enemyDefPenalty > 0) {
-      chips.add(
-        _SynergyChip(
-          label: '적방-${s.enemyDefPenalty.toInt()}',
-          color: const Color(0xFF42A5F5),
-        ),
-      );
-    }
-    if (s.emotionExplosion) {
-      chips.add(const _SynergyChip(label: '감정폭발', color: AppColor.danger));
-    }
-    if (s.dealerCritBonus > 0) {
-      chips.add(
-        _SynergyChip(
-          label: '크리+${(s.dealerCritBonus * 100).toInt()}%',
-          color: AppColor.warning,
-        ),
-      );
-    }
-    if (s.stunDurationBonus > 0) {
-      chips.add(
-        _SynergyChip(
-          label: '스턴+${s.stunDurationBonus}s',
-          color: const Color(0xFFAB47BC),
-        ),
-      );
-    }
-    if (s.bufferRangeBonus > 0) {
-      chips.add(
-        _SynergyChip(
-          label: '범위+${s.bufferRangeBonus.toInt()}',
-          color: const Color(0xFF00BCD4),
-        ),
-      );
-    }
-    if (s.debufferDurationBonus > 0) {
-      chips.add(
-        _SynergyChip(
-          label: '디버프+${s.debufferDurationBonus}s',
-          color: const Color(0xFF42A5F5),
-        ),
-      );
-    }
-    return chips;
-  }
 }
 
 class _HudItem extends StatelessWidget {
@@ -257,26 +166,41 @@ class _DifficultyChip extends StatelessWidget {
   }
 }
 
-class _SynergyChip extends StatelessWidget {
-  final String label;
-  final Color color;
+/// 시너지 버튼 — 활성 시너지 개수 표시, 탭하면 시너지 팝업 열기
+class _SynergyButton extends StatelessWidget {
+  final int count;
+  final VoidCallback? onTap;
 
-  const _SynergyChip({required this.label, required this.color});
+  const _SynergyButton({required this.count, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
-      decoration: BoxDecoration(
-        border: Border.all(color: color, width: 0.8),
-        borderRadius: BorderRadius.circular(3),
-      ),
-      child: Text(
-        label,
-        style: TextStyle(
-          color: color,
-          fontSize: 9,
-          fontWeight: FontWeight.bold,
+    final active = count > 0;
+    final color = active ? AppColor.primary : AppColor.textMuted;
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4),
+          border: Border.all(color: color),
+          color: active ? color.withValues(alpha: 0.15) : Colors.transparent,
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.auto_awesome, color: color, size: 13),
+            const SizedBox(width: 3),
+            Text(
+              '시너지 $count',
+              style: TextStyle(
+                color: color,
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
       ),
     );

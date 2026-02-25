@@ -14,8 +14,8 @@ class GridMap extends PositionComponent {
 
   /// 화면 크기 기반 맵 초기화
   void initialize(Vector2 screenSize, {double safeAreaTop = 0, double safeAreaBottom = 0}) {
-    // SafeArea + HUD(시너지 바 포함)/액션바 높이를 제외한 가용 영역 계산
-    final topInset = safeAreaTop + GameConstants.hudHeight + GameConstants.synergyBarHeight;
+    // SafeArea + HUD/액션바 높이를 제외한 가용 영역 계산
+    final topInset = safeAreaTop + GameConstants.hudHeight;
     final bottomInset = safeAreaBottom + GameConstants.actionBarHeight;
     final availableWidth = screenSize.x;
     final availableHeight = screenSize.y - topInset - bottomInset;

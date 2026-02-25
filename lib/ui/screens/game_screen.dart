@@ -11,6 +11,7 @@ import '../widgets/overlay/hud_overlay.dart';
 import '../widgets/popup/pause_popup.dart';
 import '../widgets/popup/quest_popup.dart';
 import '../widgets/popup/reward_popup.dart';
+import '../widgets/popup/synergy_popup.dart';
 import '../widgets/popup/upgrade_popup.dart';
 import '../widgets/overlay/game_over_overlay.dart';
 
@@ -64,6 +65,8 @@ class _GameScreenState extends State<GameScreen> {
               UpgradePopup(game: game as EmotionDefenseGame),
           'questPopup': (context, game) =>
               QuestPopup(game: game as EmotionDefenseGame),
+          'synergyPopup': (context, game) =>
+              SynergyPopup(game: game as EmotionDefenseGame),
         },
         backgroundBuilder: (context) {
           return Container(color: AppColor.surface);

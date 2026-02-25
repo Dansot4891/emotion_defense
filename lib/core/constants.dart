@@ -25,6 +25,6 @@ class GameConstants {
 
   // UI 영역 높이
   static const double hudHeight = 48.0;
-  static const double synergyBarHeight = 22.0; // 시너지 바 예약 높이
+  static const double synergyBarHeight = 0; // 시너지 바 제거됨 (팝업으로 대체)
   static const double actionBarHeight = 64.0;
 }
