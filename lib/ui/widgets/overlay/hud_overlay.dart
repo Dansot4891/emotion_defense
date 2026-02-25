@@ -58,9 +58,7 @@ class HudOverlay extends StatelessWidget {
                     // 시너지 버튼
                     _SynergyButton(
                       count: synergy.activeCount,
-                      onTap: synergy.activeCount > 0
-                          ? () => game.toggleSynergyPopup()
-                          : null,
+                      onTap: () => game.toggleSynergyPopup(),
                     ),
                     const Spacer(),
                     // 배속 버튼
