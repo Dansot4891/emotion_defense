@@ -1,4 +1,5 @@
 import 'package:emotion_defense/app/route/routes.dart';
+import 'package:emotion_defense/presentation/title/widgets/title_difficult_item.dart';
 import 'package:flutter/material.dart';
 import '../../../core/const/style/app_color.dart';
 import '../../../core/const/style/app_text_style.dart';
@@ -40,43 +41,12 @@ class _TitleScreenState extends State<TitleScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: Difficulty.values.map((d) {
                 final selected = TitleScreen.selectedDifficulty == d;
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: GestureDetector(
-                    onTap: () => setState(() {
-                      TitleScreen.selectedDifficulty = d;
-                    }),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 14,
-                        vertical: 8,
-                      ),
-                      decoration: BoxDecoration(
-                        color: selected
-                            ? _difficultyColor(d).withValues(alpha: 0.25)
-                            : Colors.transparent,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
-                          color: selected
-                              ? _difficultyColor(d)
-                              : AppColor.textMuted,
-                          width: selected ? 2 : 1,
-                        ),
-                      ),
-                      child: Text(
-                        d.label,
-                        style: TextStyle(
-                          color: selected
-                              ? _difficultyColor(d)
-                              : AppColor.textSecondary,
-                          fontSize: 14,
-                          fontWeight: selected
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                        ),
-                      ),
-                    ),
-                  ),
+                return TitleDifficultItem(
+                  difficulty: d,
+                  onTap: () => setState(() {
+                    TitleScreen.selectedDifficulty = d;
+                  }),
+                  selected: selected,
                 );
               }).toList(),
             ),
@@ -107,18 +77,5 @@ class _TitleScreenState extends State<TitleScreen> {
         ),
       ),
     );
-  }
-
-  static Color _difficultyColor(Difficulty d) {
-    switch (d) {
-      case Difficulty.easy:
-        return AppColor.success;
-      case Difficulty.normal:
-        return AppColor.primary;
-      case Difficulty.hard:
-        return AppColor.warning;
-      case Difficulty.hell:
-        return AppColor.danger;
-    }
   }
 }
