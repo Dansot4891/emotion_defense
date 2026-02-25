@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flame/game.dart';
 
 import 'const/asset/app_character_path.dart';
+import 'const/asset/app_enemy_path.dart';
 import 'game_state.dart';
 import '../data/definitions/character_defs.dart';
 import '../data/models/character_model.dart';
@@ -92,6 +93,11 @@ class EmotionDefenseGame extends FlameGame {
     };
     for (final path in allImagePaths) {
       await images.load(AppCharacterPath.toFlamePath(path));
+    }
+
+    // 적 이미지 프리로드
+    for (final path in AppEnemyPath.allPaths) {
+      await images.load(AppEnemyPath.toFlamePath(path));
     }
 
     // 게임 상태 초기화

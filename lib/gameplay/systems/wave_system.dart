@@ -102,6 +102,8 @@ class WaveSystem {
       pixelWaypoints: _pixelWaypoints,
       gameState: gameState,
       hpMultiplier: multiplier,
+      wave: gameState.currentWave,
+      tileSize: tileSize,
     );
     gameWorld.add(enemy);
     gameState.onEnemySpawned();

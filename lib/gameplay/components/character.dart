@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'dart:ui' as ui;
 
 import 'package:flame/components.dart';
@@ -29,6 +30,10 @@ class CharacterComponent extends PositionComponent
 
   /// 드래그 관련
   bool _isDragging = false;
+
+  /// idle 애니메이션 (둥둥 떠있는 효과)
+  double _idleTime = 0;
+  final double _idlePhase = math.Random().nextDouble() * math.pi * 2;
 
   /// 캐릭터 스프라이트
   ui.Image? _spriteImage;
@@ -87,6 +92,10 @@ class CharacterComponent extends PositionComponent
   @override
   void update(double dt) {
     super.update(dt);
+
+    // idle 애니메이션 타이머 (드래그 중에도 계속 진행)
+    _idleTime += dt;
+
     if (_isDragging) return;
 
     // 쿨다운 감소
@@ -205,14 +214,16 @@ class CharacterComponent extends PositionComponent
       );
     }
 
-    // 캐릭터 스프라이트 렌더링
+    // 캐릭터 스프라이트 렌더링 (idle 둥둥 애니메이션 적용)
     if (_spriteImage != null) {
+      final idleOffsetY = math.sin(_idleTime * 2.5 + _idlePhase) * (size.y * 0.04);
+
       final src = Rect.fromLTWH(
         0, 0,
         _spriteImage!.width.toDouble(),
         _spriteImage!.height.toDouble(),
       );
-      final dst = Rect.fromLTWH(0, 0, size.x, size.y);
+      final dst = Rect.fromLTWH(0, idleOffsetY, size.x, size.y);
       canvas.drawImageRect(_spriteImage!, src, dst, Paint());
     }
   }

@@ -1,7 +1,9 @@
+import 'dart:ui' as ui;
 import 'dart:ui';
 
 import 'package:flame/components.dart';
 
+import '../../core/const/asset/app_enemy_path.dart';
 import '../../core/const/style/app_color.dart';
 import '../../core/emotion_defense_game.dart';
 import '../../core/game_state.dart';
@@ -16,6 +18,8 @@ class EnemyComponent extends PositionComponent
   final EnemyData data;
   final List<Offset> pixelWaypoints;
   final GameState gameState;
+  final int wave;
+  final double _tileSize;
 
   late double hp;
   late double maxHp;
@@ -29,12 +33,18 @@ class EnemyComponent extends PositionComponent
   double auraSpeedMultiplier = 1.0;
   double auraDefReduction = 0.0;
 
+  /// 적 스프라이트
+  ui.Image? _spriteImage;
+
   EnemyComponent({
     required this.data,
     required this.pixelWaypoints,
     required this.gameState,
     required double hpMultiplier,
-  }) : super(size: Vector2(data.isBoss ? 30 : 20, data.isBoss ? 30 : 20)) {
+    required this.wave,
+    double tileSize = 40,
+  }) : _tileSize = tileSize,
+       super(size: Vector2.all(data.isBoss ? tileSize * 1 : tileSize * 0.65)) {
     maxHp = data.hp * hpMultiplier * gameState.difficulty.hpMult;
     hp = maxHp;
 
@@ -42,6 +52,17 @@ class EnemyComponent extends PositionComponent
     final spawn = pixelWaypoints.first;
     position = Vector2(spawn.dx - size.x / 2, spawn.dy - size.y / 2);
     currentWaypointIndex = 1;
+  }
+
+  @override
+  Future<void> onLoad() async {
+    await super.onLoad();
+    final imagePath = AppEnemyPath.getImagePath(
+      wave: wave,
+      isBoss: data.isBoss,
+      isSummonedBoss: data.isSummonedBoss,
+    );
+    _spriteImage = game.images.fromCache(AppEnemyPath.toFlamePath(imagePath));
   }
 
   /// 중심 좌표
@@ -71,8 +92,10 @@ class EnemyComponent extends PositionComponent
         defReduction += e.value;
       }
     }
-    return (data.def * gameState.difficulty.defMult - defReduction)
-        .clamp(0.0, double.infinity);
+    return (data.def * gameState.difficulty.defMult - defReduction).clamp(
+      0.0,
+      double.infinity,
+    );
   }
 
   /// 실효 이동속도 (난이도 적용)
@@ -174,7 +197,9 @@ class EnemyComponent extends PositionComponent
           data: splitData,
           pixelWaypoints: pixelWaypoints,
           gameState: gameState,
-          hpMultiplier: 1.0, // 분열체는 기본 HP
+          hpMultiplier: 1.0,
+          wave: wave,
+          tileSize: _tileSize,
         );
         // 현재 위치 근처에 스폰
         splitEnemy.position = position.clone() + Vector2(i * 10.0 - 5, 0);
@@ -189,13 +214,21 @@ class EnemyComponent extends PositionComponent
 
   @override
   void render(Canvas canvas) {
-    // 적 본체 (원형)
-    final bodyPaint = Paint()..color = data.color;
-    canvas.drawCircle(
-      Offset(size.x / 2, size.y / 2),
-      size.x / 2,
-      bodyPaint,
-    );
+    // 적 스프라이트 렌더링
+    if (_spriteImage != null) {
+      final src = Rect.fromLTWH(
+        0,
+        0,
+        _spriteImage!.width.toDouble(),
+        _spriteImage!.height.toDouble(),
+      );
+      final dst = Rect.fromLTWH(0, 0, size.x, size.y);
+      canvas.drawImageRect(_spriteImage!, src, dst, Paint());
+    } else {
+      // 이미지 없으면 기존 원형 폴백
+      final bodyPaint = Paint()..color = data.color;
+      canvas.drawCircle(Offset(size.x / 2, size.y / 2), size.x / 2, bodyPaint);
+    }
 
     // 스턴 표시 (노란 테두리)
     if (isStunned) {
@@ -215,18 +248,15 @@ class EnemyComponent extends PositionComponent
     const hpBarHeight = 4.0;
     const hpBarY = -6.0;
     final bgPaint = Paint()..color = AppColor.hpBarBackground;
-    canvas.drawRect(
-      Rect.fromLTWH(0, hpBarY, hpBarWidth, hpBarHeight),
-      bgPaint,
-    );
+    canvas.drawRect(Rect.fromLTWH(0, hpBarY, hpBarWidth, hpBarHeight), bgPaint);
 
     // HP 바 (현재 HP 비율)
     final hpRatio = (hp / maxHp).clamp(0.0, 1.0);
     final hpColor = hpRatio > 0.5
         ? AppColor.hpHigh
         : hpRatio > 0.25
-            ? AppColor.hpMid
-            : AppColor.hpLow;
+        ? AppColor.hpMid
+        : AppColor.hpLow;
     final hpPaint = Paint()..color = hpColor;
     canvas.drawRect(
       Rect.fromLTWH(0, hpBarY, hpBarWidth * hpRatio, hpBarHeight),

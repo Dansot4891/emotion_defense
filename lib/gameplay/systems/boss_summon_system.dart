@@ -88,6 +88,8 @@ class BossSummonSystem {
       pixelWaypoints: _pixelWaypoints,
       gameState: gameState,
       hpMultiplier: hpScale,
+      wave: gameState.currentWave,
+      tileSize: tileSize,
     );
 
     gameWorld.add(enemy);
