@@ -41,12 +41,12 @@ class CharacterBookGradeSection extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               '$title 등급',
-              style: AppTextStyle.hudLabel.copyWith(fontSize: 16, color: color),
+              style: AppTextStyle.hudLabel.copyWith(color: color),
             ),
             const SizedBox(width: 8),
             Text(
               '${characters.length}종',
-              style: AppTextStyle.caption.copyWith(color: AppColor.textMuted),
+              style: AppTextStyle.hudLabel.copyWith(color: AppColor.white),
             ),
           ],
         ),

@@ -68,6 +68,6 @@ abstract class AppTextStyle {
   // === 기타 ===
   static const TextStyle caption = TextStyle(
     color: AppColor.textMuted,
-    fontSize: 12,
+    fontSize: 14,
   );
 }

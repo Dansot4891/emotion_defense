@@ -105,6 +105,9 @@ abstract class AppColor {
   // === 알림 배지 ===
   static const Color badgeRed = Color(0xFFF44336);
 
+  // === 흰색 ===
+  static const Color white = Color(0xFFFFFFFF);
+
   /// 등급별 색상 반환 (여러 곳에서 공용)
   static Color gradeColor(Grade grade) {
     switch (grade) {

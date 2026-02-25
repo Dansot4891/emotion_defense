@@ -28,20 +28,13 @@ class CharacterBookCharacterCard extends StatelessWidget {
         children: [
           // 캐릭터 이미지
           Container(
-            width: 72,
-            height: 72,
+            width: 120,
+            height: 120,
             decoration: BoxDecoration(
-              color: AppColor.background,
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: color.withValues(alpha: 0.4),
-                width: 1,
-              ),
+              border: Border.all(color: color.withValues(alpha: 0.4), width: 1),
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(7),
-              child: Image.asset(data.imagePath, fit: BoxFit.contain),
-            ),
+            child: Image.asset(data.imagePath, fit: BoxFit.contain),
           ),
           const SizedBox(width: 12),
           // 정보 영역
@@ -76,7 +69,7 @@ class CharacterBookCharacterCard extends StatelessWidget {
                 Text(
                   data.description,
                   style: AppTextStyle.caption.copyWith(
-                    fontSize: 11,
+                    fontSize: 14,
                     color: AppColor.textSecondary,
                   ),
                 ),
@@ -137,7 +130,7 @@ class _Tag extends StatelessWidget {
         label,
         style: TextStyle(
           color: color,
-          fontSize: 9,
+          fontSize: 12,
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -161,7 +154,7 @@ class _StatChip extends StatelessWidget {
           '$label ',
           style: const TextStyle(
             color: AppColor.textMuted,
-            fontSize: 10,
+            fontSize: 12,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -169,7 +162,7 @@ class _StatChip extends StatelessWidget {
           value,
           style: const TextStyle(
             color: AppColor.textPrimary,
-            fontSize: 10,
+            fontSize: 12,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -201,7 +194,7 @@ class _SkillLine extends StatelessWidget {
             '$label ',
             style: TextStyle(
               color: color,
-              fontSize: 9,
+              fontSize: 11,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -210,7 +203,7 @@ class _SkillLine extends StatelessWidget {
               description,
               style: const TextStyle(
                 color: AppColor.textSecondary,
-                fontSize: 9,
+                fontSize: 11,
               ),
             ),
           ),
