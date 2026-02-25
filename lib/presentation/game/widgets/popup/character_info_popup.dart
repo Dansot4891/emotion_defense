@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/const/style/app_color.dart';
-import '../../../core/const/style/app_text_style.dart';
-import '../../../core/emotion_defense_game.dart';
-import '../../../core/game_state.dart';
-import '../../../data/models/character_model.dart';
+import '../../../../core/const/style/app_color.dart';
+import '../../../../core/const/style/app_text_style.dart';
+import '../../../../core/emotion_defense_game.dart';
+import '../../../../core/game_state.dart';
+import '../../../../data/models/character_model.dart';
 
 /// 캐릭터 정보/강화 팝업
 class CharacterInfoPopup extends StatelessWidget {
@@ -238,7 +238,8 @@ class _RerollButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const cost = 10;
-    final enabled = state.gold >= cost &&
+    final enabled =
+        state.gold >= cost &&
         state.phase != GamePhase.gameOver &&
         state.phase != GamePhase.victory;
 

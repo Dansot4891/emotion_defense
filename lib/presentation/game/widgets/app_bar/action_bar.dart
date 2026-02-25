@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/const/style/app_color.dart';
-import '../../../core/const/style/app_text_style.dart';
-import '../../../core/emotion_defense_game.dart';
-import '../../../core/game_state.dart';
+import '../../../../core/const/style/app_color.dart';
+import '../../../../core/const/style/app_text_style.dart';
+import '../../../../core/emotion_defense_game.dart';
+import '../../../../core/game_state.dart';
 
 /// 하단 액션 버튼 바 - 뽑기, 조합, 강화, 판매
 class ActionBar extends StatelessWidget {
@@ -128,8 +128,9 @@ class _ActionButton extends StatelessWidget {
                 children: [
                   Icon(
                     icon,
-                    color:
-                        enabled ? AppColor.textPrimary : AppColor.textDisabled,
+                    color: enabled
+                        ? AppColor.textPrimary
+                        : AppColor.textDisabled,
                     size: 18,
                   ),
                   FittedBox(

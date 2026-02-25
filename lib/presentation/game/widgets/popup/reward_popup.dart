@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/const/style/app_color.dart';
-import '../../../core/const/style/app_text_style.dart';
-import '../../../core/emotion_defense_game.dart';
-import '../../../data/models/reward_model.dart';
+import '../../../../core/const/style/app_color.dart';
+import '../../../../core/const/style/app_text_style.dart';
+import '../../../../core/emotion_defense_game.dart';
+import '../../../../data/models/reward_model.dart';
 
 /// 보상 선택 팝업 — 3개 카드 중 1개 선택
 class RewardPopup extends StatelessWidget {

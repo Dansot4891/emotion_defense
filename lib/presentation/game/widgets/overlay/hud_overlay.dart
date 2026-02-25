@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/const/style/app_color.dart';
-import '../../../core/const/style/app_text_style.dart';
-import '../../../core/constants.dart';
-import '../../../core/emotion_defense_game.dart';
-import '../../../core/game_state.dart';
+import '../../../../core/const/style/app_color.dart';
+import '../../../../core/const/style/app_text_style.dart';
+import '../../../../core/constants.dart';
+import '../../../../core/emotion_defense_game.dart';
+import '../../../../core/game_state.dart';
 
 /// 상단 HUD 오버레이 - 웨이브 정보, 골드, 적 수, 시너지, 배속, 일시정지
 class HudOverlay extends StatelessWidget {
@@ -107,7 +107,6 @@ class HudOverlay extends StatelessWidget {
       },
     );
   }
-
 }
 
 class _HudItem extends StatelessWidget {

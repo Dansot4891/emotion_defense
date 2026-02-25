@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/const/style/app_color.dart';
-import '../../../core/const/style/app_text_style.dart';
-import '../../../core/emotion_defense_game.dart';
-import '../../../data/definitions/character_defs.dart';
-import '../../../data/definitions/recipe_defs.dart';
-import '../../../data/models/character_model.dart';
-import '../../../data/models/recipe_model.dart';
+import '../../../../core/const/style/app_color.dart';
+import '../../../../core/const/style/app_text_style.dart';
+import '../../../../core/emotion_defense_game.dart';
+import '../../../../data/definitions/character_defs.dart';
+import '../../../../data/definitions/recipe_defs.dart';
+import '../../../../data/models/character_model.dart';
+import '../../../../data/models/recipe_model.dart';
 
 /// 등급별 통일 색상
 Color _gradeColor(Grade? grade) {

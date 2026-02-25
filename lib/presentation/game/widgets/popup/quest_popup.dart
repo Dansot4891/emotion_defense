@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/const/style/app_color.dart';
-import '../../../core/const/style/app_text_style.dart';
-import '../../../core/emotion_defense_game.dart';
-import '../../../data/definitions/mission_defs.dart';
-import '../../../data/models/mission_model.dart';
-import '../../../gameplay/components/character.dart';
+import '../../../../core/const/style/app_color.dart';
+import '../../../../core/const/style/app_text_style.dart';
+import '../../../../core/emotion_defense_game.dart';
+import '../../../../data/definitions/mission_defs.dart';
+import '../../../../data/models/mission_model.dart';
+import '../../../../gameplay/components/character.dart';
 
 /// 퀘스트 팝업 — 미션 탭 + 보스 소환 탭
 class QuestPopup extends StatefulWidget {
@@ -154,8 +154,7 @@ class _MissionTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final characters =
-        game.children.whereType<CharacterComponent>().toList();
+    final characters = game.children.whereType<CharacterComponent>().toList();
 
     return ListView.separated(
       shrinkWrap: true,
@@ -192,8 +191,7 @@ class _MissionRow extends StatelessWidget {
     final state = game.gameState;
     final isClaimed = state.claimedMissionIds.contains(mission.id);
     final isCompleted = state.completedMissionIds.contains(mission.id);
-    final progress =
-        game.missionSystem.getMissionProgress(mission, characters);
+    final progress = game.missionSystem.getMissionProgress(mission, characters);
     final target = mission.targetValue;
     final progressRatio = (progress / target).clamp(0.0, 1.0);
 
@@ -256,10 +254,7 @@ class _MissionRow extends StatelessWidget {
                 // 보상 표시
                 Text(
                   '보상: ${mission.reward.description}',
-                  style: TextStyle(
-                    fontSize: 9,
-                    color: AppColor.gold,
-                  ),
+                  style: TextStyle(fontSize: 9, color: AppColor.gold),
                 ),
               ],
             ),
@@ -383,10 +378,7 @@ class _BossSummonTab extends StatelessWidget {
                 // 스탯 정보
                 Text(
                   'HP: 400 (스케일링 적용) | DEF: ${3 + (state.bossSummonCount)} | 보상: ${system.currentRewardGold}G',
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: AppColor.textSecondary,
-                  ),
+                  style: TextStyle(fontSize: 10, color: AppColor.textSecondary),
                 ),
               ],
             ),
@@ -396,14 +388,8 @@ class _BossSummonTab extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _StatChip(
-                label: '소환 횟수',
-                value: '${state.bossSummonCount}',
-              ),
-              _StatChip(
-                label: '처치 횟수',
-                value: '${state.bossKillCount}',
-              ),
+              _StatChip(label: '소환 횟수', value: '${state.bossSummonCount}'),
+              _StatChip(label: '처치 횟수', value: '${state.bossKillCount}'),
             ],
           ),
           const SizedBox(height: 12),
@@ -413,10 +399,7 @@ class _BossSummonTab extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 8),
               child: Text(
                 '쿨타임: ${system.cooldownRemaining}웨이브 남음 (웨이브 ${system.nextAvailableWave}부터 가능)',
-                style: TextStyle(
-                  fontSize: 10,
-                  color: AppColor.warning,
-                ),
+                style: TextStyle(fontSize: 10, color: AppColor.warning),
               ),
             ),
           // 소환 버튼
@@ -464,10 +447,7 @@ class _StatChip extends StatelessWidget {
           style: TextStyle(fontSize: 10, color: AppColor.textSecondary),
         ),
         const SizedBox(height: 2),
-        Text(
-          value,
-          style: AppTextStyle.hudLabel.copyWith(fontSize: 16),
-        ),
+        Text(value, style: AppTextStyle.hudLabel.copyWith(fontSize: 16)),
       ],
     );
   }

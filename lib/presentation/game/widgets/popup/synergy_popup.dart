@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/const/style/app_color.dart';
-import '../../../core/const/style/app_text_style.dart';
-import '../../../core/emotion_defense_game.dart';
-import '../../../gameplay/systems/synergy_system.dart';
+import '../../../../core/const/style/app_color.dart';
+import '../../../../core/const/style/app_text_style.dart';
+import '../../../../core/emotion_defense_game.dart';
+import '../../../../gameplay/systems/synergy_system.dart';
 
 /// 시너지 상세 팝업 — 극성/역할군 시너지 조건 + 진행률 표시
 class SynergyPopup extends StatelessWidget {
@@ -104,7 +104,8 @@ class SynergyPopup extends StatelessWidget {
                               _SynergyRow(
                                 label: '긍정 3+ & 부정 3+',
                                 effect: '감정폭발 (5웨이브마다 전체 100 데미지)',
-                                current: synergy.positiveCount >= 3 &&
+                                current:
+                                    synergy.positiveCount >= 3 &&
                                         synergy.negativeCount >= 3
                                     ? 1
                                     : 0,
@@ -262,10 +263,7 @@ class _SectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 16),
-      child: Text(
-        label,
-        style: AppTextStyle.hudLabel.copyWith(fontSize: 12),
-      ),
+      child: Text(label, style: AppTextStyle.hudLabel.copyWith(fontSize: 12)),
     );
   }
 }
@@ -324,10 +322,7 @@ class _SynergyRow extends StatelessWidget {
               // 카운트
               Text(
                 customProgress ?? '$current/$required_',
-                style: TextStyle(
-                  color: displayColor,
-                  fontSize: 10,
-                ),
+                style: TextStyle(color: displayColor, fontSize: 10),
               ),
             ],
           ),
@@ -358,7 +353,9 @@ class _SynergyRow extends StatelessWidget {
             child: Text(
               effect,
               style: TextStyle(
-                color: active ? color.withValues(alpha: 0.85) : AppColor.textMuted,
+                color: active
+                    ? color.withValues(alpha: 0.85)
+                    : AppColor.textMuted,
                 fontSize: 9,
               ),
             ),

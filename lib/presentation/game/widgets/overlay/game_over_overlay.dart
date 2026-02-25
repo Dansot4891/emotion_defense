@@ -1,9 +1,9 @@
 import 'package:emotion_defense/app/route/routes.dart';
 import 'package:flutter/material.dart';
-import '../../../core/const/style/app_color.dart';
-import '../../../core/const/style/app_text_style.dart';
-import '../../../core/emotion_defense_game.dart';
-import '../../../core/game_state.dart';
+import '../../../../core/const/style/app_color.dart';
+import '../../../../core/const/style/app_text_style.dart';
+import '../../../../core/emotion_defense_game.dart';
+import '../../../../core/game_state.dart';
 
 /// 게임오버/승리 오버레이 화면 — 결과 통계 포함
 class GameOverOverlay extends StatelessWidget {

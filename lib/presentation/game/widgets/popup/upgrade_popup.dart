@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/const/style/app_color.dart';
-import '../../../core/const/style/app_text_style.dart';
-import '../../../core/emotion_defense_game.dart';
-import '../../../data/definitions/upgrade_defs.dart';
-import '../../../data/models/character_model.dart';
+import '../../../../core/const/style/app_color.dart';
+import '../../../../core/const/style/app_text_style.dart';
+import '../../../../core/emotion_defense_game.dart';
+import '../../../../data/definitions/upgrade_defs.dart';
+import '../../../../data/models/character_model.dart';
 
 /// 강화 팝업 — 등급별 ATK/ASPD 강화
 class UpgradePopup extends StatelessWidget {

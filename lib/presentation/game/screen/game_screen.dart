@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import '../../../core/const/style/app_color.dart';
 import '../../../core/emotion_defense_game.dart';
 import '../../title/screen/title_screen.dart';
-import '../../widgets/app_bar/action_bar.dart';
-import '../../widgets/popup/character_info_popup.dart';
-import '../../widgets/popup/combine_popup.dart';
-import '../../widgets/overlay/hud_overlay.dart';
-import '../../widgets/popup/pause_popup.dart';
-import '../../widgets/popup/quest_popup.dart';
-import '../../widgets/popup/reward_popup.dart';
-import '../../widgets/popup/synergy_popup.dart';
-import '../../widgets/popup/upgrade_popup.dart';
-import '../../widgets/overlay/game_over_overlay.dart';
+import '../widgets/app_bar/action_bar.dart';
+import '../widgets/popup/character_info_popup.dart';
+import '../widgets/popup/combine_popup.dart';
+import '../widgets/overlay/hud_overlay.dart';
+import '../widgets/popup/pause_popup.dart';
+import '../widgets/popup/quest_popup.dart';
+import '../widgets/popup/reward_popup.dart';
+import '../widgets/popup/synergy_popup.dart';
+import '../widgets/popup/upgrade_popup.dart';
+import '../widgets/overlay/game_over_overlay.dart';
 
 /// 게임 화면 - FlameGame GameWidget 래퍼 + 오버레이 등록
 class GameScreen extends StatefulWidget {
