@@ -1,3 +1,5 @@
+import 'package:emotion_defense/core/constants.dart';
+import 'package:emotion_defense/presentation/shared/button/app_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/const/style/app_color.dart';
@@ -17,150 +19,99 @@ class ActionBar extends StatelessWidget {
       listenable: game.gameState,
       builder: (context, _) {
         final state = game.gameState;
-        final bottomPadding = MediaQuery.of(context).padding.bottom;
-        return Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            color: AppColor.hudBackground,
-            padding: EdgeInsets.only(
-              left: 6,
-              right: 6,
-              top: 6,
-              bottom: 6 + bottomPadding,
-            ),
-            child: Row(
-              children: [
-                _ActionButton(
-                  label: '뽑기\n${state.effectiveGachaCost}G',
-                  icon: Icons.casino,
-                  enabled:
-                      state.gold >= state.effectiveGachaCost &&
-                      state.phase != GamePhase.gameOver &&
-                      state.phase != GamePhase.victory,
-                  onTap: () => game.doGacha(),
-                ),
-                const SizedBox(width: 4),
-                _ActionButton(
-                  label: '조합',
-                  icon: Icons.merge_type,
-                  enabled:
-                      state.phase == GamePhase.preparing ||
-                      state.phase == GamePhase.waveActive,
-                  onTap: () => game.toggleCombinePopup(),
-                ),
-                const SizedBox(width: 4),
-                _ActionButton(
-                  label: '강화',
-                  icon: Icons.arrow_upward,
-                  enabled:
-                      state.phase == GamePhase.preparing ||
-                      state.phase == GamePhase.waveActive,
-                  onTap: () => game.toggleUpgradePopup(),
-                ),
-                const SizedBox(width: 4),
-                _ActionButton(
-                  label: game.isSellMode ? '판매중' : '판매',
-                  icon: Icons.sell,
-                  enabled:
-                      state.phase == GamePhase.preparing ||
-                      state.phase == GamePhase.waveActive,
-                  highlight: game.isSellMode,
-                  onTap: () => game.toggleSellMode(),
-                ),
-                const SizedBox(width: 4),
-                _ActionButton(
-                  label: '퀘스트',
-                  icon: Icons.assignment,
-                  enabled:
-                      state.phase == GamePhase.preparing ||
-                      state.phase == GamePhase.waveActive,
-                  badge: state.hasPendingMissionReward,
-                  onTap: () => game.toggleQuestPopup(),
-                ),
-              ],
+        return SafeArea(
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: GameConstants.actionBarHeight,
+              padding: EdgeInsets.all(6),
+              child: Row(
+                spacing: 4,
+                children: [
+                  _textWithIconButton(
+                    text: '뽑기 ${state.effectiveGachaCost}G',
+                    icon: Icons.casino,
+                    onTap: () => game.doGacha(),
+                    enabled:
+                        state.gold >= state.effectiveGachaCost &&
+                        state.phase != GamePhase.gameOver &&
+                        state.phase != GamePhase.victory,
+                  ),
+                  _textWithIconButton(
+                    text: '조합',
+                    icon: Icons.merge_type,
+                    onTap: () => game.toggleCombinePopup(),
+                    enabled:
+                        state.phase == GamePhase.preparing ||
+                        state.phase == GamePhase.waveActive,
+                  ),
+                  _textWithIconButton(
+                    text: '강화',
+                    icon: Icons.arrow_upward,
+                    onTap: () => game.toggleUpgradePopup(),
+                    enabled:
+                        state.phase == GamePhase.preparing ||
+                        state.phase == GamePhase.waveActive,
+                  ),
+                  _textWithIconButton(
+                    text: game.isSellMode ? '판매중' : '판매',
+                    icon: Icons.sell,
+                    backgroundColor: game.isSellMode ? AppColor.danger : null,
+                    onTap: () => game.toggleSellMode(),
+                    enabled:
+                        state.phase == GamePhase.preparing ||
+                        state.phase == GamePhase.waveActive,
+                  ),
+                  _textWithIconButton(
+                    text: '퀘스트',
+                    icon: Icons.assignment,
+                    onTap: () => game.toggleQuestPopup(),
+                    enabled:
+                        state.phase == GamePhase.preparing ||
+                        state.phase == GamePhase.waveActive,
+                  ),
+                ],
+              ),
             ),
           ),
         );
       },
     );
   }
-}
 
-class _ActionButton extends StatelessWidget {
-  final String label;
-  final IconData icon;
-  final bool enabled;
-  final bool highlight;
-  final bool badge;
-  final VoidCallback? onTap;
-
-  const _ActionButton({
-    required this.label,
-    required this.icon,
-    required this.enabled,
-    required this.onTap,
-    this.highlight = false,
-    this.badge = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final bgColor = highlight
-        ? AppColor.danger
-        : enabled
-        ? AppColor.primary
-        : AppColor.disabled;
-    return Expanded(
-      child: GestureDetector(
-        onTap: enabled ? onTap : null,
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              decoration: BoxDecoration(
-                color: bgColor,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    icon,
-                    color: enabled
-                        ? AppColor.textPrimary
-                        : AppColor.textDisabled,
-                    size: 18,
-                  ),
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      label,
-                      textAlign: TextAlign.center,
-                      style: enabled
-                          ? AppTextStyle.buttonSmall
-                          : AppTextStyle.buttonSmallDisabled,
-                    ),
-                  ),
-                ],
+  Widget _textWithIconButton({
+    required String text,
+    required IconData icon,
+    required bool enabled,
+    required VoidCallback onTap,
+    Color? backgroundColor,
+  }) {
+    return AppButton.basePrimary(
+      text: "",
+      onTap: onTap,
+      enabled: enabled,
+      isExpanded: true,
+      verticalPadding: 4,
+      bgColor: backgroundColor ?? AppColor.primary,
+      widget: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
+            color: enabled ? AppColor.textPrimary : AppColor.textDisabled,
+            size: 18,
+          ),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: AppTextStyle.buttonMedium.copyWith(
+                color: enabled ? null : AppColor.textDisabled,
               ),
             ),
-            if (badge)
-              Positioned(
-                top: -2,
-                right: -2,
-                child: Container(
-                  width: 8,
-                  height: 8,
-                  decoration: const BoxDecoration(
-                    color: AppColor.badgeRed,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

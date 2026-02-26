@@ -31,6 +31,11 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.bold,
   );
 
+  static const TextStyle buttonMedium = TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+  );
+
   static const TextStyle buttonSmall = TextStyle(
     color: AppColor.textPrimary,
     fontSize: 9,
