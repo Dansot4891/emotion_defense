@@ -403,8 +403,9 @@ class EmotionDefenseGame extends FlameGame {
     );
     add(newChar);
 
-    // 팝업을 새 캐릭터로 갱신
-    selectedCharacter = newChar;
+    SoundManager.instance.play(Sfx.change);
+    // 교체 후 상세 팝업 닫기
+    hideCharacterInfo();
     gameState.notify();
   }
 
