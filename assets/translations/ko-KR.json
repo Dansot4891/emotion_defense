@@ -1,0 +1,428 @@
+{
+  "common": {
+    "appName": "감정디펜스",
+    "appSubtitle": "Emotion Defense"
+  },
+  "title": {
+    "characterBook": "캐릭터 도감",
+    "difficulty": "난이도",
+    "startGame": "게임 시작",
+    "subtitle": "Random Combination Tower Defense"
+  },
+  "game": {
+    "pause": "일시정지",
+    "bgm": "BGM",
+    "sfx": "SFX",
+    "resume": "계속하기",
+    "toTitle": "타이틀로",
+    "victory": "승리!",
+    "gameOver": "게임오버",
+    "waveReached": "Wave {wave}까지 도달",
+    "enemiesKilled": "처치한 적",
+    "goldEarned": "획득 골드",
+    "goldSpent": "소비 골드",
+    "goldRemaining": "잔여 골드",
+    "restart": "다시 시작",
+    "synergyCount": "시너지 {count}",
+    "waveClear": "Wave {wave} 클리어!",
+    "selectReward": "보상을 선택하세요"
+  },
+  "action": {
+    "gacha": "뽑기 {cost}G",
+    "combine": "조합",
+    "upgrade": "강화",
+    "selling": "판매중",
+    "sell": "판매",
+    "quest": "퀘스트"
+  },
+  "characterInfo": {
+    "baseAtk": "기본 {value}",
+    "baseAspd": "기본 {value}s",
+    "rangeTile": "{value}칸",
+    "passive": "패시브",
+    "active": "액티브",
+    "noSkill": "스킬 없음",
+    "reroll": "교체 {cost}G"
+  },
+  "combine": {
+    "title": "조합표",
+    "all": "전체",
+    "button": "조합"
+  },
+  "upgrade": {
+    "title": "강화",
+    "atk": "ATK 강화 +{level}\n{cost}G",
+    "aspd": "ASPD 강화 +{level}\n{cost}G"
+  },
+  "quest": {
+    "title": "퀘스트",
+    "mission": "미션",
+    "bossSummon": "보스 소환",
+    "reward": "보상: {description}",
+    "completed": "완료",
+    "claim": "수령",
+    "summon": "소환",
+    "summonCooldown": "소환 (쿨타임)",
+    "summonCount": "소환 횟수",
+    "killCount": "처치 횟수",
+    "cooldownInfo": "쿨타임: {remaining}웨이브 남음 (웨이브 {wave}부터 가능)",
+    "bossHpInfo": "HP: 400 (스케일링 적용) | DEF: {def} | 보상: {gold}G"
+  },
+  "book": {
+    "title": "도감",
+    "characterTab": "캐릭터",
+    "synergyTab": "시너지",
+    "gradeTitle": "{grade} 등급",
+    "characterCount": "{count}종"
+  },
+  "synergy": {
+    "polaritySynergy": "극성 시너지",
+    "polaritySynergyDesc": "같은 극성의 캐릭터를 일정 수 이상 배치하면 발동",
+    "roleSynergy": "역할군 시너지",
+    "roleSynergyDesc": "같은 역할의 캐릭터를 일정 수 이상 배치하면 발동",
+    "positive3": "긍정 3+",
+    "positive3Condition": "긍정 극성 캐릭터 3명 이상 배치",
+    "positive3Effect": "아군 전체 ATK +10%",
+    "positive3EffectShort": "ATK +10%",
+    "positive5": "긍정 5+",
+    "positive5Condition": "긍정 극성 캐릭터 5명 이상 배치",
+    "positive5Effect": "아군 전체 ATK +20%, ASPD +10%",
+    "positive5EffectShort": "ATK +20%, ASPD +10%",
+    "negative3": "부정 3+",
+    "negative3Condition": "부정 극성 캐릭터 3명 이상 배치",
+    "negative3Effect": "적 이동속도 -10%",
+    "negative3EffectShort": "적 이동속도 -10%",
+    "negative5": "부정 5+",
+    "negative5Condition": "부정 극성 캐릭터 5명 이상 배치",
+    "negative5Effect": "적 이동속도 -20%, 적 방어력 -2",
+    "negative5EffectShort": "적 이동속도 -20%, 적 방어 -2",
+    "emotionExplosion": "감정폭발",
+    "emotionExplosionCondition": "긍정 3+ & 부정 3+ 동시 달성",
+    "emotionExplosionEffect": "5웨이브마다 전체 적에게 100 데미지",
+    "emotionExplosionEffectShort": "감정폭발 (5웨이브마다 전체 100 데미지)",
+    "emotionExplosionLabel": "긍정 3+ & 부정 3+",
+    "dealer3": "딜러 3+",
+    "dealer3Condition": "딜러 역할 캐릭터 3명 이상 배치",
+    "dealer3Effect": "딜러 크리티컬 확률 +15%",
+    "dealer3EffectShort": "크리티컬 +15%",
+    "stunner2": "스터너 2+",
+    "stunner2Condition": "스터너 역할 캐릭터 2명 이상 배치",
+    "stunner2Effect": "스턴 지속시간 +0.5초",
+    "stunner2EffectShort": "스턴 +0.5초",
+    "buffer2": "버퍼 2+",
+    "buffer2Condition": "버퍼 역할 캐릭터 2명 이상 배치",
+    "buffer2Effect": "오라 범위 +1칸",
+    "buffer2EffectShort": "오라 범위 +1칸",
+    "debuffer2": "디버퍼 2+",
+    "debuffer2Condition": "디버퍼 역할 캐릭터 2명 이상 배치",
+    "debuffer2Effect": "디버프 지속시간 +1.0초",
+    "debuffer2EffectShort": "디버프 +1.0초"
+  },
+  "grade": {
+    "common": "일반",
+    "rare": "레어",
+    "hero": "영웅",
+    "legend": "전설"
+  },
+  "polarity": {
+    "positive": "긍정",
+    "negative": "부정",
+    "neutral": "중립"
+  },
+  "role": {
+    "dealer": "딜러",
+    "stunner": "스터너",
+    "buffer": "버퍼",
+    "debuffer": "디버퍼"
+  },
+  "difficulty": {
+    "easy": "쉬움",
+    "normal": "보통",
+    "hard": "어려움",
+    "hell": "지옥"
+  },
+  "character": {
+    "joy": {
+      "name": "기쁨",
+      "description": "기본적인 행복의 감정"
+    },
+    "sadness": {
+      "name": "슬픔",
+      "description": "기본적인 슬픔의 감정"
+    },
+    "fear": {
+      "name": "두려움",
+      "description": "기본적인 두려움의 감정"
+    },
+    "surprise": {
+      "name": "놀람",
+      "description": "기본적인 놀라움의 감정"
+    },
+    "loneliness": {
+      "name": "외로움",
+      "description": "기본적인 외로움의 감정"
+    },
+    "excitement": {
+      "name": "설렘",
+      "description": "기본적인 설렘의 감정"
+    },
+    "disgust": {
+      "name": "혐오",
+      "description": "기본적인 혐오의 감정"
+    },
+    "curiosity": {
+      "name": "호기심",
+      "description": "기본적인 호기심의 감정"
+    },
+    "anger": {
+      "name": "분노",
+      "description": "슬픔과 외로움이 합쳐져 폭발한 분노",
+      "active1": "15% 확률로 크리티컬 x2.0"
+    },
+    "jealousy": {
+      "name": "질투",
+      "description": "기쁨과 두려움이 뒤섞인 질투",
+      "active1": "30% 확률로 방깎 0.10 (3초)"
+    },
+    "anxiety": {
+      "name": "불안",
+      "description": "두려움과 호기심이 결합한 불안",
+      "active1": "25% 확률로 감속 15% (2초)"
+    },
+    "nostalgia": {
+      "name": "그리움",
+      "description": "슬픔과 설렘이 어우러진 그리움",
+      "passive1": "주변 2칸 아군 ATK +10%"
+    },
+    "shame": {
+      "name": "수치심",
+      "description": "놀람과 혐오가 만든 수치심",
+      "active1": "15% 확률로 스턴 1초"
+    },
+    "gratitude": {
+      "name": "감사",
+      "description": "기쁨과 호기심이 빚어낸 감사",
+      "passive1": "주변 2칸 아군 ASPD +10%"
+    },
+    "regret": {
+      "name": "후회",
+      "description": "외로움과 혐오가 엉킨 후회",
+      "passive1": "주변 2칸 적 이동속도 -8%"
+    },
+    "wonder": {
+      "name": "경이",
+      "description": "설렘과 놀람이 빚어낸 경이",
+      "active1": "10% 확률로 주변 40% 범위 데미지"
+    },
+    "madness": {
+      "name": "광기",
+      "description": "분노와 경이가 뒤섞인 광기",
+      "active1": "20% 확률로 크리티컬 x2.5",
+      "active2": "15% 확률로 주변 50% 범위 데미지"
+    },
+    "resignation": {
+      "name": "체념",
+      "description": "후회와 불안이 무기력으로 변한 체념",
+      "active1": "30% 확률로 감속 25% (3초)",
+      "active2": "25% 확률로 방깎 0.15 (4초)"
+    },
+    "hope": {
+      "name": "희망",
+      "description": "감사와 그리움에서 피어난 희망",
+      "passive1": "주변 2칸 아군 ATK +15%",
+      "passive2": "주변 2칸 아군 ASPD +10%"
+    },
+    "contempt": {
+      "name": "경멸",
+      "description": "질투와 수치심이 깊어져 생긴 경멸",
+      "active1": "20% 확률로 스턴 1.5초",
+      "active2": "25% 확률로 감속 20% (2초)"
+    },
+    "serenity": {
+      "name": "평온",
+      "description": "감사와 경이가 깊어진 평온",
+      "passive1": "주변 2칸 아군 ASPD +15%",
+      "passive2": "주변 2칸 적 이동속도 -10%"
+    },
+    "dread": {
+      "name": "공포",
+      "description": "분노와 불안이 극으로 치달은 공포",
+      "passive1": "주변 2칸 적 DEF -0.05",
+      "active1": "30% 확률로 감속 20% (3초)"
+    },
+    "obsession": {
+      "name": "집착",
+      "description": "질투와 그리움이 뒤엉킨 집착",
+      "active1": "15% 확률로 스턴 1초",
+      "active2": "20% 확률로 크리티컬 x2.0"
+    },
+    "courage": {
+      "name": "용기",
+      "description": "수치심과 후회를 이겨낸 용기",
+      "active1": "15% 확률로 크리티컬 x2.0",
+      "passive1": "주변 2칸 아군 ATK +10%"
+    },
+    "passion": {
+      "name": "열정",
+      "description": "광기와 용기가 합쳐진 열정",
+      "active1": "25% 확률로 크리티컬 x3.0",
+      "active2": "20% 확률로 주변 60% 범위 데미지"
+    },
+    "voidChar": {
+      "name": "공허",
+      "description": "체념과 공포가 합쳐진 공허",
+      "passive1": "주변 3칸 적 DEF -0.10",
+      "active1": "35% 확률로 감속 30% (4초)",
+      "active2": "30% 확률로 방깎 0.20 (5초)"
+    },
+    "enlightenment": {
+      "name": "깨달음",
+      "description": "경멸과 평온을 초월한 깨달음",
+      "passive1": "주변 3칸 아군 ATK +20%",
+      "passive2": "주변 3칸 아군 ASPD +15%",
+      "active1": "15% 확률로 스턴 1.5초"
+    },
+    "love": {
+      "name": "사랑",
+      "description": "희망과 평온이 합쳐진 사랑",
+      "passive1": "주변 3칸 아군 ATK +25%",
+      "passive2": "주변 3칸 아군 ASPD +20%",
+      "passive3": "주변 2칸 적 이동속도 -15%"
+    },
+    "vengeance": {
+      "name": "복수",
+      "description": "집착과 경멸이 폭발한 복수",
+      "passive1": "주변 2칸 적 DEF -0.08",
+      "active1": "30% 확률로 크리티컬 x3.5",
+      "active2": "15% 확률로 스턴 1초"
+    },
+    "ecstasy": {
+      "name": "황홀",
+      "description": "희망과 용기가 폭발한 황홀",
+      "passive1": "주변 3칸 아군 ATK +20%",
+      "passive2": "주변 3칸 적 이동속도 -20%",
+      "active1": "15% 확률로 주변 50% 범위 데미지"
+    }
+  },
+  "enemy": {
+    "idleThought": {
+      "name": "잡념",
+      "description": "기본적인 잡념, 느리고 약함"
+    },
+    "insomnia": {
+      "name": "불면",
+      "description": "빠르게 이동하는 불면"
+    },
+    "lethargy": {
+      "name": "무기력",
+      "description": "느리지만 HP가 높은 무기력"
+    },
+    "trauma": {
+      "name": "트라우마",
+      "description": "주변 적의 HP를 회복시키는 트라우마"
+    },
+    "burnout": {
+      "name": "번아웃",
+      "description": "죽으면 2마리로 분열하는 번아웃"
+    },
+    "burnoutSplit": {
+      "name": "잔열",
+      "description": "번아웃의 분열체"
+    },
+    "nihility": {
+      "name": "허무",
+      "description": "거대한 보스 - 허무"
+    },
+    "summonedDespair": {
+      "name": "절망",
+      "description": "소환된 보스 — 절망"
+    }
+  },
+  "mission": {
+    "kill50": {
+      "name": "적 50마리 처치",
+      "description": "적을 총 50마리 처치하세요",
+      "reward": "골드 100"
+    },
+    "kill200": {
+      "name": "적 200마리 처치",
+      "description": "적을 총 200마리 처치하세요",
+      "reward": "ATK +10%"
+    },
+    "wave10": {
+      "name": "웨이브 10 도달",
+      "description": "웨이브 10에 도달하세요",
+      "reward": "골드 150"
+    },
+    "wave20": {
+      "name": "웨이브 20 도달",
+      "description": "웨이브 20에 도달하세요",
+      "reward": "ASPD +10%"
+    },
+    "gold500": {
+      "name": "골드 500 획득",
+      "description": "골드를 총 500 획득하세요",
+      "reward": "뽑기 비용 -3G"
+    },
+    "collectAllCommon": {
+      "name": "일반 6종 배치",
+      "description": "일반 등급 6종을 동시에 배치하세요",
+      "reward": "ATK +5%"
+    },
+    "collectAllRare": {
+      "name": "레어 6종 배치",
+      "description": "레어 등급 6종을 동시에 배치하세요",
+      "reward": "골드 50"
+    },
+    "collectAllHero": {
+      "name": "영웅 6종 배치",
+      "description": "영웅 등급 6종을 동시에 배치하세요",
+      "reward": "골드 100"
+    },
+    "collectAllLegend": {
+      "name": "전설 4종 배치",
+      "description": "전설 등급 4종을 동시에 배치하세요",
+      "reward": "골드 200"
+    },
+    "killBoss1": {
+      "name": "소환 보스 처치",
+      "description": "소환한 보스를 처치하세요",
+      "reward": "골드 200"
+    },
+    "combine5": {
+      "name": "조합 5회",
+      "description": "캐릭터를 5회 조합하세요",
+      "reward": "적 한도 +3"
+    }
+  },
+  "reward": {
+    "bonusGold": {
+      "name": "골드 보너스",
+      "description": "+{value}G 즉시 획득"
+    },
+    "globalAtkBuff": {
+      "name": "영구 공격력 UP",
+      "description": "전체 캐릭터 ATK +5%"
+    },
+    "globalAspdBuff": {
+      "name": "영구 공속 UP",
+      "description": "전체 캐릭터 ASPD +5%"
+    },
+    "gachaCostDiscount": {
+      "name": "뽑기 할인",
+      "description": "뽑기 비용 -5G"
+    },
+    "enemyLimitIncrease": {
+      "name": "적 한도 증가",
+      "description": "적 한도 +5"
+    },
+    "randomRare": {
+      "name": "랜덤 레어",
+      "description": "레어 캐릭터 1체 즉시 획득"
+    },
+    "randomHero": {
+      "name": "랜덤 영웅",
+      "description": "영웅 캐릭터 1체 즉시 획득"
+    }
+  }
+}

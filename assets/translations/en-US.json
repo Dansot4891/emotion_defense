@@ -1,0 +1,428 @@
+{
+  "common": {
+    "appName": "Emotion Defense",
+    "appSubtitle": "Emotion Defense"
+  },
+  "title": {
+    "characterBook": "Character Book",
+    "difficulty": "Difficulty",
+    "startGame": "Start Game",
+    "subtitle": "Random Combination Tower Defense"
+  },
+  "game": {
+    "pause": "Paused",
+    "bgm": "BGM",
+    "sfx": "SFX",
+    "resume": "Resume",
+    "toTitle": "Title",
+    "victory": "Victory!",
+    "gameOver": "Game Over",
+    "waveReached": "Reached Wave {wave}",
+    "enemiesKilled": "Enemies Killed",
+    "goldEarned": "Gold Earned",
+    "goldSpent": "Gold Spent",
+    "goldRemaining": "Gold Left",
+    "restart": "Restart",
+    "synergyCount": "Synergy {count}",
+    "waveClear": "Wave {wave} Clear!",
+    "selectReward": "Select a reward"
+  },
+  "action": {
+    "gacha": "Gacha {cost}G",
+    "combine": "Combine",
+    "upgrade": "Upgrade",
+    "selling": "Selling",
+    "sell": "Sell",
+    "quest": "Quest"
+  },
+  "characterInfo": {
+    "baseAtk": "Base {value}",
+    "baseAspd": "Base {value}s",
+    "rangeTile": "{value} tiles",
+    "passive": "Passive",
+    "active": "Active",
+    "noSkill": "No Skills",
+    "reroll": "Reroll {cost}G"
+  },
+  "combine": {
+    "title": "Recipes",
+    "all": "All",
+    "button": "Combine"
+  },
+  "upgrade": {
+    "title": "Upgrade",
+    "atk": "ATK UP +{level}\n{cost}G",
+    "aspd": "ASPD UP +{level}\n{cost}G"
+  },
+  "quest": {
+    "title": "Quest",
+    "mission": "Mission",
+    "bossSummon": "Boss Summon",
+    "reward": "Reward: {description}",
+    "completed": "Done",
+    "claim": "Claim",
+    "summon": "Summon",
+    "summonCooldown": "Summon (CD)",
+    "summonCount": "Summons",
+    "killCount": "Kills",
+    "cooldownInfo": "Cooldown: {remaining} waves left (available from wave {wave})",
+    "bossHpInfo": "HP: 400 (scaled) | DEF: {def} | Reward: {gold}G"
+  },
+  "book": {
+    "title": "Book",
+    "characterTab": "Characters",
+    "synergyTab": "Synergy",
+    "gradeTitle": "{grade} Grade",
+    "characterCount": "{count} types"
+  },
+  "synergy": {
+    "polaritySynergy": "Polarity Synergy",
+    "polaritySynergyDesc": "Activate by placing enough characters of the same polarity",
+    "roleSynergy": "Role Synergy",
+    "roleSynergyDesc": "Activate by placing enough characters of the same role",
+    "positive3": "Positive 3+",
+    "positive3Condition": "Place 3+ Positive characters",
+    "positive3Effect": "All allies ATK +10%",
+    "positive3EffectShort": "ATK +10%",
+    "positive5": "Positive 5+",
+    "positive5Condition": "Place 5+ Positive characters",
+    "positive5Effect": "All allies ATK +20%, ASPD +10%",
+    "positive5EffectShort": "ATK +20%, ASPD +10%",
+    "negative3": "Negative 3+",
+    "negative3Condition": "Place 3+ Negative characters",
+    "negative3Effect": "Enemy speed -10%",
+    "negative3EffectShort": "Enemy speed -10%",
+    "negative5": "Negative 5+",
+    "negative5Condition": "Place 5+ Negative characters",
+    "negative5Effect": "Enemy speed -20%, DEF -2",
+    "negative5EffectShort": "Enemy speed -20%, DEF -2",
+    "emotionExplosion": "Emotion Burst",
+    "emotionExplosionCondition": "Positive 3+ & Negative 3+ both active",
+    "emotionExplosionEffect": "Deal 100 damage to all enemies every 5 waves",
+    "emotionExplosionEffectShort": "Burst (100 AoE every 5 waves)",
+    "emotionExplosionLabel": "Positive 3+ & Negative 3+",
+    "dealer3": "Dealer 3+",
+    "dealer3Condition": "Place 3+ Dealer characters",
+    "dealer3Effect": "Dealer crit chance +15%",
+    "dealer3EffectShort": "Crit +15%",
+    "stunner2": "Stunner 2+",
+    "stunner2Condition": "Place 2+ Stunner characters",
+    "stunner2Effect": "Stun duration +0.5s",
+    "stunner2EffectShort": "Stun +0.5s",
+    "buffer2": "Buffer 2+",
+    "buffer2Condition": "Place 2+ Buffer characters",
+    "buffer2Effect": "Aura range +1 tile",
+    "buffer2EffectShort": "Aura range +1",
+    "debuffer2": "Debuffer 2+",
+    "debuffer2Condition": "Place 2+ Debuffer characters",
+    "debuffer2Effect": "Debuff duration +1.0s",
+    "debuffer2EffectShort": "Debuff +1.0s"
+  },
+  "grade": {
+    "common": "Common",
+    "rare": "Rare",
+    "hero": "Hero",
+    "legend": "Legend"
+  },
+  "polarity": {
+    "positive": "Positive",
+    "negative": "Negative",
+    "neutral": "Neutral"
+  },
+  "role": {
+    "dealer": "Dealer",
+    "stunner": "Stunner",
+    "buffer": "Buffer",
+    "debuffer": "Debuffer"
+  },
+  "difficulty": {
+    "easy": "Easy",
+    "normal": "Normal",
+    "hard": "Hard",
+    "hell": "Hell"
+  },
+  "character": {
+    "joy": {
+      "name": "Joy",
+      "description": "A basic emotion of happiness"
+    },
+    "sadness": {
+      "name": "Sadness",
+      "description": "A basic emotion of sorrow"
+    },
+    "fear": {
+      "name": "Fear",
+      "description": "A basic emotion of dread"
+    },
+    "surprise": {
+      "name": "Surprise",
+      "description": "A basic emotion of astonishment"
+    },
+    "loneliness": {
+      "name": "Loneliness",
+      "description": "A basic emotion of isolation"
+    },
+    "excitement": {
+      "name": "Excitement",
+      "description": "A basic emotion of thrill"
+    },
+    "disgust": {
+      "name": "Disgust",
+      "description": "A basic emotion of revulsion"
+    },
+    "curiosity": {
+      "name": "Curiosity",
+      "description": "A basic emotion of wonder"
+    },
+    "anger": {
+      "name": "Anger",
+      "description": "Sadness and loneliness erupt into anger",
+      "active1": "15% chance for critical x2.0"
+    },
+    "jealousy": {
+      "name": "Jealousy",
+      "description": "Joy and fear intertwined into jealousy",
+      "active1": "30% chance for DEF break 0.10 (3s)"
+    },
+    "anxiety": {
+      "name": "Anxiety",
+      "description": "Fear and curiosity combined into anxiety",
+      "active1": "25% chance for slow 15% (2s)"
+    },
+    "nostalgia": {
+      "name": "Nostalgia",
+      "description": "Sadness and excitement woven into nostalgia",
+      "passive1": "Allies within 2 tiles ATK +10%"
+    },
+    "shame": {
+      "name": "Shame",
+      "description": "Surprise and disgust forged into shame",
+      "active1": "15% chance for stun 1s"
+    },
+    "gratitude": {
+      "name": "Gratitude",
+      "description": "Joy and curiosity shaped into gratitude",
+      "passive1": "Allies within 2 tiles ASPD +10%"
+    },
+    "regret": {
+      "name": "Regret",
+      "description": "Loneliness and disgust tangled into regret",
+      "passive1": "Enemies within 2 tiles speed -8%"
+    },
+    "wonder": {
+      "name": "Wonder",
+      "description": "Excitement and surprise forged into wonder",
+      "active1": "10% chance for AoE 40% splash"
+    },
+    "madness": {
+      "name": "Madness",
+      "description": "Anger and wonder merged into madness",
+      "active1": "20% chance for critical x2.5",
+      "active2": "15% chance for AoE 50% splash"
+    },
+    "resignation": {
+      "name": "Resignation",
+      "description": "Regret and anxiety turned into resignation",
+      "active1": "30% chance for slow 25% (3s)",
+      "active2": "25% chance for DEF break 0.15 (4s)"
+    },
+    "hope": {
+      "name": "Hope",
+      "description": "Gratitude and nostalgia bloomed into hope",
+      "passive1": "Allies within 2 tiles ATK +15%",
+      "passive2": "Allies within 2 tiles ASPD +10%"
+    },
+    "contempt": {
+      "name": "Contempt",
+      "description": "Jealousy and shame deepened into contempt",
+      "active1": "20% chance for stun 1.5s",
+      "active2": "25% chance for slow 20% (2s)"
+    },
+    "serenity": {
+      "name": "Serenity",
+      "description": "Gratitude and wonder deepened into serenity",
+      "passive1": "Allies within 2 tiles ASPD +15%",
+      "passive2": "Enemies within 2 tiles speed -10%"
+    },
+    "dread": {
+      "name": "Dread",
+      "description": "Anger and anxiety pushed to the extreme as dread",
+      "passive1": "Enemies within 2 tiles DEF -0.05",
+      "active1": "30% chance for slow 20% (3s)"
+    },
+    "obsession": {
+      "name": "Obsession",
+      "description": "Jealousy and nostalgia entangled into obsession",
+      "active1": "15% chance for stun 1s",
+      "active2": "20% chance for critical x2.0"
+    },
+    "courage": {
+      "name": "Courage",
+      "description": "Shame and regret overcome by courage",
+      "active1": "15% chance for critical x2.0",
+      "passive1": "Allies within 2 tiles ATK +10%"
+    },
+    "passion": {
+      "name": "Passion",
+      "description": "Madness and courage fused into passion",
+      "active1": "25% chance for critical x3.0",
+      "active2": "20% chance for AoE 60% splash"
+    },
+    "voidChar": {
+      "name": "Void",
+      "description": "Resignation and dread merged into the void",
+      "passive1": "Enemies within 3 tiles DEF -0.10",
+      "active1": "35% chance for slow 30% (4s)",
+      "active2": "30% chance for DEF break 0.20 (5s)"
+    },
+    "enlightenment": {
+      "name": "Enlightenment",
+      "description": "Contempt and serenity transcended into enlightenment",
+      "passive1": "Allies within 3 tiles ATK +20%",
+      "passive2": "Allies within 3 tiles ASPD +15%",
+      "active1": "15% chance for stun 1.5s"
+    },
+    "love": {
+      "name": "Love",
+      "description": "Hope and serenity united into love",
+      "passive1": "Allies within 3 tiles ATK +25%",
+      "passive2": "Allies within 3 tiles ASPD +20%",
+      "passive3": "Enemies within 2 tiles speed -15%"
+    },
+    "vengeance": {
+      "name": "Vengeance",
+      "description": "Obsession and contempt erupted into vengeance",
+      "passive1": "Enemies within 2 tiles DEF -0.08",
+      "active1": "30% chance for critical x3.5",
+      "active2": "15% chance for stun 1s"
+    },
+    "ecstasy": {
+      "name": "Ecstasy",
+      "description": "Hope and courage exploded into ecstasy",
+      "passive1": "Allies within 3 tiles ATK +20%",
+      "passive2": "Enemies within 3 tiles speed -20%",
+      "active1": "15% chance for AoE 50% splash"
+    }
+  },
+  "enemy": {
+    "idleThought": {
+      "name": "Idle Thought",
+      "description": "A basic idle thought, slow and weak"
+    },
+    "insomnia": {
+      "name": "Insomnia",
+      "description": "Fast-moving insomnia"
+    },
+    "lethargy": {
+      "name": "Lethargy",
+      "description": "Slow but high HP lethargy"
+    },
+    "trauma": {
+      "name": "Trauma",
+      "description": "Heals nearby enemies"
+    },
+    "burnout": {
+      "name": "Burnout",
+      "description": "Splits into 2 on death"
+    },
+    "burnoutSplit": {
+      "name": "Ember",
+      "description": "Burnout fragment"
+    },
+    "nihility": {
+      "name": "Nihility",
+      "description": "Giant boss - Nihility"
+    },
+    "summonedDespair": {
+      "name": "Despair",
+      "description": "Summoned boss — Despair"
+    }
+  },
+  "mission": {
+    "kill50": {
+      "name": "Kill 50 Enemies",
+      "description": "Kill a total of 50 enemies",
+      "reward": "100 Gold"
+    },
+    "kill200": {
+      "name": "Kill 200 Enemies",
+      "description": "Kill a total of 200 enemies",
+      "reward": "ATK +10%"
+    },
+    "wave10": {
+      "name": "Reach Wave 10",
+      "description": "Reach wave 10",
+      "reward": "150 Gold"
+    },
+    "wave20": {
+      "name": "Reach Wave 20",
+      "description": "Reach wave 20",
+      "reward": "ASPD +10%"
+    },
+    "gold500": {
+      "name": "Earn 500 Gold",
+      "description": "Earn a total of 500 gold",
+      "reward": "Gacha cost -3G"
+    },
+    "collectAllCommon": {
+      "name": "Place All 6 Common",
+      "description": "Place all 6 Common characters at once",
+      "reward": "ATK +5%"
+    },
+    "collectAllRare": {
+      "name": "Place All 6 Rare",
+      "description": "Place all 6 Rare characters at once",
+      "reward": "50 Gold"
+    },
+    "collectAllHero": {
+      "name": "Place All 6 Hero",
+      "description": "Place all 6 Hero characters at once",
+      "reward": "100 Gold"
+    },
+    "collectAllLegend": {
+      "name": "Place All 4 Legend",
+      "description": "Place all 4 Legend characters at once",
+      "reward": "200 Gold"
+    },
+    "killBoss1": {
+      "name": "Kill Summoned Boss",
+      "description": "Kill a summoned boss",
+      "reward": "200 Gold"
+    },
+    "combine5": {
+      "name": "Combine 5 Times",
+      "description": "Combine characters 5 times",
+      "reward": "Enemy limit +3"
+    }
+  },
+  "reward": {
+    "bonusGold": {
+      "name": "Gold Bonus",
+      "description": "+{value}G instantly"
+    },
+    "globalAtkBuff": {
+      "name": "Permanent ATK UP",
+      "description": "All characters ATK +5%"
+    },
+    "globalAspdBuff": {
+      "name": "Permanent ASPD UP",
+      "description": "All characters ASPD +5%"
+    },
+    "gachaCostDiscount": {
+      "name": "Gacha Discount",
+      "description": "Gacha cost -5G"
+    },
+    "enemyLimitIncrease": {
+      "name": "Enemy Limit UP",
+      "description": "Enemy limit +5"
+    },
+    "randomRare": {
+      "name": "Random Rare",
+      "description": "Get 1 random Rare character"
+    },
+    "randomHero": {
+      "name": "Random Hero",
+      "description": "Get 1 random Hero character"
+    }
+  }
+}

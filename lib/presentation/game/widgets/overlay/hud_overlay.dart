@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:emotion_defense/app/localization/locale_keys.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/const/style/app_color.dart';
@@ -152,7 +154,7 @@ class _DifficultyChip extends StatelessWidget {
         borderRadius: BorderRadius.circular(4),
       ),
       child: Text(
-        difficulty.label,
+        difficulty.label.tr(),
         style: TextStyle(
           color: color,
           fontSize: 10,
@@ -190,7 +192,7 @@ class _SynergyButton extends StatelessWidget {
             Icon(Icons.auto_awesome, color: color, size: 13),
             const SizedBox(width: 3),
             Text(
-              '시너지 $count',
+              LocaleKeys.gameSynergyCount.tr(namedArgs: {'count': '$count'}),
               style: TextStyle(
                 color: color,
                 fontSize: 10,
