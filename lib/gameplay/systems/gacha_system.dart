@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flame/components.dart';
 
 import '../../core/game_state.dart';
+import '../../core/sound_manager.dart';
 import '../../data/definitions/character_defs.dart';
 import '../../data/models/character_model.dart';
 import '../components/character.dart';
@@ -50,6 +51,7 @@ class GachaSystem {
       gridMap: gridMap,
     );
     gameWorld.add(character);
+    SoundManager.instance.play(Sfx.gacha);
     return character;
   }
 

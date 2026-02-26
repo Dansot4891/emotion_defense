@@ -195,6 +195,7 @@ class CharacterComponent extends PositionComponent
       currentTile = targetTile;
       currentTile.occupant = this;
       _updatePositionFromTile();
+      SoundManager.instance.play(Sfx.place);
     } else {
       // 유효하지 않은 위치 → 원래 위치로 복귀
       _updatePositionFromTile();
