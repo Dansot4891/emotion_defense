@@ -1,4 +1,6 @@
 import 'package:emotion_defense/app/route/routes.dart';
+import 'package:emotion_defense/presentation/shared/button/app_button.dart';
+import 'package:emotion_defense/presentation/shared/button/app_small_button.dart';
 import 'package:emotion_defense/presentation/title/widgets/title_difficult_item.dart';
 import 'package:flutter/material.dart';
 import '../../../core/const/style/app_color.dart';
@@ -29,13 +31,27 @@ class _TitleScreenState extends State<TitleScreen> {
             const SizedBox(height: 8),
             const Text('Emotion Defense', style: AppTextStyle.subtitle),
             const SizedBox(height: 48),
-            TextButton(
-              onPressed: () {
-                CharacterBookScreenRoute().push(context);
-              },
-              child: const Text('캐릭터 도감', style: AppTextStyle.subtitle),
+            Row(
+              spacing: 12,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AppSmallButton(
+                  text: '캐릭터 도감',
+                  textStyle: AppTextStyle.buttonMedium,
+                  onTap: () {
+                    CharacterBookScreenRoute().push(context);
+                  },
+                ),
+                AppSmallButton(
+                  text: '시너지 도감',
+                  textStyle: AppTextStyle.buttonMedium,
+                  onTap: () {},
+                ),
+              ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
+            Text("난이도", style: AppTextStyle.hudLabel),
+            const SizedBox(height: 8),
             // 난이도 선택
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -50,25 +66,17 @@ class _TitleScreenState extends State<TitleScreen> {
                 );
               }).toList(),
             ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                GameScreenRoute().go(context);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColor.primary,
-                foregroundColor: AppColor.textPrimary,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 48,
-                  vertical: 16,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: AppButton.basePrimary(
+                text: '게임 시작',
+                textStyle: AppTextStyle.buttonLarge,
+                onTap: () {
+                  GameScreenRoute().go(context);
+                },
               ),
-              child: const Text('게임 시작', style: AppTextStyle.buttonLarge),
             ),
-            const SizedBox(height: 80),
+            const SizedBox(height: 60),
             const Text(
               'Random Combination Tower Defense',
               style: AppTextStyle.caption,

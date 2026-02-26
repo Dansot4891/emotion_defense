@@ -38,7 +38,7 @@ abstract class AppTextStyle {
 
   static const TextStyle buttonSmall = TextStyle(
     color: AppColor.textPrimary,
-    fontSize: 9,
+    fontSize: 10,
     fontWeight: FontWeight.bold,
   );
 
