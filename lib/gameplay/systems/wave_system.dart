@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 
 import '../../core/game_state.dart';
+import '../../core/sound_manager.dart';
 import '../../data/definitions/enemy_defs.dart';
 import '../../data/definitions/wave_defs.dart';
 import '../../data/models/wave_model.dart';
@@ -107,6 +108,11 @@ class WaveSystem {
     );
     gameWorld.add(enemy);
     gameState.onEnemySpawned();
+
+    // 보스 등장 사운드
+    if (enemyData.isBoss) {
+      SoundManager.instance.play(Sfx.bossSpawn);
+    }
   }
 
   /// 웨이브 클리어 보너스 골드 지급 (GameState에서 preparing으로 전환될 때 호출)

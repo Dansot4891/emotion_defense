@@ -24,6 +24,7 @@ abstract class Sfx {
   static const buttonTap = 'button_tap';
   static const gameOver = 'game_over';
   static const change = 'change';
+  static const upgrade = 'upgrade';
 }
 
 /// 효과음(SFX) 관리자 — 싱글톤
@@ -54,6 +55,7 @@ class SoundManager {
     Sfx.buttonTap: 'sfx/button_tap.mp3',
     Sfx.gameOver: 'sfx/game_over.mp3',
     Sfx.change: 'sfx/change.mp3',
+    Sfx.upgrade: 'sfx/upgrade.mp3',
   };
 
   /// SFX 프리로드 (실제 존재하는 파일만)

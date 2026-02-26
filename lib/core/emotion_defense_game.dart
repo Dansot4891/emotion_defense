@@ -425,13 +425,17 @@ class EmotionDefenseGame extends FlameGame {
 
   /// ATK 강화 (등급별)
   void doUpgradeAtk(Grade grade) {
-    upgradeSystem.upgradeAtk(grade);
+    if (upgradeSystem.upgradeAtk(grade)) {
+      SoundManager.instance.play(Sfx.upgrade);
+    }
     gameState.notify();
   }
 
   /// ASPD 강화 (등급별)
   void doUpgradeAspd(Grade grade) {
-    upgradeSystem.upgradeAspd(grade);
+    if (upgradeSystem.upgradeAspd(grade)) {
+      SoundManager.instance.play(Sfx.upgrade);
+    }
     gameState.notify();
   }
 
