@@ -1,5 +1,5 @@
+import 'package:emotion_defense/presentation/shared/button/app_button.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../core/const/style/app_color.dart';
 import '../../../../core/const/style/app_text_style.dart';
 import '../../../../core/emotion_defense_game.dart';
@@ -166,75 +166,31 @@ class _GradeUpgradeSection extends StatelessWidget {
           const SizedBox(height: 8),
           // 강화 버튼
           Row(
+            spacing: 8,
             children: [
-              Expanded(
-                child: _UpgradeButton(
-                  label: 'ATK 강화',
-                  level: atkLevel,
-                  cost: atkLevel < maxUpgradeLevel ? upgradeCosts[atkLevel] : 0,
-                  enabled: game.upgradeSystem.canUpgradeAtk(grade),
-                  onTap: () => game.doUpgradeAtk(grade),
-                ),
+              AppButton.basePrimary(
+                borderRadius: 8,
+                verticalPadding: 8,
+                isExpanded: true,
+                textAlign: TextAlign.center,
+                text:
+                    'ATK 강화 +${(atkLevel)}\n${atkLevel < maxUpgradeLevel ? upgradeCosts[atkLevel] : 0}G',
+                onTap: () => game.doUpgradeAtk(grade),
+                enabled: game.upgradeSystem.canUpgradeAtk(grade),
               ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: _UpgradeButton(
-                  label: 'ASPD 강화',
-                  level: aspdLevel,
-                  cost: aspdLevel < maxUpgradeLevel
-                      ? upgradeCosts[aspdLevel]
-                      : 0,
-                  enabled: game.upgradeSystem.canUpgradeAspd(grade),
-                  onTap: () => game.doUpgradeAspd(grade),
-                ),
+              AppButton.basePrimary(
+                borderRadius: 8,
+                verticalPadding: 8,
+                isExpanded: true,
+                textAlign: TextAlign.center,
+                text:
+                    'ASPD 강화 +${(aspdLevel)}\n${aspdLevel < maxUpgradeLevel ? upgradeCosts[aspdLevel] : 0}G',
+                onTap: () => game.doUpgradeAspd(grade),
+                enabled: game.upgradeSystem.canUpgradeAtk(grade),
               ),
             ],
           ),
         ],
-      ),
-    );
-  }
-}
-
-/// 강화 버튼
-class _UpgradeButton extends StatelessWidget {
-  final String label;
-  final int level;
-  final int cost;
-  final bool enabled;
-  final VoidCallback onTap;
-
-  const _UpgradeButton({
-    required this.label,
-    required this.level,
-    required this.cost,
-    required this.enabled,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final isMax = level >= maxUpgradeLevel;
-    return GestureDetector(
-      onTap: enabled ? onTap : null,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 6),
-        decoration: BoxDecoration(
-          color: enabled ? AppColor.primary : AppColor.disabled,
-          borderRadius: BorderRadius.circular(6),
-        ),
-        child: Column(
-          children: [
-            Text(label, style: AppTextStyle.buttonSmall.copyWith(fontSize: 10)),
-            Text(
-              isMax ? 'MAX' : '${cost}G (Lv$level)',
-              style: AppTextStyle.buttonSmall.copyWith(
-                fontSize: 9,
-                color: enabled ? AppColor.gold : AppColor.textDisabled,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

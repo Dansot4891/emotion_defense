@@ -19,7 +19,7 @@ class AppButton extends StatelessWidget {
   final Widget? widget;
   final TextStyle? textStyle;
   final bool enabled;
-
+  final TextAlign? textAlign;
   final Color? rippleColor;
 
   const AppButton({
@@ -40,6 +40,7 @@ class AppButton extends StatelessWidget {
     this.textStyle,
     this.enabled = true,
     this.rippleColor,
+    this.textAlign,
     super.key,
   });
 
@@ -55,6 +56,7 @@ class AppButton extends StatelessWidget {
     bool isExpanded = false,
     Widget? widget,
     bool enabled = true,
+    TextAlign? textAlign,
   }) {
     return AppButton(
       text: text,
@@ -68,6 +70,7 @@ class AppButton extends StatelessWidget {
       isExpanded: isExpanded,
       widget: widget,
       enabled: enabled,
+      textAlign: textAlign,
     );
   }
 
@@ -116,9 +119,10 @@ class AppButton extends StatelessWidget {
           Center(
             child: Text(
               text,
+              textAlign: textAlign,
               style:
                   textStyle ??
-                  AppTextStyle.buttonSmall.copyWith(
+                  AppTextStyle.buttonMedium.copyWith(
                     color: onTap == null ? AppColor.textDisabled : textColor,
                   ),
             ),
