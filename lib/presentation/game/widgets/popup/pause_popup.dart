@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:emotion_defense/app/localization/locale_keys.dart';
 import 'package:emotion_defense/app/route/routes.dart';
 import 'package:emotion_defense/presentation/shared/button/app_button.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +38,7 @@ class _PausePopupState extends State<PausePopup> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                '일시정지',
+                LocaleKeys.gamePause.tr(),
                 style: AppTextStyle.gameOverTitle.copyWith(
                   color: AppColor.textPrimary,
                 ),
@@ -46,7 +48,7 @@ class _PausePopupState extends State<PausePopup> {
               // BGM 볼륨
               _VolumeRow(
                 icon: Icons.music_note,
-                label: 'BGM',
+                label: LocaleKeys.gameBgm.tr(),
                 isMuted: _sound.isBgmMuted,
                 volume: _sound.bgmVolume,
                 onMuteToggle: () => setState(() => _sound.toggleBgmMute()),
@@ -57,7 +59,7 @@ class _PausePopupState extends State<PausePopup> {
               // SFX 볼륨
               _VolumeRow(
                 icon: Icons.volume_up,
-                label: 'SFX',
+                label: LocaleKeys.gameSfx.tr(),
                 isMuted: _sound.isSfxMuted,
                 volume: _sound.sfxVolume,
                 onMuteToggle: () => setState(() => _sound.toggleSfxMute()),
@@ -66,13 +68,13 @@ class _PausePopupState extends State<PausePopup> {
               const SizedBox(height: 24),
 
               AppButton.basePrimary(
-                text: '계속하기',
+                text: LocaleKeys.gameResume.tr(),
                 textStyle: AppTextStyle.hudLabel,
                 onTap: () => widget.game.togglePause(),
               ),
               const SizedBox(height: 12),
               AppButton.basePrimary(
-                text: '타이틀로',
+                text: LocaleKeys.gameToTitle.tr(),
                 bgColor: AppColor.danger,
                 textStyle: AppTextStyle.hudLabel,
                 onTap: () {

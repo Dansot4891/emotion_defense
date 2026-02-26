@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:emotion_defense/app/localization/locale_keys.dart';
 import 'package:emotion_defense/app/route/routes.dart';
 import 'package:emotion_defense/presentation/shared/button/app_button.dart';
 import 'package:emotion_defense/presentation/shared/button/app_small_button.dart';
@@ -34,19 +36,17 @@ class _TitleScreenState extends State<TitleScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('감정디펜스', style: AppTextStyle.title),
-            const SizedBox(height: 8),
-            const Text('Emotion Defense', style: AppTextStyle.subtitle),
+            Text(LocaleKeys.appName.tr(), style: AppTextStyle.title),
             const SizedBox(height: 48),
             AppSmallButton(
-              text: '캐릭터 도감',
+              text: LocaleKeys.titleCharacterBook.tr(),
               textStyle: AppTextStyle.buttonMedium,
               onTap: () {
                 CharacterBookScreenRoute().push(context);
               },
             ),
             const SizedBox(height: 24),
-            Text("난이도", style: AppTextStyle.hudLabel),
+            Text(LocaleKeys.titleDifficulty.tr(), style: AppTextStyle.hudLabel),
             const SizedBox(height: 8),
             // 난이도 선택
             Row(
@@ -65,7 +65,7 @@ class _TitleScreenState extends State<TitleScreen> {
             Padding(
               padding: const EdgeInsets.all(20),
               child: AppButton.basePrimary(
-                text: '게임 시작',
+                text: LocaleKeys.titleStartGame.tr(),
                 textStyle: AppTextStyle.buttonLarge,
                 onTap: () {
                   GameScreenRoute().go(context);
@@ -73,10 +73,7 @@ class _TitleScreenState extends State<TitleScreen> {
               ),
             ),
             const SizedBox(height: 60),
-            const Text(
-              'Random Combination Tower Defense',
-              style: AppTextStyle.caption,
-            ),
+            Text(LocaleKeys.titleSubtitle.tr(), style: AppTextStyle.caption),
           ],
         ),
       ),

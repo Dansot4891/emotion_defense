@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:emotion_defense/app/localization/locale_keys.dart';
 import 'package:emotion_defense/core/constants.dart';
 import 'package:emotion_defense/presentation/shared/button/app_button.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +31,7 @@ class ActionBar extends StatelessWidget {
                 spacing: 4,
                 children: [
                   _textWithIconButton(
-                    text: '뽑기 ${state.effectiveGachaCost}G',
+                    text: LocaleKeys.actionGacha.tr(namedArgs: {'cost': '${state.effectiveGachaCost}'}),
                     icon: Icons.casino,
                     onTap: () => game.doGacha(),
                     enabled:
@@ -38,7 +40,7 @@ class ActionBar extends StatelessWidget {
                         state.phase != GamePhase.victory,
                   ),
                   _textWithIconButton(
-                    text: '조합',
+                    text: LocaleKeys.actionCombine.tr(),
                     icon: Icons.merge_type,
                     onTap: () => game.toggleCombinePopup(),
                     enabled:
@@ -46,7 +48,7 @@ class ActionBar extends StatelessWidget {
                         state.phase == GamePhase.waveActive,
                   ),
                   _textWithIconButton(
-                    text: '강화',
+                    text: LocaleKeys.actionUpgrade.tr(),
                     icon: Icons.arrow_upward,
                     onTap: () => game.toggleUpgradePopup(),
                     enabled:
@@ -54,7 +56,7 @@ class ActionBar extends StatelessWidget {
                         state.phase == GamePhase.waveActive,
                   ),
                   _textWithIconButton(
-                    text: game.isSellMode ? '판매중' : '판매',
+                    text: game.isSellMode ? LocaleKeys.actionSelling.tr() : LocaleKeys.actionSell.tr(),
                     icon: Icons.sell,
                     backgroundColor: game.isSellMode ? AppColor.danger : null,
                     onTap: () => game.toggleSellMode(),
@@ -63,7 +65,7 @@ class ActionBar extends StatelessWidget {
                         state.phase == GamePhase.waveActive,
                   ),
                   _textWithIconButton(
-                    text: '퀘스트',
+                    text: LocaleKeys.actionQuest.tr(),
                     icon: Icons.assignment,
                     onTap: () => game.toggleQuestPopup(),
                     enabled:

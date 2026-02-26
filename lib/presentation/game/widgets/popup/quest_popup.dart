@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:emotion_defense/app/localization/locale_keys.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/const/style/app_color.dart';
@@ -51,7 +53,7 @@ class _QuestPopupState extends State<QuestPopup> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text('퀘스트', style: AppTextStyle.hudLabel),
+                            Text(LocaleKeys.questTitle.tr(), style: AppTextStyle.hudLabel),
                             GestureDetector(
                               onTap: () => widget.game.toggleQuestPopup(),
                               child: const Icon(
@@ -70,13 +72,13 @@ class _QuestPopupState extends State<QuestPopup> {
                         child: Row(
                           children: [
                             _TabButton(
-                              label: '미션',
+                              label: LocaleKeys.questMission.tr(),
                               selected: _tabIndex == 0,
                               onTap: () => setState(() => _tabIndex = 0),
                             ),
                             const SizedBox(width: 8),
                             _TabButton(
-                              label: '보스 소환',
+                              label: LocaleKeys.questBossSummon.tr(),
                               selected: _tabIndex == 1,
                               onTap: () => setState(() => _tabIndex = 1),
                             ),
@@ -205,7 +207,7 @@ class _MissionRow extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  mission.name,
+                  mission.name.tr(),
                   style: AppTextStyle.hudLabel.copyWith(
                     fontSize: 12,
                     color: isClaimed
@@ -215,7 +217,7 @@ class _MissionRow extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  mission.description,
+                  mission.description.tr(),
                   style: TextStyle(
                     fontSize: 10,
                     color: isClaimed
@@ -253,7 +255,7 @@ class _MissionRow extends StatelessWidget {
                 const SizedBox(height: 2),
                 // 보상 표시
                 Text(
-                  '보상: ${mission.reward.description}',
+                  LocaleKeys.questReward.tr(namedArgs: {'description': mission.reward.description.tr()}),
                   style: TextStyle(fontSize: 9, color: AppColor.gold),
                 ),
               ],
@@ -294,7 +296,7 @@ class _RewardButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(6),
         ),
         child: Text(
-          '완료',
+          LocaleKeys.questCompleted.tr(),
           style: AppTextStyle.buttonSmall.copyWith(
             color: AppColor.textDisabled,
           ),
@@ -312,7 +314,7 @@ class _RewardButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(6),
         ),
         child: Text(
-          '수령',
+          LocaleKeys.questClaim.tr(),
           style: AppTextStyle.buttonSmall.copyWith(
             color: canClaim ? AppColor.textPrimary : AppColor.textDisabled,
           ),
@@ -366,7 +368,7 @@ class _BossSummonTab extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      '절망',
+                      LocaleKeys.enemySummonedDespairName.tr(),
                       style: AppTextStyle.hudLabel.copyWith(
                         fontSize: 16,
                         color: AppColor.enemySummonedBoss,
@@ -377,7 +379,7 @@ class _BossSummonTab extends StatelessWidget {
                 const SizedBox(height: 8),
                 // 스탯 정보
                 Text(
-                  'HP: 400 (스케일링 적용) | DEF: ${3 + (state.bossSummonCount)} | 보상: ${system.currentRewardGold}G',
+                  LocaleKeys.questBossHpInfo.tr(namedArgs: {'def': '${3 + (state.bossSummonCount)}', 'gold': '${system.currentRewardGold}'}),
                   style: TextStyle(fontSize: 10, color: AppColor.textSecondary),
                 ),
               ],
@@ -388,8 +390,8 @@ class _BossSummonTab extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _StatChip(label: '소환 횟수', value: '${state.bossSummonCount}'),
-              _StatChip(label: '처치 횟수', value: '${state.bossKillCount}'),
+              _StatChip(label: LocaleKeys.questSummonCount.tr(), value: '${state.bossSummonCount}'),
+              _StatChip(label: LocaleKeys.questKillCount.tr(), value: '${state.bossKillCount}'),
             ],
           ),
           const SizedBox(height: 12),
@@ -398,7 +400,7 @@ class _BossSummonTab extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: Text(
-                '쿨타임: ${system.cooldownRemaining}웨이브 남음 (웨이브 ${system.nextAvailableWave}부터 가능)',
+                LocaleKeys.questCooldownInfo.tr(namedArgs: {'remaining': '${system.cooldownRemaining}', 'wave': '${system.nextAvailableWave}'}),
                 style: TextStyle(fontSize: 10, color: AppColor.warning),
               ),
             ),
@@ -415,7 +417,7 @@ class _BossSummonTab extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                canSummon ? '소환' : '소환 (쿨타임)',
+                canSummon ? LocaleKeys.questSummon.tr() : LocaleKeys.questSummonCooldown.tr(),
                 textAlign: TextAlign.center,
                 style: AppTextStyle.hudLabel.copyWith(
                   color: canSummon

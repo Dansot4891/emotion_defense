@@ -1,5 +1,8 @@
 import 'dart:math';
 
+import 'package:easy_localization/easy_localization.dart';
+
+import '../../app/localization/locale_keys.dart';
 import '../../data/models/reward_model.dart';
 
 /// 보상 시스템 — 5웨이브마다 3개 중 1개 보상 선택
@@ -14,52 +17,52 @@ class RewardSystem {
     pool.addAll([
       RewardOption(
         type: RewardType.bonusGold,
-        name: '골드 보너스',
-        description: '+${50 + wave * 10}G 즉시 획득',
+        name: LocaleKeys.rewardBonusGoldName.tr(),
+        description: LocaleKeys.rewardBonusGoldDesc.tr(namedArgs: {'value': '${50 + wave * 10}'}),
         value: 50 + wave * 10,
       ),
-      const RewardOption(
+      RewardOption(
         type: RewardType.globalAtkBuff,
-        name: '영구 공격력 UP',
-        description: '전체 캐릭터 ATK +5%',
+        name: LocaleKeys.rewardGlobalAtkBuffName.tr(),
+        description: LocaleKeys.rewardGlobalAtkBuffDesc.tr(),
         value: 5,
       ),
-      const RewardOption(
+      RewardOption(
         type: RewardType.globalAspdBuff,
-        name: '영구 공속 UP',
-        description: '전체 캐릭터 ASPD +5%',
+        name: LocaleKeys.rewardGlobalAspdBuffName.tr(),
+        description: LocaleKeys.rewardGlobalAspdBuffDesc.tr(),
         value: 5,
       ),
-      const RewardOption(
+      RewardOption(
         type: RewardType.gachaCostDiscount,
-        name: '뽑기 할인',
-        description: '뽑기 비용 -5G',
+        name: LocaleKeys.rewardGachaCostDiscountName.tr(),
+        description: LocaleKeys.rewardGachaCostDiscountDesc.tr(),
         value: 5,
       ),
-      const RewardOption(
+      RewardOption(
         type: RewardType.enemyLimitIncrease,
-        name: '적 한도 증가',
-        description: '적 한도 +5',
+        name: LocaleKeys.rewardEnemyLimitIncreaseName.tr(),
+        description: LocaleKeys.rewardEnemyLimitIncreaseDesc.tr(),
         value: 5,
       ),
     ]);
 
     // 초반 (wave <= 10): 레어 캐릭터 추가
     if (wave <= 15) {
-      pool.add(const RewardOption(
+      pool.add(RewardOption(
         type: RewardType.randomRare,
-        name: '랜덤 레어',
-        description: '레어 캐릭터 1체 즉시 획득',
+        name: LocaleKeys.rewardRandomRareName.tr(),
+        description: LocaleKeys.rewardRandomRareDesc.tr(),
         value: 1,
       ));
     }
 
     // 후반 (wave >= 15): 영웅 캐릭터 추가
     if (wave >= 15) {
-      pool.add(const RewardOption(
+      pool.add(RewardOption(
         type: RewardType.randomHero,
-        name: '랜덤 영웅',
-        description: '영웅 캐릭터 1체 즉시 획득',
+        name: LocaleKeys.rewardRandomHeroName.tr(),
+        description: LocaleKeys.rewardRandomHeroDesc.tr(),
         value: 1,
       ));
     }

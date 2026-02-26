@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:emotion_defense/core/const/style/app_color.dart';
 import 'package:emotion_defense/core/game_state.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class TitleDifficultItem extends StatelessWidget {
             ),
           ),
           child: Text(
-            difficulty.label,
+            difficulty.label.tr(),
             style: TextStyle(
               color: selected
                   ? _difficultyColor(difficulty)

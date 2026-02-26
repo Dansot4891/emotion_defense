@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:emotion_defense/app/localization/locale_keys.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/const/style/app_color.dart';
@@ -56,14 +58,14 @@ class CharacterInfoPopup extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  data.name,
+                                  data.name.tr(),
                                   style: AppTextStyle.hudLabel.copyWith(
                                     fontSize: 16,
                                     color: data.grade.color,
                                   ),
                                 ),
                                 Text(
-                                  '${data.grade.displayName} | ${data.polarity.displayName} | ${data.role.displayName}',
+                                  '${data.grade.displayName.tr()} | ${data.polarity.displayName.tr()} | ${data.role.displayName.tr()}',
                                   style: AppTextStyle.caption.copyWith(
                                     color: AppColor.textSecondary,
                                   ),
@@ -89,22 +91,22 @@ class CharacterInfoPopup extends StatelessWidget {
                       _StatRow(
                         label: 'ATK',
                         value:
-                            '${char.effectiveAtk.toStringAsFixed(1)} (기본 ${data.atk})',
+                            '${char.effectiveAtk.toStringAsFixed(1)} (${LocaleKeys.characterInfoBaseAtk.tr(namedArgs: {'value': '${data.atk}'})})',
                         upgradeLevel: state.atkUpgradeLevels[data.grade]!,
                       ),
                       _StatRow(
                         label: 'ASPD',
                         value:
-                            '${char.effectiveAspd.toStringAsFixed(2)}s (기본 ${data.aspd}s)',
+                            '${char.effectiveAspd.toStringAsFixed(2)}s (${LocaleKeys.characterInfoBaseAspd.tr(namedArgs: {'value': '${data.aspd}'})})',
                         upgradeLevel: state.aspdUpgradeLevels[data.grade]!,
                       ),
-                      _StatRow(label: 'Range', value: '${data.range}칸'),
+                      _StatRow(label: 'Range', value: LocaleKeys.characterInfoRangeTile.tr(namedArgs: {'value': '${data.range}'})),
                       const SizedBox(height: 8),
 
                       // 패시브 스킬
                       if (data.passives.isNotEmpty) ...[
                         Text(
-                          '패시브',
+                          LocaleKeys.characterInfoPassive.tr(),
                           style: AppTextStyle.hudLabel.copyWith(
                             fontSize: 12,
                             color: AppColor.success,
@@ -114,7 +116,7 @@ class CharacterInfoPopup extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 8, top: 2),
                             child: Text(
-                              '- ${p.description}',
+                              '- ${p.description.tr()}',
                               style: AppTextStyle.hudLabel.copyWith(
                                 fontSize: 10,
                                 color: AppColor.textSecondary,
@@ -127,7 +129,7 @@ class CharacterInfoPopup extends StatelessWidget {
                       // 액티브 스킬
                       if (data.actives.isNotEmpty) ...[
                         Text(
-                          '액티브',
+                          LocaleKeys.characterInfoActive.tr(),
                           style: AppTextStyle.hudLabel.copyWith(
                             fontSize: 12,
                             color: AppColor.warning,
@@ -137,7 +139,7 @@ class CharacterInfoPopup extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 8, top: 2),
                             child: Text(
-                              '- ${a.description}',
+                              '- ${a.description.tr()}',
                               style: AppTextStyle.hudLabel.copyWith(
                                 fontSize: 10,
                                 color: AppColor.textSecondary,
@@ -149,7 +151,7 @@ class CharacterInfoPopup extends StatelessWidget {
 
                       if (data.passives.isEmpty && data.actives.isEmpty)
                         Text(
-                          '스킬 없음',
+                          LocaleKeys.characterInfoNoSkill.tr(),
                           style: AppTextStyle.hudLabel.copyWith(
                             fontSize: 10,
                             color: AppColor.textMuted,
@@ -199,7 +201,7 @@ class _RerollButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(6),
         ),
         child: Text(
-          '교체 ${cost}G',
+          LocaleKeys.characterInfoReroll.tr(namedArgs: {'cost': '$cost'}),
           textAlign: TextAlign.center,
           style: AppTextStyle.buttonSmall.copyWith(
             fontSize: 11,

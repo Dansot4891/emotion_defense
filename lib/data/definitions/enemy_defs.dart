@@ -1,3 +1,4 @@
+import '../../app/localization/locale_keys.dart';
 import '../../core/const/style/app_color.dart';
 import '../../data/definitions/boss_summon_defs.dart';
 import '../../data/models/enemy_model.dart';
@@ -5,49 +6,49 @@ import '../../data/models/enemy_model.dart';
 /// 잡념 - 기본 적
 const EnemyData idleThought = EnemyData(
   id: 'idle_thought',
-  name: '잡념',
+  name: LocaleKeys.enemyIdleThoughtName,
   hp: 50,
   def: 0,
   speed: 40.0,
   rewardGold: 5,
   color: AppColor.enemyIdleThought,
-  description: '기본적인 잡념, 느리고 약함',
+  description: LocaleKeys.enemyIdleThoughtDesc,
 );
 
 /// 불면 - 빠른 적
 const EnemyData insomnia = EnemyData(
   id: 'insomnia',
-  name: '불면',
+  name: LocaleKeys.enemyInsomniaName,
   hp: 35,
   def: 0,
   speed: 70.0,
   rewardGold: 7,
   color: AppColor.enemyInsomnia,
-  description: '빠르게 이동하는 불면',
+  description: LocaleKeys.enemyInsomniaDesc,
 );
 
 /// 무기력 - 높은 HP
 const EnemyData lethargy = EnemyData(
   id: 'lethargy',
-  name: '무기력',
+  name: LocaleKeys.enemyLethargyName,
   hp: 120,
   def: 3,
   speed: 25.0,
   rewardGold: 10,
   color: AppColor.enemyLethargy,
-  description: '느리지만 HP가 높은 무기력',
+  description: LocaleKeys.enemyLethargyDesc,
 );
 
 /// 트라우마 - 주변 적 HP 회복
 const EnemyData trauma = EnemyData(
   id: 'trauma',
-  name: '트라우마',
+  name: LocaleKeys.enemyTraumaName,
   hp: 80,
   def: 2,
   speed: 35.0,
   rewardGold: 12,
   color: AppColor.enemyTrauma,
-  description: '주변 적의 HP를 회복시키는 트라우마',
+  description: LocaleKeys.enemyTraumaDesc,
   buffsNearby: true,
   nearbyBuffRange: 60.0,
   nearbyBuffValue: 5.0,
@@ -56,13 +57,13 @@ const EnemyData trauma = EnemyData(
 /// 번아웃 - 사망 시 분열
 const EnemyData burnout = EnemyData(
   id: 'burnout',
-  name: '번아웃',
+  name: LocaleKeys.enemyBurnoutName,
   hp: 60,
   def: 1,
   speed: 45.0,
   rewardGold: 8,
   color: AppColor.enemyBurnout,
-  description: '죽으면 2마리로 분열하는 번아웃',
+  description: LocaleKeys.enemyBurnoutDesc,
   splits: true,
   splitCount: 2,
   splitIntoId: 'burnout_split',
@@ -71,25 +72,25 @@ const EnemyData burnout = EnemyData(
 /// 번아웃 분열체
 const EnemyData burnoutSplit = EnemyData(
   id: 'burnout_split',
-  name: '잔열',
+  name: LocaleKeys.enemyBurnoutSplitName,
   hp: 25,
   def: 0,
   speed: 50.0,
   rewardGold: 3,
   color: AppColor.enemyBurnout,
-  description: '번아웃의 분열체',
+  description: LocaleKeys.enemyBurnoutSplitDesc,
 );
 
 /// 허무 - 보스
 const EnemyData nihility = EnemyData(
   id: 'nihility',
-  name: '허무',
+  name: LocaleKeys.enemyNihilityName,
   hp: 500,
   def: 5,
   speed: 20.0,
   rewardGold: 50,
   color: AppColor.enemyNihility,
-  description: '거대한 보스 - 허무',
+  description: LocaleKeys.enemyNihilityDesc,
   isBoss: true,
 );
 

@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:emotion_defense/app/localization/locale_keys.dart';
 import 'package:flutter/material.dart';
 import '../../../core/const/style/app_color.dart';
 import '../../../core/const/style/app_text_style.dart';
@@ -36,12 +38,12 @@ class CharacterBookGradeSection extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Text(
-              '$title 등급',
+              LocaleKeys.bookGradeTitle.tr(namedArgs: {'grade': title}),
               style: AppTextStyle.hudLabel.copyWith(color: grade.color),
             ),
             const SizedBox(width: 8),
             Text(
-              '${characters.length}종',
+              LocaleKeys.bookCharacterCount.tr(namedArgs: {'count': '${characters.length}'}),
               style: AppTextStyle.hudLabel.copyWith(color: AppColor.white),
             ),
           ],

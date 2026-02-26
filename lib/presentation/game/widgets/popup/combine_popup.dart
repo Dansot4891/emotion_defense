@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:emotion_defense/app/localization/locale_keys.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/const/style/app_color.dart';
@@ -47,7 +49,7 @@ class _CombinePopupState extends State<CombinePopup> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('조합표', style: AppTextStyle.hudLabel),
+                Text(LocaleKeys.combineTitle.tr(), style: AppTextStyle.hudLabel),
                 GestureDetector(
                   onTap: () => widget.game.toggleCombinePopup(),
                   child: const Icon(
@@ -63,25 +65,25 @@ class _CombinePopupState extends State<CombinePopup> {
             Row(
               children: [
                 _FilterTab(
-                  label: '전체',
+                  label: LocaleKeys.combineAll.tr(),
                   selected: _selectedGrade == null,
                   color: AppColor.textPrimary,
                   onTap: () => setState(() => _selectedGrade = null),
                 ),
                 _FilterTab(
-                  label: '레어',
+                  label: LocaleKeys.gradeRare.tr(),
                   selected: _selectedGrade == Grade.rare,
                   color: AppColor.gradeRare,
                   onTap: () => setState(() => _selectedGrade = Grade.rare),
                 ),
                 _FilterTab(
-                  label: '영웅',
+                  label: LocaleKeys.gradeHero.tr(),
                   selected: _selectedGrade == Grade.hero,
                   color: AppColor.gradeHero,
                   onTap: () => setState(() => _selectedGrade = Grade.hero),
                 ),
                 _FilterTab(
-                  label: '전설',
+                  label: LocaleKeys.gradeLegend.tr(),
                   selected: _selectedGrade == Grade.legend,
                   color: AppColor.gradeLegend,
                   onTap: () => setState(() => _selectedGrade = Grade.legend),
@@ -198,7 +200,7 @@ class _RecipeRow extends StatelessWidget {
             child: Row(
               children: [
                 _MaterialChip(
-                  name: allCharacters[recipe.materialIds[0]]?.name ?? '?',
+                  name: allCharacters[recipe.materialIds[0]]?.name.tr() ?? '?',
                   owned: materialOwned[0],
                   gradeColor:
                       allCharacters[recipe.materialIds[0]]?.grade.color ??
@@ -215,7 +217,7 @@ class _RecipeRow extends StatelessWidget {
                   ),
                 ),
                 _MaterialChip(
-                  name: allCharacters[recipe.materialIds[1]]?.name ?? '?',
+                  name: allCharacters[recipe.materialIds[1]]?.name.tr() ?? '?',
                   owned: materialOwned[1],
                   gradeColor:
                       allCharacters[recipe.materialIds[1]]?.grade.color ??
@@ -232,7 +234,7 @@ class _RecipeRow extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  resultData?.name ?? '?',
+                  resultData?.name.tr() ?? '?',
                   style: AppTextStyle.hudLabel.copyWith(
                     color: resultData?.grade.color ?? AppColor.textPrimary,
                   ),
@@ -250,7 +252,7 @@ class _RecipeRow extends StatelessWidget {
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text(
-                '조합',
+                LocaleKeys.combineButton.tr(),
                 style: AppTextStyle.buttonSmall.copyWith(
                   color: canCombine
                       ? AppColor.textPrimary

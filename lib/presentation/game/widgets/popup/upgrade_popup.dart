@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:emotion_defense/app/localization/locale_keys.dart';
 import 'package:emotion_defense/presentation/shared/button/app_button.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/const/style/app_color.dart';
@@ -43,7 +45,7 @@ class UpgradePopup extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text('강화', style: AppTextStyle.hudLabel),
+                            Text(LocaleKeys.upgradeTitle.tr(), style: AppTextStyle.hudLabel),
                             GestureDetector(
                               onTap: () => game.toggleUpgradePopup(),
                               child: const Icon(
@@ -117,7 +119,7 @@ class _GradeUpgradeSection extends StatelessWidget {
                   border: Border.all(color: grade.color, width: 1),
                 ),
                 child: Text(
-                  grade.displayName,
+                  grade.displayName.tr(),
                   style: TextStyle(
                     color: grade.color,
                     fontSize: 12,
@@ -146,7 +148,7 @@ class _GradeUpgradeSection extends StatelessWidget {
                 isExpanded: true,
                 textAlign: TextAlign.center,
                 text:
-                    'ATK 강화 +${(atkLevel)}\n${atkLevel < maxUpgradeLevel ? upgradeCosts[atkLevel] : 0}G',
+                    LocaleKeys.upgradeAtk.tr(namedArgs: {'level': '$atkLevel', 'cost': '${atkLevel < maxUpgradeLevel ? upgradeCosts[atkLevel] : 0}'}),
                 onTap: () => game.doUpgradeAtk(grade),
                 enabled: game.upgradeSystem.canUpgradeAtk(grade),
               ),
@@ -156,7 +158,7 @@ class _GradeUpgradeSection extends StatelessWidget {
                 isExpanded: true,
                 textAlign: TextAlign.center,
                 text:
-                    'ASPD 강화 +${(aspdLevel)}\n${aspdLevel < maxUpgradeLevel ? upgradeCosts[aspdLevel] : 0}G',
+                    LocaleKeys.upgradeAspd.tr(namedArgs: {'level': '$aspdLevel', 'cost': '${aspdLevel < maxUpgradeLevel ? upgradeCosts[aspdLevel] : 0}'}),
                 onTap: () => game.doUpgradeAspd(grade),
                 enabled: game.upgradeSystem.canUpgradeAtk(grade),
               ),

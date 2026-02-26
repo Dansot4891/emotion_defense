@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:emotion_defense/app/localization/locale_keys.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/const/style/app_color.dart';
@@ -23,7 +25,7 @@ class RewardPopup extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Wave ${game.gameState.currentWave} 클리어!',
+              LocaleKeys.gameWaveClear.tr(namedArgs: {'wave': '${game.gameState.currentWave}'}),
               style: AppTextStyle.hudLabel.copyWith(
                 fontSize: 18,
                 color: AppColor.gold,
@@ -31,7 +33,7 @@ class RewardPopup extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              '보상을 선택하세요',
+              LocaleKeys.gameSelectReward.tr(),
               style: AppTextStyle.hudLabel.copyWith(
                 fontSize: 12,
                 color: AppColor.textSecondary,

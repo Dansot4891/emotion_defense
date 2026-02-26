@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:emotion_defense/core/const/style/app_text_style.dart';
 import 'package:emotion_defense/data/models/character_model.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class SynergyCharacterItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(4),
       ),
       child: Text(
-        character.name,
+        character.name.tr(),
         style: AppTextStyle.buttonMedium.copyWith(color: color),
       ),
     );

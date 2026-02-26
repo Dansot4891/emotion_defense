@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:emotion_defense/app/localization/locale_keys.dart';
 import 'package:flutter/material.dart';
 import '../../../core/const/style/app_color.dart';
 import '../../../core/const/style/app_text_style.dart';
@@ -48,7 +50,7 @@ class CharacterBookCharacterCard extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      data.name,
+                      data.name.tr(),
                       style: AppTextStyle.hudLabel.copyWith(
                         fontSize: 15,
                         color: data.grade.color,
@@ -56,12 +58,12 @@ class CharacterBookCharacterCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 6),
                     _Tag(
-                      label: data.polarity.displayName,
+                      label: data.polarity.displayName.tr(),
                       color: data.polarity.color,
                     ),
                     const SizedBox(width: 4),
                     _Tag(
-                      label: data.role.displayName,
+                      label: data.role.displayName.tr(),
                       color: AppColor.textSecondary,
                     ),
                   ],
@@ -69,7 +71,7 @@ class CharacterBookCharacterCard extends StatelessWidget {
                 const SizedBox(height: 4),
                 // 설명
                 Text(
-                  data.description,
+                  data.description.tr(),
                   style: AppTextStyle.caption.copyWith(
                     fontSize: 14,
                     color: AppColor.textSecondary,
@@ -91,15 +93,15 @@ class CharacterBookCharacterCard extends StatelessWidget {
                   const SizedBox(height: 6),
                   ...data.passives.map(
                     (p) => _SkillLine(
-                      label: '패시브',
-                      description: p.description,
+                      label: LocaleKeys.characterInfoPassive.tr(),
+                      description: p.description.tr(),
                       color: AppColor.success,
                     ),
                   ),
                   ...data.actives.map(
                     (a) => _SkillLine(
-                      label: '액티브',
-                      description: a.description,
+                      label: LocaleKeys.characterInfoActive.tr(),
+                      description: a.description.tr(),
                       color: AppColor.warning,
                     ),
                   ),

@@ -1,16 +1,17 @@
+import '../../app/localization/locale_keys.dart';
 import '../../core/const/style/app_color.dart';
 import '../models/enemy_model.dart';
 
 /// 소환 보스 — 절망
 const EnemyData summonedDespair = EnemyData(
   id: 'summoned_despair',
-  name: '절망',
+  name: LocaleKeys.enemySummonedDespairName,
   hp: 400,
   def: 3,
   speed: 25.0,
   rewardGold: 80,
   color: AppColor.enemySummonedBoss,
-  description: '소환된 보스 — 절망',
+  description: LocaleKeys.enemySummonedDespairDesc,
   isBoss: true,
   isSummonedBoss: true,
 );

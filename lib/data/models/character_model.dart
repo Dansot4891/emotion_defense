@@ -1,13 +1,14 @@
 import 'dart:ui';
+import '../../app/localization/locale_keys.dart';
 import '../../core/const/style/app_color.dart';
 import 'effect_model.dart';
 
 /// 캐릭터 등급
 enum Grade {
-  common('일반', AppColor.gradeCommon),
-  rare('레어', AppColor.gradeRare),
-  hero('영웅', AppColor.gradeHero),
-  legend('전설', AppColor.gradeLegend);
+  common(LocaleKeys.gradeCommon, AppColor.gradeCommon),
+  rare(LocaleKeys.gradeRare, AppColor.gradeRare),
+  hero(LocaleKeys.gradeHero, AppColor.gradeHero),
+  legend(LocaleKeys.gradeLegend, AppColor.gradeLegend);
 
   final String displayName;
   final Color color;
@@ -17,9 +18,9 @@ enum Grade {
 
 /// 감정 극성
 enum Polarity {
-  positive('긍정', AppColor.success),
-  negative('부정', AppColor.danger),
-  neutral('중립', AppColor.warning);
+  positive(LocaleKeys.polarityPositive, AppColor.success),
+  negative(LocaleKeys.polarityNegative, AppColor.danger),
+  neutral(LocaleKeys.polarityNeutral, AppColor.warning);
 
   final String displayName;
   final Color color;
@@ -29,10 +30,10 @@ enum Polarity {
 
 /// 역할군
 enum Role {
-  dealer('딜러'),
-  stunner('스터너'),
-  buffer('버퍼'),
-  debuffer('디버퍼');
+  dealer(LocaleKeys.roleDealer),
+  stunner(LocaleKeys.roleStunner),
+  buffer(LocaleKeys.roleBuffer),
+  debuffer(LocaleKeys.roleDebuffer);
 
   final String displayName;
 

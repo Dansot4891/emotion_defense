@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:emotion_defense/app/localization/locale_keys.dart';
 import 'package:emotion_defense/presentation/character_book/widgets/character_book_tab.dart';
 import 'package:flutter/material.dart';
 import '../../../core/const/style/app_color.dart';
@@ -17,7 +19,7 @@ class CharacterBookScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: AppColor.surface,
           title: Text(
-            '도감',
+            LocaleKeys.bookTitle.tr(),
             style: AppTextStyle.hudLabel.copyWith(fontSize: 18),
           ),
           iconTheme: const IconThemeData(color: AppColor.textPrimary),
@@ -28,9 +30,9 @@ class CharacterBookScreen extends StatelessWidget {
             indicatorSize: TabBarIndicatorSize.tab,
             labelStyle: AppTextStyle.hudLabel.copyWith(fontSize: 14),
             unselectedLabelStyle: AppTextStyle.caption.copyWith(fontSize: 14),
-            tabs: const [
-              Tab(text: '캐릭터'),
-              Tab(text: '시너지'),
+            tabs: [
+              Tab(text: LocaleKeys.bookCharacterTab.tr()),
+              Tab(text: LocaleKeys.bookSynergyTab.tr()),
             ],
           ),
         ),

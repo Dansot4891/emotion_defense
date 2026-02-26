@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:emotion_defense/app/localization/locale_keys.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/const/style/app_color.dart';
@@ -43,7 +45,7 @@ class SynergyPopup extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text('시너지', style: AppTextStyle.hudLabel),
+                            Text(LocaleKeys.bookSynergyTab.tr(), style: AppTextStyle.hudLabel),
                             GestureDetector(
                               onTap: () => game.toggleSynergyPopup(),
                               child: const Icon(
@@ -67,43 +69,43 @@ class SynergyPopup extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               // 극성 시너지 섹션
-                              _SectionHeader(label: '극성 시너지'),
+                              _SectionHeader(label: LocaleKeys.synergyPolaritySynergy.tr()),
                               const SizedBox(height: 6),
                               _SynergyRow(
-                                label: '긍정 3+',
-                                effect: 'ATK +10%',
+                                label: LocaleKeys.synergyPositive3.tr(),
+                                effect: LocaleKeys.synergyPositive3EffectShort.tr(),
                                 current: synergy.positiveCount,
                                 required_: 3,
                                 active: synergy.positiveCount >= 3,
                                 color: AppColor.success,
                               ),
                               _SynergyRow(
-                                label: '긍정 5+',
-                                effect: 'ATK +20%, ASPD +10%',
+                                label: LocaleKeys.synergyPositive5.tr(),
+                                effect: LocaleKeys.synergyPositive5EffectShort.tr(),
                                 current: synergy.positiveCount,
                                 required_: 5,
                                 active: synergy.positiveCount >= 5,
                                 color: AppColor.success,
                               ),
                               _SynergyRow(
-                                label: '부정 3+',
-                                effect: '적 이동속도 -10%',
+                                label: LocaleKeys.synergyNegative3.tr(),
+                                effect: LocaleKeys.synergyNegative3EffectShort.tr(),
                                 current: synergy.negativeCount,
                                 required_: 3,
                                 active: synergy.negativeCount >= 3,
                                 color: const Color(0xFF42A5F5),
                               ),
                               _SynergyRow(
-                                label: '부정 5+',
-                                effect: '적 이동속도 -20%, 적 방어 -2',
+                                label: LocaleKeys.synergyNegative5.tr(),
+                                effect: LocaleKeys.synergyNegative5EffectShort.tr(),
                                 current: synergy.negativeCount,
                                 required_: 5,
                                 active: synergy.negativeCount >= 5,
                                 color: const Color(0xFF42A5F5),
                               ),
                               _SynergyRow(
-                                label: '긍정 3+ & 부정 3+',
-                                effect: '감정폭발 (5웨이브마다 전체 100 데미지)',
+                                label: LocaleKeys.synergyEmotionExplosionLabel.tr(),
+                                effect: LocaleKeys.synergyEmotionExplosionEffectShort.tr(),
                                 current:
                                     synergy.positiveCount >= 3 &&
                                         synergy.negativeCount >= 3
@@ -113,39 +115,39 @@ class SynergyPopup extends StatelessWidget {
                                 active: synergy.emotionExplosion,
                                 color: AppColor.danger,
                                 customProgress:
-                                    '긍정 ${synergy.positiveCount}/3, 부정 ${synergy.negativeCount}/3',
+                                    '${LocaleKeys.polarityPositive.tr()} ${synergy.positiveCount}/3, ${LocaleKeys.polarityNegative.tr()} ${synergy.negativeCount}/3',
                               ),
                               const SizedBox(height: 12),
                               // 역할군 시너지 섹션
-                              _SectionHeader(label: '역할군 시너지'),
+                              _SectionHeader(label: LocaleKeys.synergyRoleSynergy.tr()),
                               const SizedBox(height: 6),
                               _SynergyRow(
-                                label: '딜러 3+',
-                                effect: '크리티컬 +15%',
+                                label: LocaleKeys.synergyDealer3.tr(),
+                                effect: LocaleKeys.synergyDealer3EffectShort.tr(),
                                 current: synergy.dealerCount,
                                 required_: 3,
                                 active: synergy.dealerCritBonus > 0,
                                 color: AppColor.warning,
                               ),
                               _SynergyRow(
-                                label: '스터너 2+',
-                                effect: '스턴 +0.5초',
+                                label: LocaleKeys.synergyStunner2.tr(),
+                                effect: LocaleKeys.synergyStunner2EffectShort.tr(),
                                 current: synergy.stunnerCount,
                                 required_: 2,
                                 active: synergy.stunDurationBonus > 0,
                                 color: const Color(0xFFAB47BC),
                               ),
                               _SynergyRow(
-                                label: '버퍼 2+',
-                                effect: '오라 범위 +1칸',
+                                label: LocaleKeys.synergyBuffer2.tr(),
+                                effect: LocaleKeys.synergyBuffer2EffectShort.tr(),
                                 current: synergy.bufferCount,
                                 required_: 2,
                                 active: synergy.bufferRangeBonus > 0,
                                 color: const Color(0xFF00BCD4),
                               ),
                               _SynergyRow(
-                                label: '디버퍼 2+',
-                                effect: '디버프 +1.0초',
+                                label: LocaleKeys.synergyDebuffer2.tr(),
+                                effect: LocaleKeys.synergyDebuffer2EffectShort.tr(),
                                 current: synergy.debufferCount,
                                 required_: 2,
                                 active: synergy.debufferDurationBonus > 0,
@@ -182,32 +184,32 @@ class _PlacementSummary extends StatelessWidget {
         runSpacing: 4,
         children: [
           _CountChip(
-            label: '긍정',
+            label: LocaleKeys.polarityPositive.tr(),
             count: synergy.positiveCount,
             color: AppColor.success,
           ),
           _CountChip(
-            label: '부정',
+            label: LocaleKeys.polarityNegative.tr(),
             count: synergy.negativeCount,
             color: const Color(0xFF42A5F5),
           ),
           _CountChip(
-            label: '딜러',
+            label: LocaleKeys.roleDealer.tr(),
             count: synergy.dealerCount,
             color: AppColor.warning,
           ),
           _CountChip(
-            label: '스터너',
+            label: LocaleKeys.roleStunner.tr(),
             count: synergy.stunnerCount,
             color: const Color(0xFFAB47BC),
           ),
           _CountChip(
-            label: '버퍼',
+            label: LocaleKeys.roleBuffer.tr(),
             count: synergy.bufferCount,
             color: const Color(0xFF00BCD4),
           ),
           _CountChip(
-            label: '디버퍼',
+            label: LocaleKeys.roleDebuffer.tr(),
             count: synergy.debufferCount,
             color: const Color(0xFF42A5F5),
           ),

@@ -1,14 +1,15 @@
 import 'package:flutter/foundation.dart';
 
+import '../app/localization/locale_keys.dart';
 import '../data/models/character_model.dart';
 import 'constants.dart';
 
 /// 난이도
 enum Difficulty {
-  easy(label: '쉬움', hpMult: 0.7, defMult: 0.7, speedMult: 0.85),
-  normal(label: '보통', hpMult: 1.0, defMult: 1.0, speedMult: 1.0),
-  hard(label: '어려움', hpMult: 1.4, defMult: 1.3, speedMult: 1.15),
-  hell(label: '지옥', hpMult: 2.0, defMult: 1.6, speedMult: 1.3);
+  easy(label: LocaleKeys.difficultyEasy, hpMult: 0.7, defMult: 0.7, speedMult: 0.85),
+  normal(label: LocaleKeys.difficultyNormal, hpMult: 1.0, defMult: 1.0, speedMult: 1.0),
+  hard(label: LocaleKeys.difficultyHard, hpMult: 1.4, defMult: 1.3, speedMult: 1.15),
+  hell(label: LocaleKeys.difficultyHell, hpMult: 2.0, defMult: 1.6, speedMult: 1.3);
 
   final String label;
   final double hpMult; // 적 HP 배율

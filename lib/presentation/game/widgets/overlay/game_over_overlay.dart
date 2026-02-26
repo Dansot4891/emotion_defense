@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:emotion_defense/app/localization/locale_keys.dart';
 import 'package:emotion_defense/app/route/routes.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/const/style/app_color.dart';
@@ -38,12 +40,12 @@ class GameOverOverlay extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              isVictory ? '승리!' : '게임오버',
+              isVictory ? LocaleKeys.gameVictory.tr() : LocaleKeys.gameGameOver.tr(),
               style: AppTextStyle.gameOverTitle.copyWith(color: accentColor),
             ),
             const SizedBox(height: 8),
             Text(
-              'Wave ${state.currentWave}까지 도달',
+              LocaleKeys.gameWaveReached.tr(namedArgs: {'wave': '${state.currentWave}'}),
               style: AppTextStyle.gameOverSubtitle,
             ),
             const SizedBox(height: 16),
@@ -58,26 +60,26 @@ class GameOverOverlay extends StatelessWidget {
                 children: [
                   _StatLine(
                     icon: Icons.pest_control,
-                    label: '처치한 적',
+                    label: LocaleKeys.gameEnemiesKilled.tr(),
                     value: '${state.totalEnemiesKilled}',
                   ),
                   const SizedBox(height: 6),
                   _StatLine(
                     icon: Icons.monetization_on,
-                    label: '획득 골드',
+                    label: LocaleKeys.gameGoldEarned.tr(),
                     value: '${state.totalGoldEarned}G',
                     color: AppColor.gold,
                   ),
                   const SizedBox(height: 6),
                   _StatLine(
                     icon: Icons.shopping_cart,
-                    label: '소비 골드',
+                    label: LocaleKeys.gameGoldSpent.tr(),
                     value: '${state.totalGoldSpent}G',
                   ),
                   const SizedBox(height: 6),
                   _StatLine(
                     icon: Icons.monetization_on,
-                    label: '잔여 골드',
+                    label: LocaleKeys.gameGoldRemaining.tr(),
                     value: '${state.gold}G',
                     color: AppColor.gold,
                   ),
@@ -98,7 +100,7 @@ class GameOverOverlay extends StatelessWidget {
                       vertical: 12,
                     ),
                   ),
-                  child: const Text('다시 시작'),
+                  child: Text(LocaleKeys.gameRestart.tr()),
                 ),
                 const SizedBox(width: 16),
                 ElevatedButton(
@@ -111,7 +113,7 @@ class GameOverOverlay extends StatelessWidget {
                       vertical: 12,
                     ),
                   ),
-                  child: const Text('타이틀로'),
+                  child: Text(LocaleKeys.gameToTitle.tr()),
                 ),
               ],
             ),
