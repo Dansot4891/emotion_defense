@@ -20,7 +20,7 @@ class UpgradePopup extends StatelessWidget {
         return GestureDetector(
           onTap: () => game.toggleUpgradePopup(),
           child: Container(
-            color: const Color(0x88000000),
+            color: AppColor.background,
             child: SafeArea(
               child: GestureDetector(
                 onTap: () {}, // 내부 탭은 닫기 방지

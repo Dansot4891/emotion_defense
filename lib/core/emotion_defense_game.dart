@@ -152,7 +152,9 @@ class EmotionDefenseGame extends FlameGame {
 
   @override
   void update(double dt) {
-    final scaledDt = dt * gameSpeed;
+    // 일시정지/보상 팝업 후 재개 시 누적 dt 폭주 방지 (최대 1프레임 = ~50ms)
+    final clampedDt = dt.clamp(0.0, 0.05);
+    final scaledDt = clampedDt * gameSpeed;
     super.update(scaledDt);
 
     // 오라 + 시너지 처리 (선두)
