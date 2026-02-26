@@ -36,6 +36,11 @@ class CharacterComponent extends PositionComponent
   double _idleTime = 0;
   final double _idlePhase = math.Random().nextDouble() * math.pi * 2;
 
+  /// 페이드 인/아웃
+  double _fadeOpacity = 0.0;
+  bool _isFadingOut = false;
+  static const _fadeDuration = 0.15;
+
   /// 캐릭터 스프라이트
   ui.Image? _spriteImage;
 
@@ -95,6 +100,19 @@ class CharacterComponent extends PositionComponent
   @override
   void update(double dt) {
     super.update(dt);
+
+    // 페이드 인
+    if (!_isFadingOut && _fadeOpacity < 1.0) {
+      _fadeOpacity = (_fadeOpacity + dt / _fadeDuration).clamp(0.0, 1.0);
+    }
+    // 페이드 아웃 완료 시 제거
+    if (_isFadingOut) {
+      _fadeOpacity = (_fadeOpacity - dt / _fadeDuration).clamp(0.0, 1.0);
+      if (_fadeOpacity <= 0) {
+        removeFromParent();
+      }
+      return;
+    }
 
     // idle 애니메이션 타이머 (드래그 중에도 계속 진행)
     _idleTime += dt;
@@ -206,6 +224,14 @@ class CharacterComponent extends PositionComponent
 
   @override
   void render(Canvas canvas) {
+    // 페이드 opacity 적용
+    final opacity = (_fadeOpacity * 255).round();
+    if (opacity <= 0) return;
+    final needsLayer = opacity < 255;
+    if (needsLayer) {
+      canvas.saveLayer(null, Paint()..color = Color.fromARGB(opacity, 0, 0, 0));
+    }
+
     // 사거리 표시 (드래그 중에만)
     if (_isDragging) {
       final rangePaint = Paint()
@@ -239,6 +265,10 @@ class CharacterComponent extends PositionComponent
       final nameY = idleOffsetY - nameParagraph.height - 1;
       canvas.drawParagraph(nameParagraph, Offset(nameX, nameY));
     }
+
+    if (needsLayer) {
+      canvas.restore();
+    }
   }
 
   /// 캐릭터 이름 라벨 빌드
@@ -268,9 +298,9 @@ class CharacterComponent extends PositionComponent
     return paragraph;
   }
 
-  /// 캐릭터 제거 (판매 등)
+  /// 캐릭터 제거 (판매/교체 등) — 페이드 아웃 후 제거
   void removeCharacter() {
     currentTile.occupant = null;
-    removeFromParent();
+    _isFadingOut = true;
   }
 }
