@@ -101,8 +101,9 @@ class EmotionDefenseGame extends FlameGame {
       await images.load(AppEnemyPath.toFlamePath(path));
     }
 
-    // SFX 프리로드
+    // SFX + BGM 프리로드
     await SoundManager.instance.preload();
+    await SoundManager.instance.preloadBgm();
 
     // 게임 상태 초기화
     gameState = GameState();
@@ -215,10 +216,12 @@ class EmotionDefenseGame extends FlameGame {
     // 게임오버/승리 오버레이
     if (gameState.phase == GamePhase.gameOver &&
         _previousPhase != GamePhase.gameOver) {
+      SoundManager.instance.stopBgm();
       overlays.add('gameOver');
     }
     if (gameState.phase == GamePhase.victory &&
         _previousPhase != GamePhase.victory) {
+      SoundManager.instance.stopBgm();
       overlays.add('gameOver');
     }
 

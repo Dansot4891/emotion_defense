@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../../../core/const/style/app_color.dart';
 import '../../../core/const/style/app_text_style.dart';
 import '../../../core/game_state.dart';
+import '../../../core/sound_manager.dart';
 
 /// 타이틀 화면 - "감정디펜스" + 난이도 선택 + 시작 버튼
 class TitleScreen extends StatefulWidget {
@@ -19,6 +20,12 @@ class TitleScreen extends StatefulWidget {
 }
 
 class _TitleScreenState extends State<TitleScreen> {
+  @override
+  void initState() {
+    super.initState();
+    SoundManager.instance.playBgm(Bgm.title);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

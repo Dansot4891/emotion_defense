@@ -1,5 +1,11 @@
 import 'package:flame_audio/flame_audio.dart';
 
+/// BGM 키 상수
+abstract class Bgm {
+  static const title = 'title';
+  static const ingame = 'ingame';
+}
+
 /// SFX 키 상수 — 사운드 재생 시 이 키를 사용
 abstract class Sfx {
   // 전투
@@ -36,8 +42,17 @@ class SoundManager {
   /// SFX 볼륨 (0.0 ~ 1.0)
   double sfxVolume = 1.0;
 
+  /// BGM 볼륨 (0.0 ~ 1.0)
+  double bgmVolume = 0.4;
+
   /// SFX 음소거
-  bool isMuted = false;
+  bool isSfxMuted = false;
+
+  /// BGM 음소거
+  bool isBgmMuted = false;
+
+  /// 현재 재생 중인 BGM 키
+  String? _currentBgm;
 
   /// 키 → 파일 경로 매핑 (assets/audio/ 하위)
   static const _sfxFiles = {
@@ -73,9 +88,41 @@ class SoundManager {
 
   /// SFX 재생
   void play(String key) {
-    if (isMuted) return;
+    if (isSfxMuted || sfxVolume <= 0) return;
     final path = _sfxFiles[key];
     if (path == null) return;
     FlameAudio.play(path, volume: sfxVolume);
+  }
+
+  // --- BGM ---
+
+  static const _bgmFiles = {
+    Bgm.title: 'bgm/title.mp3',
+    Bgm.ingame: 'bgm/ingame.mp3',
+  };
+
+  /// BGM 프리로드
+  Future<void> preloadBgm() async {
+    for (final path in _bgmFiles.values) {
+      try {
+        await FlameAudio.audioCache.load(path);
+      } catch (_) {}
+    }
+  }
+
+  /// BGM 재생 (이미 같은 곡이면 무시)
+  void playBgm(String key) {
+    if (isMuted || key == _currentBgm) return;
+    stopBgm();
+    final path = _bgmFiles[key];
+    if (path == null) return;
+    _currentBgm = key;
+    FlameAudio.bgm.play(path, volume: bgmVolume);
+  }
+
+  /// BGM 정지
+  void stopBgm() {
+    _currentBgm = null;
+    FlameAudio.bgm.stop();
   }
 }
