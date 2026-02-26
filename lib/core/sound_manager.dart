@@ -23,6 +23,7 @@ abstract class Sfx {
   // UI
   static const buttonTap = 'button_tap';
   static const gameOver = 'game_over';
+  static const combineLegendary = 'combine_legendary';
   static const change = 'change';
   static const upgrade = 'upgrade';
 }
@@ -54,6 +55,7 @@ class SoundManager {
     Sfx.baseHit: 'sfx/base_hit.mp3',
     Sfx.buttonTap: 'sfx/button_tap.mp3',
     Sfx.gameOver: 'sfx/game_over.mp3',
+    Sfx.combineLegendary: 'sfx/combine_legendary.mp3',
     Sfx.change: 'sfx/change.mp3',
     Sfx.upgrade: 'sfx/upgrade.mp3',
   };

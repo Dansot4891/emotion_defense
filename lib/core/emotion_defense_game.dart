@@ -360,8 +360,13 @@ class EmotionDefenseGame extends FlameGame {
 
   /// 조합 실행
   void doCombine(RecipeData recipe) {
-    combineSystem.execute(recipe);
-    SoundManager.instance.play(Sfx.combine);
+    final result = combineSystem.execute(recipe);
+    // 전설 조합은 특별 연출음, 그 외는 일반 조합음
+    if (result != null && result.data.grade == Grade.legend) {
+      SoundManager.instance.play(Sfx.combineLegendary);
+    } else {
+      SoundManager.instance.play(Sfx.combine);
+    }
     gameState.totalCombineCount++;
     gameState.notify();
   }
