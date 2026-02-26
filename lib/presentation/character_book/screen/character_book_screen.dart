@@ -2,7 +2,7 @@ import 'package:emotion_defense/presentation/character_book/widgets/character_bo
 import 'package:flutter/material.dart';
 import '../../../core/const/style/app_color.dart';
 import '../../../core/const/style/app_text_style.dart';
-import '../widgets/synergy_book_tab.dart';
+import '../widgets/synergy/synergy_book_tab.dart';
 
 /// 도감 화면 — 캐릭터 / 시너지 탭
 class CharacterBookScreen extends StatelessWidget {
