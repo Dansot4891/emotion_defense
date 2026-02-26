@@ -14,12 +14,14 @@ final _allChars = [
 ];
 
 /// 극성으로 캐릭터 이름 필터
-List<String> _namesByPolarity(Polarity polarity) =>
-    _allChars.where((c) => c.polarity == polarity).map((c) => c.name).toList();
+List<CharacterData> _namesByPolarity(Polarity polarity) =>
+    _allChars.where((c) => c.polarity == polarity).map((c) => c).toList()
+      ..sort((a, b) => a.grade.index.compareTo(b.grade.index));
 
 /// 역할로 캐릭터 이름 필터
-List<String> _namesByRole(Role role) =>
-    _allChars.where((c) => c.role == role).map((c) => c.name).toList();
+List<CharacterData> _namesByRole(Role role) =>
+    _allChars.where((c) => c.role == role).map((c) => c).toList()
+      ..sort((a, b) => a.grade.index.compareTo(b.grade.index));
 
 /// 시너지 도감 탭 — 극성/역할군 시너지 조건 + 효과 + 해당 캐릭터 표시
 class SynergyBookTab extends StatelessWidget {

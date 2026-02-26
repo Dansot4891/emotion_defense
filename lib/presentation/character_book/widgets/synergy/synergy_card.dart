@@ -1,3 +1,4 @@
+import 'package:emotion_defense/data/models/character_model.dart';
 import 'package:emotion_defense/presentation/character_book/widgets/synergy/synergy_character_item.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/const/style/app_color.dart';
@@ -10,7 +11,7 @@ class SynergyEntry {
   final String effect;
   final Color color;
   final IconData icon;
-  final List<String> characters;
+  final List<CharacterData> characters;
 
   const SynergyEntry({
     required this.label,
@@ -93,7 +94,7 @@ class SynergyCard extends StatelessWidget {
                   children: entry.characters
                       .map(
                         (name) => SynergyCharacterItem(
-                          name: name,
+                          character: name,
                           color: entry.color,
                         ),
                       )

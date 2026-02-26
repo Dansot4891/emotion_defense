@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
 import '../../../core/const/style/app_color.dart';
 import '../../../core/const/style/app_text_style.dart';
 import '../../../data/models/character_model.dart';
 import 'character_book_character_card.dart';
-import 'character_book_utils.dart';
 
 /// 등급별 섹션 — 헤더 + 캐릭터 카드 리스트
 class CharacterBookGradeSection extends StatelessWidget {
@@ -21,8 +19,6 @@ class CharacterBookGradeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = gradeColor(grade);
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -34,14 +30,14 @@ class CharacterBookGradeSection extends StatelessWidget {
               width: 4,
               height: 20,
               decoration: BoxDecoration(
-                color: color,
+                color: grade.color,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
             const SizedBox(width: 8),
             Text(
               '$title 등급',
-              style: AppTextStyle.hudLabel.copyWith(color: color),
+              style: AppTextStyle.hudLabel.copyWith(color: grade.color),
             ),
             const SizedBox(width: 8),
             Text(

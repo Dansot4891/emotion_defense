@@ -1,24 +1,43 @@
 import 'dart:ui';
-
+import '../../core/const/style/app_color.dart';
 import 'effect_model.dart';
 
 /// 캐릭터 등급
 enum Grade {
-  common('일반'),
-  rare('레어'),
-  hero('영웅'),
-  legend('전설');
+  common('일반', AppColor.gradeCommon),
+  rare('레어', AppColor.gradeRare),
+  hero('영웅', AppColor.gradeHero),
+  legend('전설', AppColor.gradeLegend);
 
   final String displayName;
+  final Color color;
 
-  const Grade(this.displayName);
+  const Grade(this.displayName, this.color);
 }
 
 /// 감정 극성
-enum Polarity { positive, negative, neutral }
+enum Polarity {
+  positive('긍정', AppColor.success),
+  negative('부정', AppColor.danger),
+  neutral('중립', AppColor.warning);
+
+  final String displayName;
+  final Color color;
+
+  const Polarity(this.displayName, this.color);
+}
 
 /// 역할군
-enum Role { dealer, stunner, buffer, debuffer }
+enum Role {
+  dealer('딜러'),
+  stunner('스터너'),
+  buffer('버퍼'),
+  debuffer('디버퍼');
+
+  final String displayName;
+
+  const Role(this.displayName);
+}
 
 /// 캐릭터 데이터 정의 (const 불변 데이터)
 class CharacterData {

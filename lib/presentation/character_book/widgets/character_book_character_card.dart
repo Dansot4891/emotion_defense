@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
 import '../../../core/const/style/app_color.dart';
 import '../../../core/const/style/app_text_style.dart';
 import '../../../data/models/character_model.dart';
-import 'character_book_utils.dart';
 
 /// 캐릭터 카드 — 이미지 + 이름/역할/스탯/스킬
 class CharacterBookCharacterCard extends StatelessWidget {
@@ -13,15 +11,16 @@ class CharacterBookCharacterCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = gradeColor(data.grade);
-
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: AppColor.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.withValues(alpha: 0.3), width: 1),
+        border: Border.all(
+          color: data.grade.color.withValues(alpha: 0.3),
+          width: 1,
+        ),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,7 +31,10 @@ class CharacterBookCharacterCard extends StatelessWidget {
             height: 120,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: color.withValues(alpha: 0.4), width: 1),
+              border: Border.all(
+                color: data.grade.color.withValues(alpha: 0.4),
+                width: 1,
+              ),
             ),
             child: Image.asset(data.imagePath, fit: BoxFit.contain),
           ),
@@ -49,17 +51,17 @@ class CharacterBookCharacterCard extends StatelessWidget {
                       data.name,
                       style: AppTextStyle.hudLabel.copyWith(
                         fontSize: 15,
-                        color: color,
+                        color: data.grade.color,
                       ),
                     ),
                     const SizedBox(width: 6),
                     _Tag(
-                      label: polarityName(data.polarity),
-                      color: polarityColor(data.polarity),
+                      label: data.polarity.displayName,
+                      color: data.polarity.color,
                     ),
                     const SizedBox(width: 4),
                     _Tag(
-                      label: roleName(data.role),
+                      label: data.role.displayName,
                       color: AppColor.textSecondary,
                     ),
                   ],

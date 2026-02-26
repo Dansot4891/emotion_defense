@@ -35,17 +35,14 @@ class SynergySection extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               title,
-              style: AppTextStyle.hudLabel.copyWith(color: AppColor.primary),
+              style: AppTextStyle.hudLabel.copyWith(color: AppColor.white),
             ),
           ],
         ),
         const SizedBox(height: 4),
         Text(
           description,
-          style: AppTextStyle.caption.copyWith(
-            fontSize: 11,
-            color: AppColor.textMuted,
-          ),
+          style: AppTextStyle.caption.copyWith(color: AppColor.white),
         ),
         const SizedBox(height: 10),
         // 시너지 카드 리스트
