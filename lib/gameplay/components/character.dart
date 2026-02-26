@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import '../../core/const/asset/app_character_path.dart';
 import '../../core/const/style/app_color.dart';
 import '../../core/emotion_defense_game.dart';
+import '../../core/sound_manager.dart';
 import '../../data/models/character_model.dart';
 import '../map/grid_map.dart';
 import '../map/path_system.dart';
@@ -132,6 +133,7 @@ class CharacterComponent extends PositionComponent
 
   /// 투사체 발사
   void _attack(EnemyComponent target) {
+    SoundManager.instance.play(Sfx.attack);
     final projectile = ProjectileComponent(
       target: target,
       atk: effectiveAtk,

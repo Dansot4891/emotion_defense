@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flame/game.dart';
 
 import 'const/asset/app_character_path.dart';
+import 'sound_manager.dart';
 import 'const/asset/app_enemy_path.dart';
 import 'game_state.dart';
 import '../data/definitions/character_defs.dart';
@@ -99,6 +100,9 @@ class EmotionDefenseGame extends FlameGame {
     for (final path in AppEnemyPath.allPaths) {
       await images.load(AppEnemyPath.toFlamePath(path));
     }
+
+    // SFX 프리로드
+    await SoundManager.instance.preload();
 
     // 게임 상태 초기화
     gameState = GameState();

@@ -6,6 +6,7 @@ import 'package:flame/components.dart';
 import '../../core/const/asset/app_enemy_path.dart';
 import '../../core/const/style/app_color.dart';
 import '../../core/emotion_defense_game.dart';
+import '../../core/sound_manager.dart';
 import '../../core/game_state.dart';
 import '../../data/definitions/enemy_defs.dart';
 import '../../data/models/enemy_model.dart';
@@ -180,6 +181,7 @@ class EnemyComponent extends PositionComponent
 
   /// 사망 처리
   void die() {
+    SoundManager.instance.play(Sfx.kill);
     isDead = true;
     gameState.addGold(data.rewardGold);
     gameState.onEnemyKilled();
