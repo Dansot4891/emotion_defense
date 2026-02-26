@@ -112,7 +112,7 @@ class SoundManager {
 
   /// BGM 재생 (이미 같은 곡이면 무시)
   void playBgm(String key) {
-    if (isMuted || key == _currentBgm) return;
+    if (isBgmMuted || key == _currentBgm) return;
     stopBgm();
     final path = _bgmFiles[key];
     if (path == null) return;
@@ -124,5 +124,26 @@ class SoundManager {
   void stopBgm() {
     _currentBgm = null;
     FlameAudio.bgm.stop();
+  }
+
+  /// BGM 볼륨 실시간 변경
+  void setBgmVolume(double volume) {
+    bgmVolume = volume;
+    FlameAudio.bgm.audioPlayer.setVolume(volume);
+  }
+
+  /// BGM 음소거 토글
+  void toggleBgmMute() {
+    isBgmMuted = !isBgmMuted;
+    if (isBgmMuted) {
+      FlameAudio.bgm.pause();
+    } else if (_currentBgm != null) {
+      FlameAudio.bgm.resume();
+    }
+  }
+
+  /// SFX 음소거 토글
+  void toggleSfxMute() {
+    isSfxMuted = !isSfxMuted;
   }
 }
