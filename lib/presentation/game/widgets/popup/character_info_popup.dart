@@ -35,10 +35,7 @@ class CharacterInfoPopup extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: AppColor.surface,
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: _gradeColor(data.grade),
-                      width: 2,
-                    ),
+                    border: Border.all(color: data.grade.color, width: 2),
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -62,13 +59,12 @@ class CharacterInfoPopup extends StatelessWidget {
                                   data.name,
                                   style: AppTextStyle.hudLabel.copyWith(
                                     fontSize: 16,
-                                    color: _gradeColor(data.grade),
+                                    color: data.grade.color,
                                   ),
                                 ),
                                 Text(
-                                  '${_gradeName(data.grade)} | ${_polarityName(data.polarity)} | ${_roleName(data.role)}',
-                                  style: AppTextStyle.hudLabel.copyWith(
-                                    fontSize: 10,
+                                  '${data.grade.displayName} | ${data.polarity.displayName} | ${data.role.displayName}',
+                                  style: AppTextStyle.caption.copyWith(
                                     color: AppColor.textSecondary,
                                   ),
                                 ),
@@ -177,56 +173,6 @@ class CharacterInfoPopup extends StatelessWidget {
       },
     );
   }
-
-  static Color _gradeColor(Grade grade) {
-    switch (grade) {
-      case Grade.common:
-        return AppColor.gradeCommon;
-      case Grade.rare:
-        return AppColor.gradeRare;
-      case Grade.hero:
-        return AppColor.gradeHero;
-      case Grade.legend:
-        return AppColor.gradeLegend;
-    }
-  }
-
-  static String _gradeName(Grade grade) {
-    switch (grade) {
-      case Grade.common:
-        return '일반';
-      case Grade.rare:
-        return '레어';
-      case Grade.hero:
-        return '영웅';
-      case Grade.legend:
-        return '전설';
-    }
-  }
-
-  static String _polarityName(Polarity p) {
-    switch (p) {
-      case Polarity.positive:
-        return '긍정';
-      case Polarity.negative:
-        return '부정';
-      case Polarity.neutral:
-        return '중립';
-    }
-  }
-
-  static String _roleName(Role r) {
-    switch (r) {
-      case Role.dealer:
-        return '딜러';
-      case Role.stunner:
-        return '스터너';
-      case Role.buffer:
-        return '버퍼';
-      case Role.debuffer:
-        return '디버퍼';
-    }
-  }
 }
 
 class _RerollButton extends StatelessWidget {
@@ -282,8 +228,7 @@ class _StatRow extends StatelessWidget {
             width: 50,
             child: Text(
               label,
-              style: AppTextStyle.hudLabel.copyWith(
-                fontSize: 11,
+              style: AppTextStyle.caption.copyWith(
                 color: AppColor.textSecondary,
               ),
             ),
@@ -291,16 +236,13 @@ class _StatRow extends StatelessWidget {
           Expanded(
             child: Text(
               value,
-              style: AppTextStyle.hudLabel.copyWith(fontSize: 11),
+              style: AppTextStyle.caption.copyWith(color: AppColor.textPrimary),
             ),
           ),
           if (upgradeLevel != null && upgradeLevel! > 0)
             Text(
               '+$upgradeLevel',
-              style: AppTextStyle.hudLabel.copyWith(
-                fontSize: 10,
-                color: AppColor.success,
-              ),
+              style: AppTextStyle.caption.copyWith(color: AppColor.success),
             ),
         ],
       ),

@@ -61,35 +61,14 @@ class UpgradePopup extends StatelessWidget {
                         child: ListView(
                           shrinkWrap: true,
                           padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                          children: [
-                            _GradeUpgradeSection(
-                              grade: Grade.common,
-                              gradeName: '일반',
-                              gradeColor: AppColor.gradeCommon,
-                              game: game,
-                            ),
-                            const SizedBox(height: 8),
-                            _GradeUpgradeSection(
-                              grade: Grade.rare,
-                              gradeName: '레어',
-                              gradeColor: AppColor.gradeRare,
-                              game: game,
-                            ),
-                            const SizedBox(height: 8),
-                            _GradeUpgradeSection(
-                              grade: Grade.hero,
-                              gradeName: '영웅',
-                              gradeColor: AppColor.gradeHero,
-                              game: game,
-                            ),
-                            const SizedBox(height: 8),
-                            _GradeUpgradeSection(
-                              grade: Grade.legend,
-                              gradeName: '전설',
-                              gradeColor: AppColor.gradeLegend,
-                              game: game,
-                            ),
-                          ],
+                          children: Grade.values
+                              .map(
+                                (grade) => _GradeUpgradeSection(
+                                  grade: grade,
+                                  game: game,
+                                ),
+                              )
+                              .toList(),
                         ),
                       ),
                     ],
@@ -107,16 +86,9 @@ class UpgradePopup extends StatelessWidget {
 /// 등급 하나에 대한 강화 섹션
 class _GradeUpgradeSection extends StatelessWidget {
   final Grade grade;
-  final String gradeName;
-  final Color gradeColor;
   final EmotionDefenseGame game;
 
-  const _GradeUpgradeSection({
-    required this.grade,
-    required this.gradeName,
-    required this.gradeColor,
-    required this.game,
-  });
+  const _GradeUpgradeSection({required this.grade, required this.game});
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +101,7 @@ class _GradeUpgradeSection extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColor.surface,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: gradeColor.withValues(alpha: 0.4)),
+        border: Border.all(color: grade.color.withValues(alpha: 0.4)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -140,14 +112,14 @@ class _GradeUpgradeSection extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
-                  color: gradeColor.withValues(alpha: 0.2),
+                  color: grade.color.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: gradeColor, width: 1),
+                  border: Border.all(color: grade.color, width: 1),
                 ),
                 child: Text(
-                  gradeName,
+                  grade.displayName,
                   style: TextStyle(
-                    color: gradeColor,
+                    color: grade.color,
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
                   ),

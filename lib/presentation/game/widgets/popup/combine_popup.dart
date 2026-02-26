@@ -8,22 +8,6 @@ import '../../../../data/definitions/recipe_defs.dart';
 import '../../../../data/models/character_model.dart';
 import '../../../../data/models/recipe_model.dart';
 
-/// 등급별 통일 색상
-Color _gradeColor(Grade? grade) {
-  switch (grade) {
-    case Grade.common:
-      return AppColor.gradeCommon;
-    case Grade.rare:
-      return AppColor.gradeRare;
-    case Grade.hero:
-      return AppColor.gradeHero;
-    case Grade.legend:
-      return AppColor.gradeLegend;
-    case null:
-      return AppColor.textPrimary;
-  }
-}
-
 /// 조합표 팝업 오버레이 — 등급 필터 + 레시피 목록 + 조합 실행
 class CombinePopup extends StatefulWidget {
   final EmotionDefenseGame game;
@@ -216,9 +200,9 @@ class _RecipeRow extends StatelessWidget {
                 _MaterialChip(
                   name: allCharacters[recipe.materialIds[0]]?.name ?? '?',
                   owned: materialOwned[0],
-                  gradeColor: _gradeColor(
-                    allCharacters[recipe.materialIds[0]]?.grade,
-                  ),
+                  gradeColor:
+                      allCharacters[recipe.materialIds[0]]?.grade.color ??
+                      AppColor.textPrimary,
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4),
@@ -233,9 +217,9 @@ class _RecipeRow extends StatelessWidget {
                 _MaterialChip(
                   name: allCharacters[recipe.materialIds[1]]?.name ?? '?',
                   owned: materialOwned[1],
-                  gradeColor: _gradeColor(
-                    allCharacters[recipe.materialIds[1]]?.grade,
-                  ),
+                  gradeColor:
+                      allCharacters[recipe.materialIds[1]]?.grade.color ??
+                      AppColor.textPrimary,
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4),
@@ -250,7 +234,7 @@ class _RecipeRow extends StatelessWidget {
                 Text(
                   resultData?.name ?? '?',
                   style: AppTextStyle.hudLabel.copyWith(
-                    color: _gradeColor(resultData?.grade),
+                    color: resultData?.grade.color ?? AppColor.textPrimary,
                   ),
                 ),
               ],
