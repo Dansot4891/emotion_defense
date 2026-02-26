@@ -31,23 +31,12 @@ class _TitleScreenState extends State<TitleScreen> {
             const SizedBox(height: 8),
             const Text('Emotion Defense', style: AppTextStyle.subtitle),
             const SizedBox(height: 48),
-            Row(
-              spacing: 12,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                AppSmallButton(
-                  text: '캐릭터 도감',
-                  textStyle: AppTextStyle.buttonMedium,
-                  onTap: () {
-                    CharacterBookScreenRoute().push(context);
-                  },
-                ),
-                AppSmallButton(
-                  text: '시너지 도감',
-                  textStyle: AppTextStyle.buttonMedium,
-                  onTap: () {},
-                ),
-              ],
+            AppSmallButton(
+              text: '캐릭터 도감',
+              textStyle: AppTextStyle.buttonMedium,
+              onTap: () {
+                CharacterBookScreenRoute().push(context);
+              },
             ),
             const SizedBox(height: 24),
             Text("난이도", style: AppTextStyle.hudLabel),
