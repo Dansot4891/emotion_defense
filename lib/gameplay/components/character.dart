@@ -232,7 +232,40 @@ class CharacterComponent extends PositionComponent
       );
       final dst = Rect.fromLTWH(0, idleOffsetY, size.x, size.y);
       canvas.drawImageRect(_spriteImage!, src, dst, Paint());
+
+      // 캐릭터 이름 라벨 (스프라이트 위에 표시)
+      final nameParagraph = _buildNameLabel();
+      final nameX = (size.x - nameParagraph.width) / 2;
+      final nameY = idleOffsetY - nameParagraph.height - 1;
+      canvas.drawParagraph(nameParagraph, Offset(nameX, nameY));
     }
+  }
+
+  /// 캐릭터 이름 라벨 빌드
+  ui.Paragraph _buildNameLabel() {
+    final fontSize = size.x * 0.22;
+    final builder =
+        ui.ParagraphBuilder(
+            ui.ParagraphStyle(textAlign: TextAlign.center, maxLines: 1),
+          )
+          ..pushStyle(
+            ui.TextStyle(
+              color: data.color,
+              fontSize: fontSize,
+              fontWeight: FontWeight.bold,
+              shadows: [
+                const Shadow(
+                  color: Colors.black,
+                  blurRadius: 2,
+                  offset: Offset(0.5, 0.5),
+                ),
+              ],
+            ),
+          )
+          ..addText(data.name);
+    final paragraph = builder.build();
+    paragraph.layout(ui.ParagraphConstraints(width: size.x * 1.5));
+    return paragraph;
   }
 
   /// 캐릭터 제거 (판매 등)
