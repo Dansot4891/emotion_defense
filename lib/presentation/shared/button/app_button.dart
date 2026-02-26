@@ -57,6 +57,7 @@ class AppButton extends StatelessWidget {
     Widget? widget,
     bool enabled = true,
     TextAlign? textAlign,
+    TextStyle? textStyle,
   }) {
     return AppButton(
       text: text,
@@ -71,6 +72,7 @@ class AppButton extends StatelessWidget {
       widget: widget,
       enabled: enabled,
       textAlign: textAlign,
+      textStyle: textStyle,
     );
   }
 

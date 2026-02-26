@@ -1,4 +1,5 @@
 import 'package:emotion_defense/app/route/routes.dart';
+import 'package:emotion_defense/presentation/shared/button/app_button.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/const/style/app_color.dart';
 import '../../../../core/const/style/app_text_style.dart';
@@ -33,15 +34,16 @@ class PausePopup extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32),
-              _PauseButton(
-                label: '계속하기',
-                color: AppColor.primary,
+              AppButton.basePrimary(
+                text: '계속하기',
+                textStyle: AppTextStyle.hudLabel,
                 onTap: () => game.togglePause(),
               ),
               const SizedBox(height: 12),
-              _PauseButton(
-                label: '타이틀로',
-                color: AppColor.danger,
+              AppButton.basePrimary(
+                text: '타이틀로',
+                bgColor: AppColor.danger,
+                textStyle: AppTextStyle.hudLabel,
                 onTap: () {
                   game.togglePause();
                   TitleRoute().go(context);
@@ -49,38 +51,6 @@ class PausePopup extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class _PauseButton extends StatelessWidget {
-  final String label;
-  final Color color;
-  final VoidCallback onTap;
-
-  const _PauseButton({
-    required this.label,
-    required this.color,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Text(
-          label,
-          textAlign: TextAlign.center,
-          style: AppTextStyle.hudLabel,
         ),
       ),
     );
