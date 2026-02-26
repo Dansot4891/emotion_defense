@@ -78,8 +78,10 @@ class CharacterComponent extends PositionComponent
   bool containsLocalPoint(Vector2 point) {
     final tileSize = currentTile.size;
     final offset = (tileSize - size) / 2;
-    return point.x >= -offset.x && point.x <= size.x + offset.x &&
-        point.y >= -offset.y && point.y <= size.y + offset.y;
+    return point.x >= -offset.x &&
+        point.x <= size.x + offset.x &&
+        point.y >= -offset.y &&
+        point.y <= size.y + offset.y;
   }
 
   /// 타일 중심에 캐릭터 배치
@@ -133,7 +135,7 @@ class CharacterComponent extends PositionComponent
 
   /// 투사체 발사
   void _attack(EnemyComponent target) {
-    SoundManager.instance.play(Sfx.attack);
+    // SoundManager.instance.play(Sfx.attack);
     final projectile = ProjectileComponent(
       target: target,
       atk: effectiveAtk,
@@ -219,10 +221,12 @@ class CharacterComponent extends PositionComponent
 
     // 캐릭터 스프라이트 렌더링 (idle 둥둥 애니메이션 적용)
     if (_spriteImage != null) {
-      final idleOffsetY = math.sin(_idleTime * 2.5 + _idlePhase) * (size.y * 0.04);
+      final idleOffsetY =
+          math.sin(_idleTime * 2.5 + _idlePhase) * (size.y * 0.04);
 
       final src = Rect.fromLTWH(
-        0, 0,
+        0,
+        0,
         _spriteImage!.width.toDouble(),
         _spriteImage!.height.toDouble(),
       );

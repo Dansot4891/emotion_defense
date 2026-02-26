@@ -359,6 +359,7 @@ class EmotionDefenseGame extends FlameGame {
   /// 조합 실행
   void doCombine(RecipeData recipe) {
     combineSystem.execute(recipe);
+    SoundManager.instance.play(Sfx.combine);
     gameState.totalCombineCount++;
     gameState.notify();
   }
@@ -371,6 +372,7 @@ class EmotionDefenseGame extends FlameGame {
 
   /// 캐릭터 판매 — sellValue 만큼 골드 환급
   void doSell(CharacterComponent char) {
+    SoundManager.instance.play(Sfx.sell);
     gameState.addGold(char.data.sellValue);
     char.removeCharacter();
     gameState.notify();
