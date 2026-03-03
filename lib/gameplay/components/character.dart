@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
@@ -292,7 +293,7 @@ class CharacterComponent extends PositionComponent
               ],
             ),
           )
-          ..addText(data.name);
+          ..addText(data.name.tr());
     final paragraph = builder.build();
     paragraph.layout(ui.ParagraphConstraints(width: size.x * 1.5));
     return paragraph;
