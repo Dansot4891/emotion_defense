@@ -20,7 +20,7 @@ void main() async {
       path: 'assets/translations',
       fallbackLocale: const Locale('ko', 'KR'),
       // startLocale: const Locale('ko', 'KR'),
-      startLocale: const Locale('en', 'US'),
+      // startLocale: const Locale('en', 'US'),
       child: const EmotionDefenseApp(),
     ),
   );
