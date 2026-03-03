@@ -44,4 +44,4 @@ If you have any questions about this Privacy Policy, please contact us at:
 
 ### 6. 연락처
 본 개인정보 처리방침에 대한 문의:
-- 이메일: myungwoo.dev@gmail.com
+- 이메일: cnctlim94@gmail.com
